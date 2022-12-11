@@ -1,0 +1,19 @@
+{
+    "scope": {
+        "UI_EmployeeCount": 260,
+        "UI_Revenue": 100000,
+        "UI_IndustryLoad": 2.25,
+        "UI_LimitOption1": 1000000,
+        "UI_LimitOption2": 5000000,
+        "UI_LimitOption3": 10000000,
+        "UI_LimitOption4": 19000000,
+        "UI_Retention1": 210000,
+        "UI_Retention2": 46000,
+        "UI_Retention3": 10000,
+        "UI_ProRateFactor": 1
+    },
+    "queryCriteria": {
+        "product": "crimelock",
+        "version": 1
+      }
+}

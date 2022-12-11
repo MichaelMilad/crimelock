@@ -1,0 +1,29 @@
+{
+  "name": "crimelock_retention_load",
+  "schemaValidation": {
+    "type": "object",
+    "properties": {
+      "RetentionIDFrom": {
+        "type": "number",
+        "minimum": 0
+      },
+      "RetentionIDTo": {
+        "type": "number",
+        "minimum": 0
+      },
+      "RetentionText": {
+        "type": "string"
+      },
+      "RetentionLoad": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "required": [
+      "RetentionIDFrom",
+      "RetentionIDTo",
+      "RetentionText",
+      "RetentionLoad"
+    ]
+  }
+}

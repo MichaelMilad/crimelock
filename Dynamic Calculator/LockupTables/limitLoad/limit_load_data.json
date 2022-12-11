@@ -1,0 +1,50 @@
+[
+    {
+     "limitIdFrom": 0,
+     "limitIdTo": 500000,
+     "limitText": "500,000",
+     "limitLoad": 0.72
+    },
+    {
+     "limitIdFrom": 500000,
+     "limitIdTo": 1000000,
+     "limitText": "1,000,000",
+     "limitLoad": 1
+    },
+    {
+     "limitIdFrom": 1000000,
+     "limitIdTo": 2000000,
+     "limitText": "2,000,000",
+     "limitLoad": 1.499
+    },
+    {
+     "limitIdFrom": 2000000,
+     "limitIdTo": 3000000,
+     "limitText": "3,000,000",
+     "limitLoad": 1.895
+    },
+    {
+     "limitIdFrom": 3000000,
+     "limitIdTo": 5000000,
+     "limitText": "5,000,000",
+     "limitLoad": 2.533
+    },
+    {
+     "limitIdFrom": 5000000,
+     "limitIdTo": 10000000,
+     "limitText": "10,000,000",
+     "limitLoad": 3.729
+    },
+    {
+     "limitIdFrom": 10000000,
+     "limitIdTo": 15000000,
+     "limitText": "15,000,000",
+     "limitLoad": 4.4748
+    },
+    {
+     "limitIdFrom": 15000000,
+     "limitIdTo": 20000000,
+     "limitText": "20,000,000",
+     "limitLoad": 5.36976
+    }
+   ]

@@ -1,0 +1,156 @@
+[
+    {
+     "BasicLoadFrom": 0,
+     "BasicLoadTo": 0,
+     "Retention1": 25000,
+     "Retention2": 25000,
+     "Retention3": 30000
+    },
+    {
+     "BasicLoadFrom": 0,
+     "BasicLoadTo": 500,
+     "Retention1": 25000,
+     "Retention2": 25000,
+     "Retention3": 40000
+    },
+    {
+     "BasicLoadFrom": 500,
+     "BasicLoadTo": 670,
+     "Retention1": 25000,
+     "Retention2": 30000,
+     "Retention3": 45000
+    },
+    {
+     "BasicLoadFrom": 670,
+     "BasicLoadTo": 897.8,
+     "Retention1": 25000,
+     "Retention2": 35000,
+     "Retention3": 50000
+    },
+    {
+     "BasicLoadFrom": 897.8,
+     "BasicLoadTo": 1203.052,
+     "Retention1": 25000,
+     "Retention2": 40000,
+     "Retention3": 55000
+    },
+    {
+     "BasicLoadFrom": 1203.052,
+     "BasicLoadTo": 1612.08968,
+     "Retention1": 30000,
+     "Retention2": 45000,
+     "Retention3": 60000
+    },
+    {
+     "BasicLoadFrom": 1612.08968,
+     "BasicLoadTo": 2160.200171,
+     "Retention1": 35000,
+     "Retention2": 50000,
+     "Retention3": 65000
+    },
+    {
+     "BasicLoadFrom": 2160.200171,
+     "BasicLoadTo": 2894.668229,
+     "Retention1": 40000,
+     "Retention2": 55000,
+     "Retention3": 70000
+    },
+    {
+     "BasicLoadFrom": 2894.668229,
+     "BasicLoadTo": 3878.855427,
+     "Retention1": 45000,
+     "Retention2": 60000,
+     "Retention3": 75000
+    },
+    {
+     "BasicLoadFrom": 3878.855427,
+     "BasicLoadTo": 5197.666273,
+     "Retention1": 50000,
+     "Retention2": 65000,
+     "Retention3": 80000
+    },
+    {
+     "BasicLoadFrom": 5197.666273,
+     "BasicLoadTo": 6964.872805,
+     "Retention1": 55000,
+     "Retention2": 70000,
+     "Retention3": 85000
+    },
+    {
+     "BasicLoadFrom": 6964.872805,
+     "BasicLoadTo": 9332.929559,
+     "Retention1": 60000,
+     "Retention2": 75000,
+     "Retention3": 90000
+    },
+    {
+     "BasicLoadFrom": 9332.929559,
+     "BasicLoadTo": 12506.12561,
+     "Retention1": 65000,
+     "Retention2": 80000,
+     "Retention3": 95000
+    },
+    {
+     "BasicLoadFrom": 12506.12561,
+     "BasicLoadTo": 16758.20832,
+     "Retention1": 70000,
+     "Retention2": 85000,
+     "Retention3": 100000
+    },
+    {
+     "BasicLoadFrom": 16758.20832,
+     "BasicLoadTo": 22455.99914,
+     "Retention1": 75000,
+     "Retention2": 90000,
+     "Retention3": 105000
+    },
+    {
+     "BasicLoadFrom": 22455.99914,
+     "BasicLoadTo": 30091.03885,
+     "Retention1": 80000,
+     "Retention2": 95000,
+     "Retention3": 110000
+    },
+    {
+     "BasicLoadFrom": 30091.03885,
+     "BasicLoadTo": 40321.99206,
+     "Retention1": 85000,
+     "Retention2": 100000,
+     "Retention3": 115000
+    },
+    {
+     "BasicLoadFrom": 40321.99206,
+     "BasicLoadTo": 54031.46937,
+     "Retention1": 90000,
+     "Retention2": 105000,
+     "Retention3": 120000
+    },
+    {
+     "BasicLoadFrom": 54031.46937,
+     "BasicLoadTo": 72402.16895,
+     "Retention1": 95000,
+     "Retention2": 110000,
+     "Retention3": 125000
+    },
+    {
+     "BasicLoadFrom": 72402.16895,
+     "BasicLoadTo": 97018.90639,
+     "Retention1": 100000,
+     "Retention2": 125000,
+     "Retention3": 150000
+    },
+    {
+     "BasicLoadFrom": 97018.90639,
+     "BasicLoadTo": 130005.3346,
+     "Retention1": 125000,
+     "Retention2": 150000,
+     "Retention3": 200000
+    },
+    {
+     "BasicLoadFrom": 130005.3346,
+     "BasicLoadTo": 174207.1483,
+     "Retention1": 150000,
+     "Retention2": 200000,
+     "Retention3": 250000
+    }
+   ]

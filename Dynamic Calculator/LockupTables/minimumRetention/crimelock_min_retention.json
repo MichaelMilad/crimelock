@@ -1,0 +1,35 @@
+{
+  "name": "crimelock_min_retention",
+  "schemaValidation": {
+    "type": "object",
+    "properties": {
+      "BasicLoadFrom": {
+        "type": "number",
+        "minimum": 0
+      },
+      "BasicLoadTo": {
+        "type": "number",
+        "minimum": 0
+      },
+      "Retention1": {
+        "type": "number",
+        "minimum": 0
+      },
+      "Retention2": {
+        "type": "number",
+        "minimum": 0
+      },
+      "Retention3": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "required": [
+      "BasicLoadFrom",
+      "BasicLoadTo",
+      "Retention1",
+      "Retention2",
+      "Retention3"
+    ]
+  }
+}

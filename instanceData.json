@@ -1,0 +1,22 @@
+{
+  "incidentDateTime": "2022-12-07T12:26:47.142Z",
+  "details": {
+    "status": "System Error",
+    "title": "System error occurred. Our team has been notified. - System Error",
+    "details": [
+      "An unexpected error has occurred, and the system automatically notified the support team to check the incident. We’ll get back to you as soon as we have an update.",
+      "Incident Reference: abd79c24-856a-4d67-89f5-5d1907904c9f"
+    ],
+    "internalError": "Request failed with status code 400 - \"Locations are not found!\"",
+    "systemError": true,
+    "logLevel": "error"
+  },
+  "jobMetadata": {
+    "workflowKey": "bestinsurance-790a3630-7e35-4361-a1a6-5456f17cf2f9",
+    "instanceId": "4503599631237349",
+    "version": 31,
+    "taskId": "Activity_0k0jkv9"
+  },
+  "sendNotification": true,
+  "internalError": "Request failed with status code 400 - \"Locations are not found!\""
+}

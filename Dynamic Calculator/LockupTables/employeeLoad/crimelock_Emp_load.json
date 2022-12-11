@@ -1,0 +1,17 @@
+{
+  "name": "crimelock_emp_load",
+  "schemaValidation": {
+    "type": "object",
+    "properties": {
+      "EmployeeID": {
+        "type": "number",
+        "minimum": 0
+      },
+      "EmployeeLoad": {
+        "type": "number",
+        "minimum": 1
+      }
+    },
+    "required": ["EmployeeID", "EmployeeLoad"]
+  }
+}

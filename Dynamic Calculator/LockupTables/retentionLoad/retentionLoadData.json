@@ -1,0 +1,164 @@
+[
+    {
+     "RetentionIDFrom": 0,
+     "RetentionIDTo": 10000,
+     "RetentionText": "10,000",
+     "RetentionLoad": 1.469328077
+    },
+    {
+     "RetentionIDFrom": 10000,
+     "RetentionIDTo": 15000,
+     "RetentionText": "15,000",
+     "RetentionLoad": 1.469328077
+    },
+    {
+     "RetentionIDFrom": 15000,
+     "RetentionIDTo": 20000,
+     "RetentionText": "20,000",
+     "RetentionLoad": 1.469328077
+    },
+    {
+     "RetentionIDFrom": 20000,
+     "RetentionIDTo": 25000,
+     "RetentionText": "25,000",
+     "RetentionLoad": 1.469328077
+    },
+    {
+     "RetentionIDFrom": 25000,
+     "RetentionIDTo": 30000,
+     "RetentionText": "30,000",
+     "RetentionLoad": 1.36048896
+    },
+    {
+     "RetentionIDFrom": 30000,
+     "RetentionIDTo": 35000,
+     "RetentionText": "35,000",
+     "RetentionLoad": 1.259712
+    },
+    {
+     "RetentionIDFrom": 35000,
+     "RetentionIDTo": 40000,
+     "RetentionText": "40,000",
+     "RetentionLoad": 1.1664
+    },
+    {
+     "RetentionIDFrom": 40000,
+     "RetentionIDTo": 45000,
+     "RetentionText": "45,000",
+     "RetentionLoad": 1.08
+    },
+    {
+     "RetentionIDFrom": 45000,
+     "RetentionIDTo": 50000,
+     "RetentionText": "50,000",
+     "RetentionLoad": 1
+    },
+    {
+     "RetentionIDFrom": 50000,
+     "RetentionIDTo": 55000,
+     "RetentionText": "55,000",
+     "RetentionLoad": 0.9828
+    },
+    {
+     "RetentionIDFrom": 55000,
+     "RetentionIDTo": 60000,
+     "RetentionText": "60,000",
+     "RetentionLoad": 0.96589584
+    },
+    {
+     "RetentionIDFrom": 60000,
+     "RetentionIDTo": 65000,
+     "RetentionText": "65,000",
+     "RetentionLoad": 0.949282432
+    },
+    {
+     "RetentionIDFrom": 65000,
+     "RetentionIDTo": 70000,
+     "RetentionText": "70,000",
+     "RetentionLoad": 0.932954774
+    },
+    {
+     "RetentionIDFrom": 70000,
+     "RetentionIDTo": 75000,
+     "RetentionText": "75,000",
+     "RetentionLoad": 0.916907952
+    },
+    {
+     "RetentionIDFrom": 75000,
+     "RetentionIDTo": 80000,
+     "RetentionText": "80,000",
+     "RetentionLoad": 0.901137135
+    },
+    {
+     "RetentionIDFrom": 80000,
+     "RetentionIDTo": 85000,
+     "RetentionText": "85,000",
+     "RetentionLoad": 0.885637576
+    },
+    {
+     "RetentionIDFrom": 85000,
+     "RetentionIDTo": 90000,
+     "RetentionText": "90,000",
+     "RetentionLoad": 0.87040461
+    },
+    {
+     "RetentionIDFrom": 90000,
+     "RetentionIDTo": 95000,
+     "RetentionText": "95,000",
+     "RetentionLoad": 0.855433651
+    },
+    {
+     "RetentionIDFrom": 95000,
+     "RetentionIDTo": 100000,
+     "RetentionText": "100,000",
+     "RetentionLoad": 0.840720192
+    },
+    {
+     "RetentionIDFrom": 100000,
+     "RetentionIDTo": 105000,
+     "RetentionText": "105,000",
+     "RetentionLoad": 0.811799417
+    },
+    {
+     "RetentionIDFrom": 105000,
+     "RetentionIDTo": 110000,
+     "RetentionText": "110,000",
+     "RetentionLoad": 0.811799417
+    },
+    {
+     "RetentionIDFrom": 110000,
+     "RetentionIDTo": 115000,
+     "RetentionText": "115,000",
+     "RetentionLoad": 0.769910567
+    },
+    {
+     "RetentionIDFrom": 115000,
+     "RetentionIDTo": 120000,
+     "RetentionText": "120,000",
+     "RetentionLoad": 0.769910567
+    },
+    {
+     "RetentionIDFrom": 120000,
+     "RetentionIDTo": 125000,
+     "RetentionText": "125,000",
+     "RetentionLoad": 0.769910567
+    },
+    {
+     "RetentionIDFrom": 125000,
+     "RetentionIDTo": 150000,
+     "RetentionText": "150,000",
+     "RetentionLoad": 0.71694072
+    },
+    {
+     "RetentionIDFrom": 150000,
+     "RetentionIDTo": 200000,
+     "RetentionText": "200,000",
+     "RetentionLoad": 0.655283818
+    },
+    {
+     "RetentionIDFrom": 200000,
+     "RetentionIDTo": 250000,
+     "RetentionText": "250,000",
+     "RetentionLoad": 0.59892941
+    }
+   ]

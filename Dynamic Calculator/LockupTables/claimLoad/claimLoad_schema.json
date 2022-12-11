@@ -1,0 +1,18 @@
+{
+  "name": "crimelock_claim_load",
+  "schemaValidation": {
+    "properties": {
+      "ClaimLoadID": {
+        "type": "number",
+        "minimum": 0
+      },
+      "ClaimLoadDescription": {
+        "type": "string"
+      },
+      "ClaimLoad": {
+        "type": "number"
+      }
+    },
+    "required": ["ClaimLoadID", "ClaimLoadDescription", "ClaimLoad"]
+  }
+}

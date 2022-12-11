@@ -1,0 +1,12 @@
+[
+  {
+    "ClaimLoadID": 1,
+    "ClaimLoadDescription": "None",
+    "ClaimLoad": 1
+  },
+  {
+    "ClaimLoadID": 2,
+    "ClaimLoadDescription": "Yes",
+    "ClaimLoad": -1
+  }
+]

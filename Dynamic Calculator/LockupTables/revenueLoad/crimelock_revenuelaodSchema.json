@@ -1,0 +1,17 @@
+{
+  "name": "crimelock_rev_load",
+  "schemaValidation": {
+    "type": "object",
+    "properties": {
+      "RevenueID": {
+        "type": "number",
+        "minimum": 0
+      },
+      "RevenueLoad": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "required": ["RevenueID", "RevenueLoad"]
+  }
+}
