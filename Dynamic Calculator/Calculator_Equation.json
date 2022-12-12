@@ -1,16 +1,20 @@
 {
   "equations": {
     "EQ_MinRetention1": {
+      "temp": true,
       "expression": "vl_VL_MinRetention1"
     },
     "EQ_MinRetention2": {
+      "temp": true,
       "expression": "eq_EQ_MinRetention1"
     },
     "EQ_MinRetention3": {
+      "temp": true,
       "expression": "eq_EQ_MinRetention1"
     },
 
     "UI_Retention1": {
+      "temp": true,
       "expression": "UI_Retention1",
       "conditionalCases": [
         {
@@ -21,9 +25,11 @@
     },
 
     "EQ_RatePerMille1": {
+      "temp": true,
       "expression": "PRODUCT(DIVIDE(UI_LimitOption1, 1000), 1.5)"
     },
     "EQ_RatePerMille2": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -33,6 +39,7 @@
       ]
     },
     "EQ_RatePerMille3": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -42,6 +49,7 @@
       ]
     },
     "EQ_RatePerMille4": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -52,21 +60,24 @@
     },
 
     "EQ_BasicLoad": {
+      "temp": true,
       "expression": "PRODUCT(vl_VL_EmployeeLoad, vl_CO_ClassALoad, UI_IndustryLoad, vl_VL_RevenueLoad)"
     },
     "RevenueLoadID": {
-      "expression": "ROUND(DIVIDE(UI_Revenue, 1000000))",
-      "temp": true
+      "temp": true,
+      "expression": "ROUND(DIVIDE(UI_Revenue, 1000000))"
     },
     "tenthOfBasicLoad": {
-      "expression": "DIVIDE(eq_EQ_BasicLoad, 10)",
-      "temp": true
+      "temp": true,
+      "expression": "DIVIDE(eq_EQ_BasicLoad, 10)"
     },
 
     "EQ_LO1Premium1_temp": {
+      "temp": true,
       "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad1, vl_VL_RetentionLoad1))"
     },
     "EQ_LO1Premium1_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO1Premium1_temp",
       "conditionalCases": [
         {
@@ -84,9 +95,11 @@
     },
 
     "CON_LO1Premium2": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption1, 0), GREATER(UI_Retention2, 0))"
     },
     "EQ_LO1Premium2_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -96,6 +109,7 @@
       ]
     },
     "EQ_LO1Premium2_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO1Premium2_temp",
       "conditionalCases": [
         {
@@ -119,9 +133,11 @@
     },
 
     "CON_LO1Premium3": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption1, 0), GREATER(UI_Retention3, 0))"
     },
     "EQ_LO1Premium3_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -131,6 +147,7 @@
       ]
     },
     "EQ_LO1Premium3_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO1Premium3_temp",
       "conditionalCases": [
         {
@@ -154,9 +171,11 @@
     },
 
     "CON_LO2Premium1": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption2, 0), GREATER(UI_Retention1, 0))"
     },
     "EQ_LO2Premium1_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -166,6 +185,7 @@
       ]
     },
     "EQ_LO2Premium1_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO2Premium1_temp",
       "conditionalCases": [
         {
@@ -189,9 +209,11 @@
     },
 
     "CON_LO2Premium2": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption2, 0), GREATER(UI_Retention2, 0))"
     },
     "EQ_LO2Premium2_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -201,6 +223,7 @@
       ]
     },
     "EQ_LO2Premium2_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO2Premium2_temp",
       "conditionalCases": [
         {
@@ -224,9 +247,11 @@
     },
 
     "CON_LO2Premium3": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption2, 0), GREATER(UI_Retention3, 0))"
     },
     "EQ_LO2Premium3_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -236,6 +261,7 @@
       ]
     },
     "EQ_LO2Premium3_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO2Premium3_temp",
       "conditionalCases": [
         {
@@ -259,9 +285,11 @@
     },
 
     "CON_LO3Premium1": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption3, 0), GREATER(UI_Retention1, 0))"
     },
     "EQ_LO3Premium1_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -271,6 +299,7 @@
       ]
     },
     "EQ_LO3Premium1_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO3Premium1_temp",
       "conditionalCases": [
         {
@@ -294,9 +323,11 @@
     },
 
     "CON_LO3Premium2": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption3, 0), GREATER(UI_Retention2, 0))"
     },
     "EQ_LO3Premium2_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -306,6 +337,7 @@
       ]
     },
     "EQ_LO3Premium2_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO3Premium2_temp",
       "conditionalCases": [
         {
@@ -329,9 +361,11 @@
     },
 
     "CON_LO3Premium3": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption3, 0), GREATER(UI_Retention3, 0))"
     },
     "EQ_LO3Premium3_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -341,6 +375,7 @@
       ]
     },
     "EQ_LO3Premium3_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO3Premium3_temp",
       "conditionalCases": [
         {
@@ -364,9 +399,11 @@
     },
 
     "CON_LO4Premium1": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption4, 0), GREATER(UI_Retention1, 0))"
     },
     "EQ_LO4Premium1_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -376,6 +413,7 @@
       ]
     },
     "EQ_LO4Premium1_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO4Premium1_temp",
       "conditionalCases": [
         {
@@ -399,9 +437,11 @@
     },
 
     "CON_LO4Premium2": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption4, 0), GREATER(UI_Retention2, 0))"
     },
     "EQ_LO4Premium2_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -411,6 +451,7 @@
       ]
     },
     "EQ_LO4Premium2_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO4Premium2_temp",
       "conditionalCases": [
         {
@@ -434,9 +475,11 @@
     },
 
     "CON_LO4Premium3": {
+      "temp": true,
       "expression": "AND(GREATER(UI_LimitOption4, 0), GREATER(UI_Retention3, 0))"
     },
     "EQ_LO4Premium3_temp": {
+      "temp": true,
       "expression": "0",
       "conditionalCases": [
         {
@@ -446,6 +489,7 @@
       ]
     },
     "EQ_LO4Premium3_temp2": {
+      "temp": true,
       "expression": "eq_EQ_LO4Premium3_temp",
       "conditionalCases": [
         {
@@ -471,6 +515,7 @@
 
   "lookups": {
     "VL_EmployeeLoad": {
+      "temp": true,
       "query": {
         "table": "crimelock_emp_load",
         "target": "EmployeeLoad",
@@ -493,6 +538,7 @@
     },
 
     "VL_RevenueLoad": {
+      "temp": true,
       "query": {
         "table": "crimelock_rev_load",
         "target": "RevenueLoad",
@@ -509,6 +555,7 @@
     },
 
     "VL_MinRetention1": {
+      "temp": true,
       "query": {
         "table": "crimelock_min_retention",
         "target": "Retention1",
@@ -522,6 +569,7 @@
     },
 
     "VL_RetentionLoad1": {
+      "temp": true,
       "query": {
         "table": "crimelock_retention_load",
         "target": "RetentionLoad",
@@ -534,6 +582,7 @@
       }
     },
     "VL_RetentionLoad2": {
+      "temp": true,
       "value": 0,
       "conditionalCases": [
         {
@@ -552,6 +601,7 @@
       ]
     },
     "VL_RetentionLoad3": {
+      "temp": true,
       "value": 0,
       "conditionalCases": [
         {
@@ -571,6 +621,7 @@
     },
 
     "VL_LimitLoad1": {
+      "temp": true,
       "query": {
         "table": "crimelock_limit_load",
         "target": "limitLoad",
@@ -583,6 +634,7 @@
       }
     },
     "VL_LimitLoad2": {
+      "temp": true,
       "value": 0,
       "conditionalCases": [
         {
@@ -601,6 +653,7 @@
       ]
     },
     "VL_LimitLoad3": {
+      "temp": true,
       "value": 0,
       "conditionalCases": [
         {
@@ -619,6 +672,7 @@
       ]
     },
     "VL_LimitLoad4": {
+      "temp": true,
       "value": 0,
       "conditionalCases": [
         {
@@ -638,9 +692,11 @@
     },
 
     "CO_MinPremium": {
+      "temp": true,
       "value": 2160
     },
     "CO_ClassALoad": {
+      "temp": true,
       "value": 0.943424083457335
     }
   },

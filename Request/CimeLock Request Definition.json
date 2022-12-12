@@ -924,13 +924,318 @@
           }
         }
       },
-      "referred": {
-        "type": "boolean",
-        "default": false
+      "quotes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "market": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              }
+            },
+            "pinned": {
+              "type": "boolean"
+            },
+            "status": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["warning", "loading", "declined", "error"]
+                }
+              }
+            },
+            "premium": {
+              "type": "number"
+            },
+            "coverage": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["SingleValueCoverage", "MultiValueCoverage"]
+                  },
+                  "value": {
+                    "type": "string",
+                    "enum": [
+                      "N/A",
+                      "SELECTED",
+                      "NOT_SELECTED",
+                      "SELECTED_WITH_EXCEPTION",
+                      "CONTACT_UNDERWRITER"
+                    ]
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "selected": {
+                    "type": "number"
+                  },
+                  "exception": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "selected": {
+              "type": "boolean"
+            },
+            "canUnbind": {
+              "type": "boolean"
+            },
+            "menuOptions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": ["primary", "warning", "link"]
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "search": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "loading": {
+                          "type": "boolean"
+                        },
+                        "actionId": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "loading": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "actionButton": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["primary", "warning"]
+                },
+                "label": {
+                  "type": "string"
+                },
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": ["object", "array"]
+                      },
+                      "loading": {
+                        "type": "boolean"
+                      },
+                      "actionId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "loading": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "ratingInputs": {
+              "type": "object"
+            },
+            "attachmentButton": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "coverageControls": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "SingleValueCoverage",
+                      "MultiValueCoverage",
+                      "ToggleValueCoverage"
+                    ]
+                  },
+                  "value": {
+                    "type": ["string", "boolean"],
+                    "enum": [
+                      "N/A",
+                      "SELECTED",
+                      "NOT_SELECTED",
+                      "SELECTED_WITH_EXCEPTION",
+                      "CONTACT_UNDERWRITER",
+                      true,
+                      false
+                    ]
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "selected": {
+                    "type": "number"
+                  },
+                  "controlUpdatePaths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "changeCoverageValue": {
+              "type": "boolean"
+            }
+          }
+        },
+        "default": [
+          {
+            "id": "crimelock",
+            "market": {
+              "key": "crimelock",
+              "label": "CRIMELOCK"
+            },
+            "pinned": false,
+            "status": {
+              "type": "loading",
+              "label": "Waiting for Price"
+            },
+            "selected": false,
+            "canUnbind": true,
+            "menuOptions": [],
+            "actionButton": {
+              "type": "primary",
+              "label": "Bind",
+              "actions": [],
+              "enabled": false,
+              "loading": false
+            },
+            "attachmentButton": {
+              "enabled": false
+            },
+            "coverageControls": [
+              {
+                "type": "SingleValueCoverage",
+                "values": [
+                  500000, 1000000, 2000000, 3000000
+                ]
+              },
+              {
+                "type": "MultiValueCoverage",
+                "values": [10000, 15000, 25000, 50000, 75000, 100000]
+              }
+            ],
+            "changeCoverageValue": false
+          }
+        ]
       },
-      "referralReasons": {
-        "type": "string",
-        "default": ""
+      "purchase": {
+        "type": "object",
+        "properties": {
+          "quote": { "type": "string" },
+          "signDate": {
+            "type": "string",
+            "format": "date",
+            "before": {
+              "type": "object",
+              "properties": { "path": "applicant.crimelock.periodFrom" }
+            },
+            "errorMessage": { "before": "Sign date cannot be after start date" }
+          }
+        },
+        "required": ["quote"]
+      },
+      "coverageHeaders": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          }
+        },
+        "default": [
+          {
+            "label": "Limit Option",
+            "value": "limit"
+          },
+          {
+            "label": "Retention Option",
+            "value": "retention"
+          }
+        ]
       }
     },
     "allOf": [
