@@ -32,8 +32,8 @@
                       },
                       {
                         "type": "AutoCompleteSearch",
-                        "label": "First Address",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address1/properties/address",
+                        "label": "Address",
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/address",
                         "options": {
                           "searchCountryScope": ["US"],
                           "countryMap": {
@@ -47,90 +47,49 @@
                           ],
                           "dependencies": [
                             {
-                              "key": "administrative_area_level_3.long_name",
-                              "paths": ["applicant.crimelock.address1.area"]
+                              "key": "streetLongName",
+                              "paths": [
+                                "applicant.crimelock.address.streetAddress"
+                              ]
                             },
                             {
                               "key": "cityLongName",
-                              "paths": ["applicant.crimelock.address1.city"]
+                              "paths": ["applicant.crimelock.address.city"]
                             },
                             {
                               "key": "stateLongName",
-                              "paths": ["applicant.crimelock.address1.state"]
+                              "paths": ["applicant.crimelock.address.state"]
                             },
                             {
                               "key": "postalCodeLongName",
-                              "paths": ["applicant.crimelock.address1.zipCode"]
+                              "paths": ["applicant.crimelock.address.zipCode"]
                             }
                           ]
                         }
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address1/properties/area"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/streetAddress"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address1/properties/city"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/streetAddress2"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address1/properties/state"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/area"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address1/properties/zipCode"
-                      },
-                      {
-                        "type": "AutoCompleteSearch",
-                        "label": "Second Address",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address2/properties/address",
-                        "options": {
-                          "searchCountryScope": ["US"],
-                          "countryMap": {
-                            "United States": "United States of America"
-                          },
-                          "countrySearchCode": [
-                            {
-                              "name": "United States of America",
-                              "code": "US"
-                            }
-                          ],
-                          "dependencies": [
-                            {
-                              "key": "administrative_area_level_3.long_name",
-                              "paths": ["applicant.crimelock.address2.area"]
-                            },
-                            {
-                              "key": "cityLongName",
-                              "paths": ["applicant.crimelock.address2.city"]
-                            },
-                            {
-                              "key": "stateLongName",
-                              "paths": ["applicant.crimelock.address2.state"]
-                            },
-                            {
-                              "key": "postal_code.long_name",
-                              "paths": ["applicant.crimelock.address2.zipCode"]
-                            }
-                          ]
-                        }
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/city"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address2/properties/area"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/state"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address2/properties/city"
-                      },
-                      {
-                        "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address2/properties/state"
-                      },
-                      {
-                        "type": "Control",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/address2/properties/zipCode"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/zipCode"
                       },
                       {
                         "type": "Control",
@@ -161,48 +120,6 @@
                         "scope": "#/properties/applicant/properties/crimelock/properties/additionalInformation",
                         "options": {
                           "multi": true
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "Section",
-                    "label": "Production Information",
-                    "elements": [
-                      {
-                        "type": "Control",
-                        "label": "Production Office",
-                        "scope": "#/properties/productionInformation/properties/productionOffice",
-                        "rule": {
-                          "effect": "DISABLE",
-                          "condition": {}
-                        }
-                      },
-                      {
-                        "type": "Control",
-                        "label": "Production Contact",
-                        "scope": "#/properties/productionInformation/properties/productionContact",
-                        "rule": {
-                          "effect": "DISABLE",
-                          "condition": {}
-                        }
-                      },
-                      {
-                        "type": "Control",
-                        "label": "Production Phone",
-                        "scope": "#/properties/productionInformation/properties/productionPhone",
-                        "rule": {
-                          "effect": "DISABLE",
-                          "condition": {}
-                        }
-                      },
-                      {
-                        "type": "Control",
-                        "label": "Production Email",
-                        "scope": "#/properties/productionInformation/properties/productionEmail",
-                        "rule": {
-                          "effect": "DISABLE",
-                          "condition": {}
                         }
                       }
                     ]
@@ -286,8 +203,7 @@
                       },
                       {
                         "type": "Control",
-                        "label": "Choose Country",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/country_1",
+                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/numberOfCountries",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -299,102 +215,164 @@
                         }
                       },
                       {
-                        "type": "Control",
-                        "label": "No. Of Employees",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_1",
+                        "type": "Section",
+                        "label": "Country 1",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
+                            "type": "AND",
+                            "conditions": [
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
+                                "schema": { "const": true }
+                              },
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
+                                "schema": { "minimum": 1 }
+                              }
+                            ]
                           }
-                        }
+                        },
+                        "elements": [
+                          {
+                            "type": "Control",
+                            "label": "Choose Country",
+                            "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/country_1"
+                          },
+                          {
+                            "type": "Control",
+                            "label": "No. Of Employees",
+                            "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_1"
+                          }
+                        ]
                       },
                       {
-                        "type": "Control",
-                        "label": "Choose Country",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/country_2",
+                        "type": "Section",
+                        "label": "Country 2",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
+                            "type": "AND",
+                            "conditions": [
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
+                                "schema": { "const": true }
+                              },
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
+                                "schema": { "minimum": 2 }
+                              }
+                            ]
                           }
-                        }
+                        },
+                        "elements": [
+                          {
+                            "type": "Control",
+                            "label": "Choose Country",
+                            "scope": "#/allOf[3]/then/properties/applicant/properties/crimelock/properties/country_2"
+                          },
+                          {
+                            "type": "Control",
+                            "label": "No. Of Employees",
+                            "scope": "#/allOf[3]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_2"
+                          }
+                        ]
                       },
                       {
-                        "type": "Control",
-                        "label": "No. Of Employees",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_2",
+                        "type": "Section",
+                        "label": "Country 3",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
+                            "type": "AND",
+                            "conditions": [
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
+                                "schema": { "const": true }
+                              },
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
+                                "schema": { "minimum": 3 }
+                              }
+                            ]
                           }
-                        }
+                        },
+                        "elements": [
+                          {
+                            "type": "Control",
+                            "label": "Choose Country",
+                            "scope": "#/allOf[4]/then/properties/applicant/properties/crimelock/properties/country_3"
+                          },
+                          {
+                            "type": "Control",
+                            "label": "No. Of Employees",
+                            "scope": "#/allOf[4]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_3"
+                          }
+                        ]
                       },
                       {
-                        "type": "Control",
-                        "label": "Choose Country",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/country_3",
+                        "type": "Section",
+                        "label": "Country 4",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
+                            "type": "AND",
+                            "conditions": [
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
+                                "schema": { "const": true }
+                              },
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
+                                "schema": { "minimum": 4 }
+                              }
+                            ]
                           }
-                        }
+                        },
+                        "elements": [
+                          {
+                            "type": "Control",
+                            "label": "Choose Country",
+                            "scope": "#/allOf[5]/then/properties/applicant/properties/crimelock/properties/country_4"
+                          },
+                          {
+                            "type": "Control",
+                            "label": "No. Of Employees",
+                            "scope": "#/allOf[5]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_4"
+                          }
+                        ]
                       },
                       {
-                        "type": "Control",
-                        "label": "No. Of Employees",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_3",
+                        "type": "Section",
+                        "label": "Country 5",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
+                            "type": "AND",
+                            "conditions": [
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
+                                "schema": { "const": true }
+                              },
+                              {
+                                "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
+                                "schema": { "minimum": 5 }
+                              }
+                            ]
                           }
-                        }
-                      },
-                      {
-                        "type": "Control",
-                        "label": "Choose Country",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/country_4",
-                        "rule": {
-                          "effect": "SHOW",
-                          "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
+                        },
+                        "elements": [
+                          {
+                            "type": "Control",
+                            "label": "Choose Country",
+                            "scope": "#/allOf[6]/then/properties/applicant/properties/crimelock/properties/country_5"
+                          },
+                          {
+                            "type": "Control",
+                            "label": "No. Of Employees",
+                            "scope": "#/allOf[6]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_5"
                           }
-                        }
-                      },
-                      {
-                        "type": "Control",
-                        "label": "No. Of Employees",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/noOfEmployees_4",
-                        "rule": {
-                          "effect": "SHOW",
-                          "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
-                          }
-                        }
+                        ]
                       }
                     ]
                   }
@@ -933,13 +911,14 @@
           "key": "assistant",
           "data": {
             "label": "SOF",
-            "description": "One or more SOF question answered with NO, Referral will be triggered"          }
+            "description": "One or more SOF question answered with NO, Referral will be triggered"
+          }
         }
       ]
     },
     {
       "if": {
-        "in": ["-1", {"var": "applicant.crimelock.industry"}]
+        "in": ["-1", { "var": "applicant.crimelock.industry" }]
       },
       "then": [
         {

@@ -1,17 +1,35 @@
-[
-  {
-    "rhs": [
-      [
-        {
-          "id": "crimelock",
+{
+  "data": [
+    {
+      "schemaKey": "5a033379-beb3-4ffa-beb6-0ce24be9a087",
+      "mappedData": {
+        "data": {
+          "id": "limit1_retention1",
           "market": { "key": "crimelock", "label": "CRIMELOCK" },
+          "menuOptions": [],
           "pinned": false,
-          "premium": 1792,
+          "status": { "type": "succeeded", "label": "Succeeded" },
+          "premium": 7598,
           "attachmentButton": { "enabled": false },
           "actionButton": {
             "type": "primary",
             "label": "Bind",
-            "actions": [],
+            "key": "bind",
+            "actions": [
+              {
+                "key": "navigate",
+                "data": { "search": "%3Fquote-id=$quoteId" }
+              },
+              {
+                "key": "mutate",
+                "data": [
+                  {
+                    "path": "purchase",
+                    "value": { "quote": "$quote[$quoteId]: $quotePremium" }
+                  }
+                ]
+              }
+            ],
             "enabled": true,
             "loading": false
           },
@@ -20,195 +38,6 @@
               "name": "limit",
               "type": "MultiValueCoverage",
               "selected": 1000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 25000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 2160,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 1000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 40000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 3000,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 2000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 25000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 3000,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 2000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 40000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 3000,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 2000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 25000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 3000,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 2000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 40000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 4500,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 3000000
-            },
-            {
-              "name": "retention",
-              "type": "MultiValueCoverage",
-              "selected": 25000
-            }
-          ],
-          "changeCoverageValue": false
-        },
-        {
-          "id": "crimelock",
-          "market": { "key": "crimelock", "label": "CRIMELOCK" },
-          "pinned": false,
-          "premium": 4500,
-          "attachmentButton": { "enabled": false },
-          "actionButton": {
-            "type": "primary",
-            "label": "Bind",
-            "actions": [],
-            "enabled": true,
-            "loading": false
-          },
-          "coverageControls": [
-            {
-              "name": "limit",
-              "type": "MultiValueCoverage",
-              "selected": 3000000
             },
             {
               "name": "retention",
@@ -218,9 +47,17 @@
           ],
           "changeCoverageValue": false
         }
-      ]
-    ],
-    "path": ["quotes"],
-    "kind": "E"
-  }
-]
+      }
+    }
+  ]
+}
+
+
+
+,
+                "setDateDefault": {
+                  "incrementBy": {
+                    "by": 2,
+                    "unit": "day"
+                  }
+                }

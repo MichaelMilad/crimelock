@@ -1,11 +1,6 @@
-# Questions
-
-# Information
-1. All statuses will be combined into statuses panel.
-2. SOF Can and Will be automated instead of asking the user to verify its date.
-
-
-## Keys
+# Keys
 - CrimeLock Request Key : `facc73e6-b500-480c-b20a-d69568174b3c`
-- UiSchema (1st) : `663b7071-4fb5-4687-939f-8c081dea6149`
-- fileKey: `ba8194ca-b9b9-4e41-8ea2-cd942f991098`
+- UiSchema (application) : `663b7071-4fb5-4687-939f-8c081dea6149`
+- UiSchema (QuoteScreen) : `69230575-a66c-4636-98b3-5f6a07c8a345`
+- mapping Quotes fileKey : `5a033379-beb3-4ffa-beb6-0ce24be9a087`
+- mapping Calculator Inputs fileKey: `00e10b0b-99a5-464a-a224-4f997ce5490d`

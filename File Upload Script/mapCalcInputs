@@ -1,0 +1,37 @@
+{
+    "UI_ProRateFactor": (
+        $contains(applicant.crimelock.periodTo, "6 Months") ? 0.5
+        : $contains(applicant.crimelock.periodTo, "12 Months") ? 1
+        : $contains(applicant.crimelock.periodTo, "18 Months") ? 1.5
+    ),
+    "UI_EmployeeCount": applicant.crimelock.numberOfEmployees,
+    "UI_Revenue": applicant.crimelock.currentRevenue,
+    "UI_IndustryLoad": applicant.crimelock.industryLoad,
+    "UI_LimitOption1": coverage.limitOption1,
+    "UI_LimitOption2": (
+        coverage.limitOption2 > 0
+        ? coverage.limitOption2
+        : undefined
+    ),
+    "UI_LimitOption3": (
+        coverage.limitOption3 > 0
+        ? coverage.limitOption3
+        : undefined
+    ),
+    "UI_LimitOption4": (
+        coverage.limitOption4 > 0
+        ? coverage.limitOption4
+        : undefined
+    ),
+    "UI_Retention1": coverage.retentionOption1,
+    "UI_Retention2": (
+        coverage.retentionOption2 > 0
+        ? coverage.retentionOption2
+        : undefined
+    ),
+    "UI_Retention3": (
+        coverage.retentionOption3 > 0
+        ? coverage.retentionOption3
+        : undefined
+    )
+}

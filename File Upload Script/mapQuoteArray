@@ -1,14 +1,31 @@
 (
-    $output := $each(calc_result, function($val, $name){
-        $val > 0
+    $output := [
+        $each(calc_result, function($val, $name){
+        ( $contains($name, "Premium") and $val > 0)
         ?
-        {
-            "id": "crimelock",
+        (
+            $id := $join(
+                [
+                    "CrimeLock", 
+                    "_", 
+                    "Lim-", 
+                    $substring($name, 5, 1), 
+                    "_", 
+                    "Ret-", 
+                    $substring($name, 13,1)]
+                );
+            {
+            "id": $id,
             "market": {
                 "key": "crimelock",
                 "label": "CRIMELOCK"
             },
+            "menuOptions": [],
             "pinned": false,
+            "status": {
+                "type": "succeeded",
+                "label": "Succeeded"
+            },
             "premium": $val,
             "attachmentButton": {
                 "enabled": false
@@ -16,7 +33,27 @@
             "actionButton": {
                 "type": "primary",
                 "label": "Bind",
-                "actions": [],
+                "key": "bind",
+                "actions": [
+                    {
+                        "key": "navigate",
+                        "data": {
+                            "search": "?quote-id=$quoteId"
+                        }
+                    },
+                    {
+                        "key": "mutate",
+                        "data": [
+                            {
+                                "path": "purchase",
+                                "value": 
+                                    {
+                                        "quote": $join([$id, ": ", "$quotePremium"])
+                                    }
+                            }
+                        ]
+                    }
+                ],
                 "enabled": true,
                 "loading": false
             },
@@ -26,28 +63,44 @@
                     "type": "MultiValueCoverage",
                     "selected": 
                         (
-                        ($substring($name, 5, 1) = "1") ? instanceData.coverage.limitOption1
-                        : ($substring($name, 5, 1) = "2") ? instanceData.coverage.limitOption2
-                        : ($substring($name, 5, 1) = "3") ? instanceData.coverage.limitOption3
-                        : ($substring($name, 5, 1) = "4") ? instanceData.coverage.limitOption4
+                        $contains($name, "LO1Premium") ? instanceData.coverage.limitOption1
+                        : $contains($name, "LO2Premium") ? instanceData.coverage.limitOption2
+                        : $contains($name, "LO3Premium") ? instanceData.coverage.limitOption3
+                        : $contains($name, "LO4Premium") ? instanceData.coverage.limitOption4
                         )
                 },
                 {
                     "name": "retention",
                     "type": "MultiValueCoverage",
                     "selected": (
-                        ($substring($name, 13, 1) = "1") ? instanceData.coverage.retentionOption1
-                        : ($substring($name, 13, 1) = "2") ? instanceData.coverage.retentionOption2
-                        : ($substring($name, 13, 1) = "3") ? instanceData.coverage.retentionOption3
+                        ( $contains($name, "Premium1") and (instanceData.coverage.retentionOption1 >= calc_result.UI_Retention1) ) ? instanceData.coverage.retentionOption1
+                        : ( $contains($name, "Premium2") and (instanceData.coverage.retentionOption2 >= calc_result.UI_Retention1) ) ? instanceData.coverage.retentionOption2
+                        : ( $contains($name, "Premium3") and (instanceData.coverage.retentionOption3 >= calc_result.UI_Retention1) ) ? instanceData.coverage.retentionOption3
+                        : calc_result.UI_Retention1
                     )
+                },
+                {
+                    "name": "feature1",
+                    "type": "SingleValueCoverage",
+                    "value": "SELECTED"
+                },
+                {
+                    "name": "feature2",
+                    "type": "SingleValueCoverage",
+                    "value": "SELECTED"
+                },
+                {
+                    "name": "feature3",
+                    "type": "SingleValueCoverage",
+                    "value": "SELECTED_WITH_EXCEPTION"
                 }
             ],
             "changeCoverageValue": false
-        }
+        })
         : undefined
-    });
+    })
+    ];
 
-    {
-        "data" : $output
-    }
+ $output
+
 )

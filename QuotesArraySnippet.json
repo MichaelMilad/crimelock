@@ -1,0 +1,1559 @@
+[
+    {
+      "id": "datalock",
+      "data": {},
+      "market": {
+        "key": "datalock",
+        "label": "DATALOCK"
+      },
+      "pinned": false,
+      "status": {
+        "type": "error",
+        "label": "Error"
+      },
+      "selected": false,
+      "canUnbind": true,
+      "menuOptions": [
+        {
+          "key": "requote",
+          "type": "link",
+          "label": "Requote",
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "%3Freinvoke=$marketKey"
+              }
+            }
+          ]
+        }
+      ],
+      "systemError": true,
+      "actionButton": {
+        "key": "bind",
+        "type": "primary",
+        "label": "Bind",
+        "actions": [
+          {
+            "key": "navigate",
+            "data": {
+              "search": "%3Fquote-id=$quoteId"
+            }
+          },
+          {
+            "key": "mutate",
+            "data": [
+              {
+                "path": "purchase",
+                "value": {
+                  "quote": "$quoteId: $quotePremium"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": false,
+        "loading": false
+      },
+      "ratingInputs": {
+        "ratingFields": {
+          "State": "Texas",
+          "Backup": true,
+          "Revenue": 1000000,
+          "AnyClaim": false,
+          "Bricking": 0,
+          "Currency": "USD",
+          "AntiVirus": true,
+          "HQ_Country": "United States of America",
+          "EncryptData": false,
+          "DigitalAsset": 0,
+          "IndustryName": "Accounting",
+          "OverAllLimits": [
+            1000000
+          ],
+          "ActualBrokerage": 0.3,
+          "BILRembursement": 0,
+          "IsCywareRenewal": false,
+          "NumberOfPII_PHI": 5000,
+          "PatchManagement": true,
+          "RetroActiveYear": "Two years +",
+          "PCI_DSSLiability": 0,
+          "ReputationalHarm": 0,
+          "TechRateTargetLR": 0.7246,
+          "SelectedDeductible": 10000,
+          "MultiMediaLiability": 0,
+          "RegulatoryLiability": 1000000,
+          "BreachEventLiability": 1000000,
+          "CyberCrimeReimursement": 0,
+          "BiometricRecordsStorage": "No",
+          "CyberExtortionRemursement": 1000000,
+          "BreachEventCostReimursement": 1000000,
+          "MediaLiability_ReviewContent": false
+        },
+        "referralAndDeclineFields": {
+          "protectBackups": "Yes",
+          "usesEmailFiltering": "Yes",
+          "protectRemoteAccess": "N/A",
+          "biometricRecordsStorage": "No",
+          "performCyberSecurityTraining": "Yes"
+        }
+      },
+      "attachmentButton": {
+        "enabled": false
+      },
+      "coverageControls": [
+        {
+          "name": "limit",
+          "type": "MultiValueCoverage",
+          "values": [
+            100000,
+            250000,
+            500000,
+            750000,
+            1000000
+          ],
+          "selected": 1000000
+        },
+        {
+          "name": "retention",
+          "type": "MultiValueCoverage",
+          "values": [
+            10000,
+            15000,
+            25000,
+            50000,
+            75000,
+            100000
+          ],
+          "selected": 10000
+        },
+        {
+          "name": "breachEventLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "regulatoryLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "paymentCardLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "multiMediaLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoExistingPolicy",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoQuoted",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachEventCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberExtortionReimbursement",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "dataAssetLossRecovery",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "businessInterruptionCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reputationalHarmCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemSecurityCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "invoiceManipulation",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage1stParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage3rdParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cryptoJacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "voluntaryShutdown",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareDefinition",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "postBreachRemedialServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberCrime",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "servicesFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "criminalRewardCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachResponseSeparateLimit",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "theftOfPersonalFunds",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "corporateIdentityTheft",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "telephoneHacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pushPaymentFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "gdprCyber",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "courtAttendanceCost",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "ddosAttack",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskImprovementServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskManagementIncentive",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reviewBombingCover",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemFailureNonITProvider",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pollutionCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        }
+      ],
+      "changeCoverageValue": false
+    },
+    {
+      "id": "bbr",
+      "data": {},
+      "market": {
+        "key": "bbr",
+        "label": "BBR"
+      },
+      "pinned": false,
+      "status": {
+        "type": "error",
+        "label": "Error"
+      },
+      "selected": false,
+      "canUnbind": false,
+      "menuOptions": [
+        {
+          "key": "requote",
+          "type": "link",
+          "label": "Requote",
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "%3Freinvoke=$marketKey"
+              }
+            }
+          ]
+        }
+      ],
+      "systemError": true,
+      "actionButton": {
+        "key": "bind",
+        "type": "primary",
+        "label": "Bind",
+        "actions": [
+          {
+            "key": "navigate",
+            "data": {
+              "search": "%3Fquote-id=$quoteId"
+            }
+          },
+          {
+            "key": "mutate",
+            "data": [
+              {
+                "path": "purchase",
+                "value": {
+                  "quote": "$quoteMarket: $quotePremium"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": false,
+        "loading": false
+      },
+      "ratingInputs": {
+        "city": "Austin",
+        "state": "Texas",
+        "street": "West 6th Street",
+        "country": "United States of America",
+        "revenue": 1000000,
+        "website": "www.malloftanta.com",
+        "zipCode": "06107",
+        "industry": {
+          "name": "Restaurant"
+        },
+        "agencyName": "Lockton Companies, LLC - Chicago, IL",
+        "brokerEmail": "jshoaf@lockton.com",
+        "expiry_date": "Invalid date",
+        "insuredName": "lmskdmkkmkmkksdkmkmak mohamed",
+        "inception_date": "2022-12-15",
+        "aggregate_limit": 1000000,
+        "product_questions": {
+          "credit_card": "N/A",
+          "wire_transfer": "No",
+          "use_office_365": "Yes",
+          "backups_encrypted": "Yes",
+          "allow_remote_access": "No",
+          "firewall_anti_virus": "Yes",
+          "software_segregated": "No",
+          "backup_critical_data": "Yes",
+          "scan_incoming_emails": "Yes",
+          "virtual_private_network": "No",
+          "present_known_claim_info": "No",
+          "implement_critical_patches": "Yes",
+          "previous_breach_notification_a": "No",
+          "previous_breach_notification_b": "No",
+          "previous_breach_notification_c": "No",
+          "previous_breach_notification_d": "No",
+          "restoration_and_recovery_tested": "Yes",
+          "cyber_security_awareness_training": "Yes",
+          "office_365_advanced_threat_protection": "Yes",
+          "backups_separate_from_companys_network": "Yes",
+          "end_of_life_or_end_of_support_software": "No",
+          "multi_factor_authentication_for_email_access": "Yes"
+        },
+        "each_claim_retention": 1000,
+        "notified_individuals": 50000
+      },
+      "attachmentButton": {
+        "enabled": false
+      },
+      "coverageControls": [
+        {
+          "name": "limit",
+          "type": "MultiValueCoverage",
+          "values": [
+            1000000,
+            2000000
+          ],
+          "selected": 1000000
+        },
+        {
+          "name": "retention",
+          "type": "MultiValueCoverage",
+          "values": [
+            1000
+          ],
+          "selected": 1000
+        },
+        {
+          "name": "breachEventLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "regulatoryLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "paymentCardLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "multiMediaLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoExistingPolicy",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoQuoted",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachEventCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberExtortionReimbursement",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "dataAssetLossRecovery",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "businessInterruptionCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reputationalHarmCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemSecurityCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "invoiceManipulation",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage1stParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage3rdParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cryptoJacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "voluntaryShutdown",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareDefinition",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "postBreachRemedialServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberCrime",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "servicesFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "criminalRewardCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachResponseSeparateLimit",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "theftOfPersonalFunds",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "corporateIdentityTheft",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "telephoneHacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pushPaymentFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "gdprCyber",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "courtAttendanceCost",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "ddosAttack",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskImprovementServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskManagementIncentive",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reviewBombingCover",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemFailureNonITProvider",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pollutionCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        }
+      ],
+      "changeCoverageValue": false
+    },
+    {
+      "id": "coalition",
+      "data": {},
+      "market": {
+        "key": "coalition",
+        "label": "COALITION"
+      },
+      "pinned": false,
+      "status": {
+        "type": "pending",
+        "label": "Waiting for price"
+      },
+      "selected": false,
+      "canUnbind": false,
+      "menuOptions": [],
+      "actionButton": {
+        "key": "bind",
+        "type": "primary",
+        "label": "Bind",
+        "actions": [
+          {
+            "key": "navigate",
+            "data": {
+              "search": "%3Fquote-id=$quoteId"
+            }
+          },
+          {
+            "key": "mutate",
+            "data": [
+              {
+                "path": "purchase",
+                "value": {
+                  "quote": "$quoteMarket: $quotePremium"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": false,
+        "loading": false
+      },
+      "ratingInputs": {
+        "broker": {
+          "name": "Jshoaf",
+          "email": "jshoaf@lockton.com"
+        },
+        "bundle": "essential",
+        "end_date": "Invalid dateT00:00:00Z",
+        "company_name": "lmskdmkkmkmkksdkmkmak mohamed",
+        "domain_names": [
+          "www.malloftanta.com"
+        ],
+        "effective_date": "2022-12-15T00:00:00Z",
+        "aggregate_limit": 25000,
+        "company_address": {
+          "city": "Austin",
+          "state": "Texas",
+          "postcode": "06107",
+          "street_line_1": "West 6th Street"
+        },
+        "company_revenue": 1000000,
+        "company_industry": {
+          "id": 225
+        },
+        "insurance_market": "ADMITTED",
+        "retroactive_date": "2022-12-15T00:00:00Z",
+        "default_retention": 500,
+        "coverage_instances": {
+          "network": {},
+          "regulatory_defense": {},
+          "breach_response_services": {}
+        },
+        "application_responses": {
+          "pii_phi": "No",
+          "mfa_email": "Yes",
+          "dual_control": "No",
+          "prior_claims": "No",
+          "encrypts_data": "No",
+          "mfa_remote_access": "Yes",
+          "backup_and_restore": "Yes",
+          "aware_of_new_claims": "No",
+          "mfa_other_privileged_accounts": "Yes"
+        },
+        "intended_policyholder": {
+          "name": "lmskdmkkmkmkksdkmkmak mohamed",
+          "email": "test@email.com"
+        },
+        "company_employee_count": "51-250",
+        "company_gross_profit_net_revenue": 1000000
+      },
+      "attachmentButton": {
+        "enabled": false
+      },
+      "coverageControls": [
+        {
+          "name": "limit",
+          "type": "MultiValueCoverage",
+          "selected": 25000
+        },
+        {
+          "name": "retention",
+          "type": "MultiValueCoverage",
+          "values": [
+            500,
+            750,
+            1000,
+            1500,
+            2500,
+            5000,
+            7500,
+            10000,
+            15000,
+            25000,
+            50000,
+            75000,
+            100000,
+            150000,
+            175000,
+            200000,
+            250000,
+            300000,
+            500000,
+            750000,
+            1000000
+          ],
+          "selected": 500
+        },
+        {
+          "name": "breachEventLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "regulatoryLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "paymentCardLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "multiMediaLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoExistingPolicy",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoQuoted",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachEventCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberExtortionReimbursement",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "dataAssetLossRecovery",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "businessInterruptionCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reputationalHarmCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemSecurityCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "invoiceManipulation",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage1stParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage3rdParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cryptoJacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "voluntaryShutdown",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareDefinition",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "postBreachRemedialServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberCrime",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "servicesFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "criminalRewardCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachResponseSeparateLimit",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "theftOfPersonalFunds",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "corporateIdentityTheft",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "telephoneHacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pushPaymentFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "gdprCyber",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "courtAttendanceCost",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "ddosAttack",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskImprovementServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskManagementIncentive",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reviewBombingCover",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemFailureNonITProvider",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pollutionCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        }
+      ],
+      "changeCoverageValue": false
+    },
+    {
+      "id": "cfc",
+      "data": {},
+      "market": {
+        "key": "cfc",
+        "label": "CFC"
+      },
+      "pinned": false,
+      "status": {
+        "type": "pending",
+        "label": "Waiting for price"
+      },
+      "selected": false,
+      "canUnbind": false,
+      "menuOptions": [
+        {
+          "key": "requote",
+          "type": "link",
+          "label": "Requote",
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "%3Freinvoke=$marketKey"
+              }
+            }
+          ]
+        }
+      ],
+      "actionButton": {
+        "key": "bind",
+        "type": "primary",
+        "label": "Bind",
+        "actions": [
+          {
+            "key": "navigate",
+            "data": {
+              "search": "%3Fquote-id=$quoteId"
+            }
+          },
+          {
+            "key": "mutate",
+            "data": [
+              {
+                "path": "purchase",
+                "value": {
+                  "quote": "$quoteMarket: $quotePremium"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": true,
+        "loading": false
+      },
+      "ratingInputs": {
+        "Url": "www.malloftanta.com",
+        "city": "Austin",
+        "state": "Texas",
+        "street": "West 6th Street",
+        "country": "US",
+        "zipCode": "06107",
+        "Activity": "72",
+        "headCount": 100,
+        "brokerEmail": "jshoaf@lockton.com",
+        "insuredName": "lmskdmkkmkmkksdkmkmak mohamed",
+        "TotalRevenue": 1000000,
+        "inceptionDate": "2022-12-15",
+        "waitingPeriod": 4,
+        "CP_PrimaryLimit": 1000000,
+        "CX_PrimaryLimit": 100000,
+        "indemnityPeriod": 6,
+        "CP_PrimaryExcess": 5000,
+        "CX_PrimaryExcess": 5000,
+        "addCrimeCoverage": false,
+        "scheduleOfInformation": true
+      },
+      "attachmentButton": {
+        "enabled": false
+      },
+      "coverageControls": [
+        {
+          "name": "limit",
+          "type": "MultiValueCoverage",
+          "values": [
+            250000,
+            500000,
+            750000,
+            1000000,
+            1500000,
+            2000000
+          ],
+          "selected": 1000000
+        },
+        {
+          "name": "retention",
+          "type": "MultiValueCoverage",
+          "values": [
+            2500,
+            5000,
+            7500,
+            10000,
+            20000,
+            30000,
+            40000,
+            50000,
+            75000,
+            100000,
+            150000,
+            200000,
+            250000
+          ],
+          "selected": 5000
+        },
+        {
+          "name": "breachEventLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "regulatoryLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "paymentCardLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "multiMediaLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoExistingPolicy",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoQuoted",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachEventCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberExtortionReimbursement",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "dataAssetLossRecovery",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "businessInterruptionCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reputationalHarmCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemSecurityCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "invoiceManipulation",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage1stParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage3rdParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cryptoJacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "voluntaryShutdown",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareDefinition",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "postBreachRemedialServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberCrime",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "servicesFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "criminalRewardCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachResponseSeparateLimit",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "theftOfPersonalFunds",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "corporateIdentityTheft",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "telephoneHacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pushPaymentFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "gdprCyber",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "courtAttendanceCost",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "ddosAttack",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskImprovementServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskManagementIncentive",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reviewBombingCover",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemFailureNonITProvider",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pollutionCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        }
+      ],
+      "changeCoverageValue": false
+    },
+    {
+      "id": "everest",
+      "data": {},
+      "market": {
+        "key": "everest",
+        "label": "EVEREST"
+      },
+      "pinned": false,
+      "status": {
+        "type": "error",
+        "label": "Error"
+      },
+      "selected": false,
+      "canUnbind": false,
+      "menuOptions": [
+        {
+          "key": "requote",
+          "type": "link",
+          "label": "Requote",
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "%3Freinvoke=$marketKey"
+              }
+            }
+          ]
+        }
+      ],
+      "actionButton": {
+        "key": "bind",
+        "type": "primary",
+        "label": "Bind",
+        "actions": [
+          {
+            "key": "navigate",
+            "data": {
+              "search": "%3Fquote-id=$quoteId"
+            }
+          },
+          {
+            "key": "mutate",
+            "data": [
+              {
+                "path": "purchase",
+                "value": {
+                  "quote": "$quoteMarket: $quotePremium"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": false,
+        "loading": false
+      },
+      "ratingInputs": {
+        "contacts": {
+          "name": "Rasha Mohamed",
+          "email_address": "rasha.m@trufla.com",
+          "applier_is_signer": true
+        },
+        "exposure": {
+          "revenue": 1000000,
+          "corporate_assets": 1,
+          "foreign_employees": 12,
+          "prior_year_revenue": 1
+        },
+        "producer_id": "02722",
+        "phone_number": "55555501000",
+        "product_code": "CY",
+        "offering_code": "EverestCyberElevationPolicy",
+        "effective_date": "2022-12-15",
+        "primary_entity": {
+          "name": "lmskdmkkmkmkksdkmkmak mohamed",
+          "trade_names": [
+            {
+              "trade_name": "aaa",
+              "trade_name_type": "DBA"
+            }
+          ],
+          "business_type": "01"
+        },
+        "submitted_date": "2022-12-14T11:05:23.327Z",
+        "account_address": {
+          "region": "Texas",
+          "country": "USA",
+          "locality": "Austin",
+          "postal_code": "06107",
+          "address_line_1": "West 6th Street"
+        },
+        "cyber_liability": {
+          "limit": 1000000,
+          "retention": 2500,
+          "use_of_encryption": true,
+          "technology_errors_and_omissions": true,
+          "total_storage_of_sensitive_data": "UNDER_50000"
+        },
+        "expiration_date": "2023-12-15",
+        "coverage_part_code": "CYBER_LIABILITY",
+        "primary_naics_code": "924110",
+        "predominant_state_code": "Texas",
+        "underwriting_questions": {
+          "ML_CL_CYBER_LACK_OF_CRIME_CONTROLS": false,
+          "ML_CL_CYBER_PRIOR_KNOWLEDGE_OF_POTENTIAL_CLAIM": false,
+          "ML_CL_CYBER_EXPERIENCED_SYSTEMBREACH_NETWORKOUTAGE": false
+        }
+      },
+      "attachmentButton": {
+        "enabled": false
+      },
+      "coverageControls": [
+        {
+          "name": "limit",
+          "type": "MultiValueCoverage",
+          "values": [
+            1000000
+          ],
+          "selected": 1000000
+        },
+        {
+          "name": "retention",
+          "type": "MultiValueCoverage",
+          "values": [
+            2500
+          ],
+          "selected": 2500
+        },
+        {
+          "name": "breachEventLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "regulatoryLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "paymentCardLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "multiMediaLiability",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoExistingPolicy",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "TeoQuoted",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachEventCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberExtortionReimbursement",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "dataAssetLossRecovery",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "businessInterruptionCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reputationalHarmCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemSecurityCosts",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "invoiceManipulation",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage1stParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "bodilyInjuryAndPropertyDamage3rdParty",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cryptoJacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "voluntaryShutdown",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "computerHardwareDefinition",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "postBreachRemedialServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "cyberCrime",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "servicesFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "criminalRewardCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "breachResponseSeparateLimit",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "theftOfPersonalFunds",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "corporateIdentityTheft",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "telephoneHacking",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pushPaymentFraud",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "gdprCyber",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "courtAttendanceCost",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "ddosAttack",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskImprovementServices",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "riskManagementIncentive",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "reviewBombingCover",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "systemFailureNonITProvider",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        },
+        {
+          "name": "pollutionCoverage",
+          "type": "SingleValueCoverage",
+          "value": "N/A"
+        }
+      ],
+      "changeCoverageValue": false
+    }
+  ]

@@ -22,7 +22,7 @@
         "label": "Error!",
         "options": {
           "type": "error",
-          "description": "Can’t get quotes, Please contact your system administrator if this error pressest",
+          "description": "Can’t get quotes, Please contact your system administrator if this error persists",
           "requote": false,
           "requoteActions": []
         }
@@ -43,7 +43,7 @@
           },
           {
             "type": "Control",
-            "scope": "#/properties/applicant/properties/crimelock/periodTo",
+            "scope": "#/properties/applicant/properties/crimelock/properties/periodTo",
             "label": "Policy Period",
             "rule": {
               "effect": "DISABLE",

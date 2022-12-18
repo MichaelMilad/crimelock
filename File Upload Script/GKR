@@ -1,0 +1,29 @@
+(
+$motorcycles := 0;
+$vehicles := 0;
+
+data.vehicleInfo.count >=1 ?
+    data.vehicleInfo.vehicleOne.type = "Motorcycle" ? 
+        $motorcycles:= $motorcycles + 1 :
+        $vehicles:= $vehicles + 1;
+
+data.vehicleInfo.count >=2 ?
+    data.vehicleInfo.vehicleTwo.type = "Motorcycle" ?
+        $motorcycles:= $motorcycles + 1 :
+        $vehicles:= $vehicles + 1;
+
+data.vehicleInfo.count >=3 ?
+    data.vehicleInfo.vehicleThree.type = "Motorcycle" ?
+        $motorcycles:= $motorcycles + 1 :
+        $vehicles:= $vehicles + 1;
+
+data.vehicleInfo.count >=4 ?
+    data.vehicleInfo.vehicleFour.type = "Motorcycle" ?
+        $motorcycles:= $motorcycles + 1 :
+        $vehicles:= $vehicles + 1;
+        
+{
+    "motorcycles": $motorcycles,
+    "vehicles": $vehicles
+}
+)

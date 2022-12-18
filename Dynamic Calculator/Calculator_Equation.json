@@ -14,7 +14,6 @@
     },
 
     "UI_Retention1": {
-      "temp": true,
       "expression": "UI_Retention1",
       "conditionalCases": [
         {
@@ -87,6 +86,10 @@
         {
           "condition": "AND(SMALLER(eq_EQ_LO1Premium1_temp, eq_EQ_RatePerMille1), SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO1Premium1_temp, eq_EQ_RatePerMille1), SMALLER_OR_EQUAL(eq_EQ_LO1Premium1_temp, vl_CO_MinPremium))",
+          "expression": "vl_CO_MinPremium"
         }
       ]
     },
@@ -118,6 +121,10 @@
         },
         {
           "condition": "AND(SMALLER(eq_EQ_LO1Premium2_temp, eq_EQ_RatePerMille1), SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), eq_CON_LO1Premium2)",
+          "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO1Premium2_temp, eq_EQ_RatePerMille1), SMALLER_OR_EQUAL(eq_EQ_LO1Premium2_temp, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
         }
       ]
@@ -157,6 +164,10 @@
         {
           "condition": "AND(SMALLER(eq_EQ_LO1Premium3_temp, eq_EQ_RatePerMille1), SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), eq_CON_LO1Premium3)",
           "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO1Premium3_temp, eq_EQ_RatePerMille1), SMALLER_OR_EQUAL(eq_EQ_LO1Premium3_temp, vl_CO_MinPremium))",
+          "expression": "vl_CO_MinPremium"
         }
       ]
     },
@@ -194,6 +205,10 @@
         },
         {
           "condition": "AND(SMALLER(eq_EQ_LO2Premium1_temp, eq_EQ_RatePerMille2), SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium1)",
+          "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO2Premium1_temp, eq_EQ_RatePerMille2), SMALLER_OR_EQUAL(eq_EQ_LO2Premium1_temp, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
         }
       ]
@@ -233,6 +248,10 @@
         {
           "condition": "AND(SMALLER(eq_EQ_LO2Premium2_temp, eq_EQ_RatePerMille2), SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium2)",
           "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO2Premium2_temp, eq_EQ_RatePerMille2), SMALLER_OR_EQUAL(eq_EQ_LO2Premium2_temp, vl_CO_MinPremium))",
+          "expression": "vl_CO_MinPremium"
         }
       ]
     },
@@ -270,6 +289,10 @@
         },
         {
           "condition": "AND(SMALLER(eq_EQ_LO2Premium3_temp, eq_EQ_RatePerMille2), SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium3)",
+          "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO2Premium3_temp, eq_EQ_RatePerMille2), SMALLER_OR_EQUAL(eq_EQ_LO2Premium3_temp, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
         }
       ]
@@ -309,6 +332,10 @@
         {
           "condition": "AND(SMALLER(eq_EQ_LO3Premium1_temp, eq_EQ_RatePerMille3), SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium1)",
           "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO3Premium1_temp, eq_EQ_RatePerMille3), SMALLER_OR_EQUAL(eq_EQ_LO3Premium1_temp, vl_CO_MinPremium))",
+          "expression": "vl_CO_MinPremium"
         }
       ]
     },
@@ -346,6 +373,10 @@
         },
         {
           "condition": "AND(SMALLER(eq_EQ_LO3Premium2_temp, eq_EQ_RatePerMille3), SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium2)",
+          "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO3Premium2_temp, eq_EQ_RatePerMille3), SMALLER_OR_EQUAL(eq_EQ_LO3Premium2_temp, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
         }
       ]
@@ -385,6 +416,10 @@
         {
           "condition": "AND(SMALLER(eq_EQ_LO3Premium3_temp, eq_EQ_RatePerMille3), SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium3)",
           "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO3Premium3_temp, eq_EQ_RatePerMille3), SMALLER_OR_EQUAL(eq_EQ_LO3Premium3_temp, vl_CO_MinPremium))",
+          "expression": "vl_CO_MinPremium"
         }
       ]
     },
@@ -422,6 +457,10 @@
         },
         {
           "condition": "AND(SMALLER(eq_EQ_LO4Premium1_temp, eq_EQ_RatePerMille4), SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium1)",
+          "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO4Premium1_temp, eq_EQ_RatePerMille4), SMALLER_OR_EQUAL(eq_EQ_LO4Premium1_temp, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
         }
       ]
@@ -461,6 +500,10 @@
         {
           "condition": "AND(SMALLER(eq_EQ_LO4Premium2_temp, eq_EQ_RatePerMille4), SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium2)",
           "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO4Premium2_temp, eq_EQ_RatePerMille4), SMALLER_OR_EQUAL(eq_EQ_LO4Premium2_temp, vl_CO_MinPremium))",
+          "expression": "vl_CO_MinPremium"
         }
       ]
     },
@@ -498,6 +541,10 @@
         },
         {
           "condition": "AND(SMALLER(eq_EQ_LO4Premium3_temp, eq_EQ_RatePerMille4), SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium3)",
+          "expression": "vl_CO_MinPremium"
+        },
+        {
+          "condition": "AND(SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO4Premium3_temp, eq_EQ_RatePerMille4), SMALLER_OR_EQUAL(eq_EQ_LO4Premium3_temp, vl_CO_MinPremium))",
           "expression": "vl_CO_MinPremium"
         }
       ]

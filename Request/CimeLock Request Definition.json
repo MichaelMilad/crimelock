@@ -32,8 +32,7 @@
             "type": "object",
             "required": [
               "name",
-              "address1",
-              "address2",
+              "address",
               "periodFrom",
               "periodTo",
               "industry",
@@ -54,100 +53,30 @@
                   "maxLength": "Must be at most 65 characters"
                 }
               },
-              "address1": {
+              "address": {
                 "type": "object",
-                "required": ["address", "area", "city", "state", "zipCode"],
+                "required": [
+                  "address",
+                  "streetAddress",
+                  "area",
+                  "city",
+                  "state",
+                  "zipCode"
+                ],
                 "properties": {
                   "address": {
                     "type": "string",
                     "description": "What is the first address ?"
                   },
-                  "area": {
+                  "streetAddress": {
                     "type": "string",
-                    "description": "What is the insured's area ?"
+                    "minLength": 1,
+                    "maxLength": 100
                   },
-                  "city": {
+                  "streetAddress2": {
                     "type": "string",
-                    "minLength": 2,
-                    "maxLength": 40,
-                    "description": "What is the insured's city ?",
-                    "errorMessage": {
-                      "minLength": "Enter a valid city name",
-                      "maxLength": "City name must not exceed 40 characters"
-                    }
-                  },
-                  "state": {
-                    "type": "string",
-                    "enum": [
-                      "Alabama",
-                      "Alaska",
-                      "Arizona",
-                      "Arkansas",
-                      "California",
-                      "Colorado",
-                      "Connecticut",
-                      "Delaware",
-                      "Florida",
-                      "Georgia",
-                      "Hawaii",
-                      "Idaho",
-                      "Illinois",
-                      "Indiana",
-                      "Iowa",
-                      "Kansas",
-                      "Kentucky",
-                      "Louisiana",
-                      "Maine",
-                      "Maryland",
-                      "Massachusetts",
-                      "Michigan",
-                      "Minnesota",
-                      "Mississippi",
-                      "Missouri",
-                      "Montana",
-                      "Nebraska",
-                      "Nevada",
-                      "New Hampshire",
-                      "New Jersey",
-                      "New Mexico",
-                      "New York",
-                      "North Carolina",
-                      "North Dakota",
-                      "Ohio",
-                      "Oklahoma",
-                      "Oregon",
-                      "Pennsylvania",
-                      "Rhode Island",
-                      "South Carolina",
-                      "South Dakota",
-                      "Tennessee",
-                      "Texas",
-                      "Utah",
-                      "Vermont",
-                      "Virginia",
-                      "Washington",
-                      "West Virginia",
-                      "Wisconsin",
-                      "Wyoming"
-                    ]
-                  },
-                  "zipCode": {
-                    "type": "string",
-                    "pattern": "^[0-9]{5}$",
-                    "description": "What is the insured's Zip Code",
-                    "errorMessage": {
-                      "pattern": "Must be a 5-digits zip code"
-                    }
-                  }
-                }
-              },
-              "address2": {
-                "type": "object",
-                "required": ["address", "area", "city", "state", "zipCode"],
-                "properties": {
-                  "address": {
-                    "type": "string",
-                    "description": "What is the second address ?"
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "area": {
                     "type": "string",
@@ -779,35 +708,6 @@
           }
         }
       },
-      "productionInformation": {
-        "type": "object",
-        "required": [
-          "productionOffice",
-          "productionContact",
-          "productionPhone",
-          "productionEmail"
-        ],
-        "default": {
-          "productionOffice": "USA OFFICE",
-          "productionContact": "USA CrimeLock Contact",
-          "productionPhone": "123456789",
-          "productionEmail": "usa-office@crimelock.com"
-        },
-        "properties": {
-          "productionOffice": {
-            "type": "string"
-          },
-          "productionContact": {
-            "type": "string"
-          },
-          "productionPhone": {
-            "type": "string"
-          },
-          "productionEmail": {
-            "type": "string"
-          }
-        }
-      },
       "cyberRisk": {
         "type": "object",
         "properties": {
@@ -898,29 +798,320 @@
         "required": ["limitOption1", "retentionOption1"],
         "properties": {
           "limitOption1": {
-            "type": ["number", "null"],
-            "enum": [1000000, 2000000, 3000000]
+            "type": "number",
+            "oneOf": [
+              {
+                "title": "$500,000",
+                "const": 500000
+              }, 
+              {
+                "title": "$1,000,000",
+                "const": 1000000
+              }, 
+              {
+                "title": "$2,000,000",
+                "const": 2000000
+              }, 
+              {
+                "title": "$3,000,000",
+                "const": 3000000
+              }
+            ]
           },
           "limitOption2": {
             "type": ["number", "null"],
-            "enum": [null, 1000000, 2000000, 3000000]
+            "oneOf": [
+              {
+                "title": "...",
+                "const": null
+              },
+              {
+                "title": "$500,000",
+                "const": 500000
+              }, 
+              {
+                "title": "$1,000,000",
+                "const": 1000000
+              }, 
+              {
+                "title": "$2,000,000",
+                "const": 2000000
+              }, 
+              {
+                "title": "$3,000,000",
+                "const": 3000000
+              }
+            ],
+            "default": null
           },
           "limitOption3": {
             "type": ["number", "null"],
-            "enum": [null, 1000000, 2000000, 3000000]
+            "oneOf": [
+              {
+                "title": "...",
+                "const": null
+              },
+              {
+                "title": "$500,000",
+                "const": 500000
+              }, 
+              {
+                "title": "$1,000,000",
+                "const": 1000000
+              }, 
+              {
+                "title": "$2,000,000",
+                "const": 2000000
+              }, 
+              {
+                "title": "$3,000,000",
+                "const": 3000000
+              }
+            ],
+            "default": null
           },
           "limitOption4": {
             "type": ["number", "null"],
-            "enum": [null, 1000000, 2000000, 3000000]
+            "oneOf": [
+              {
+                "title": "...",
+                "const": null
+              },
+              {
+                "title": "$500,000",
+                "const": 500000
+              }, 
+              {
+                "title": "$1,000,000",
+                "const": 1000000
+              }, 
+              {
+                "title": "$2,000,000",
+                "const": 2000000
+              }, 
+              {
+                "title": "$3,000,000",
+                "const": 3000000
+              }
+            ],
+            "default": null
           },
           "retentionOption1": {
-            "type": "number"
+            "type": "number",
+            "oneOf": [
+             {
+              "title": "$25,000",
+              "const": 25000
+             },
+             {
+              "title": "$30,000",
+              "const": 30000
+             },
+             {
+              "title": "$35,000",
+              "const": 35000
+             },
+             {
+              "title": "$40,000",
+              "const": 40000
+             },
+             {
+              "title": "$45,000",
+              "const": 45000
+             },
+             {
+              "title": "$50,000",
+              "const": 50000
+             },
+             {
+              "title": "$55,000",
+              "const": 55000
+             },
+             {
+              "title": "$60,000",
+              "const": 60000
+             },
+             {
+              "title": "$65,000",
+              "const": 65000
+             },
+             {
+              "title": "$70,000",
+              "const": 70000
+             },
+             {
+              "title": "$75,000",
+              "const": 75000
+             },
+             {
+              "title": "$80,000",
+              "const": 80000
+             },
+             {
+              "title": "$85,000",
+              "const": 85000
+             },
+             {
+              "title": "$90,000",
+              "const": 90000
+             },
+             {
+              "title": "$95,000",
+              "const": 95000
+             },
+             {
+              "title": "$100,000",
+              "const": 100000
+             }
+            ]
           },
           "retentionOption2": {
-            "type": "number"
+            "type": ["number", "null"],
+            "default": null,
+            "oneOf": [
+              {
+                "title": "...",
+                "const": null
+              },
+              {
+               "title": "$25,000",
+               "const": 25000
+              },
+              {
+               "title": "$30,000",
+               "const": 30000
+              },
+              {
+               "title": "$35,000",
+               "const": 35000
+              },
+              {
+               "title": "$40,000",
+               "const": 40000
+              },
+              {
+               "title": "$45,000",
+               "const": 45000
+              },
+              {
+               "title": "$50,000",
+               "const": 50000
+              },
+              {
+               "title": "$55,000",
+               "const": 55000
+              },
+              {
+               "title": "$60,000",
+               "const": 60000
+              },
+              {
+               "title": "$65,000",
+               "const": 65000
+              },
+              {
+               "title": "$70,000",
+               "const": 70000
+              },
+              {
+               "title": "$75,000",
+               "const": 75000
+              },
+              {
+               "title": "$80,000",
+               "const": 80000
+              },
+              {
+               "title": "$85,000",
+               "const": 85000
+              },
+              {
+               "title": "$90,000",
+               "const": 90000
+              },
+              {
+               "title": "$95,000",
+               "const": 95000
+              },
+              {
+               "title": "$100,000",
+               "const": 100000
+              }
+             ]
           },
           "retentionOption3": {
-            "type": "number"
+            "type": ["number", "null"],
+            "default": null,
+            "oneOf": [
+              {
+                "title": "...",
+                "const": null
+              },
+              {
+               "title": "$25,000",
+               "const": 25000
+              },
+              {
+               "title": "$30,000",
+               "const": 30000
+              },
+              {
+               "title": "$35,000",
+               "const": 35000
+              },
+              {
+               "title": "$40,000",
+               "const": 40000
+              },
+              {
+               "title": "$45,000",
+               "const": 45000
+              },
+              {
+               "title": "$50,000",
+               "const": 50000
+              },
+              {
+               "title": "$55,000",
+               "const": 55000
+              },
+              {
+               "title": "$60,000",
+               "const": 60000
+              },
+              {
+               "title": "$65,000",
+               "const": 65000
+              },
+              {
+               "title": "$70,000",
+               "const": 70000
+              },
+              {
+               "title": "$75,000",
+               "const": 75000
+              },
+              {
+               "title": "$80,000",
+               "const": 80000
+              },
+              {
+               "title": "$85,000",
+               "const": 85000
+              },
+              {
+               "title": "$90,000",
+               "const": 90000
+              },
+              {
+               "title": "$95,000",
+               "const": 95000
+              },
+              {
+               "title": "$100,000",
+               "const": 100000
+              }
+             ]
           }
         }
       },
@@ -957,7 +1148,7 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["warning", "loading", "declined", "error"]
+                  "enum": ["warning", "pending", "declined", "error", "succeeded"]
                 }
               }
             },
@@ -1165,7 +1356,7 @@
             },
             "pinned": false,
             "status": {
-              "type": "loading",
+              "type": "pending",
               "label": "Waiting for Price"
             },
             "selected": false,
@@ -1183,12 +1374,12 @@
             },
             "coverageControls": [
               {
-                "type": "SingleValueCoverage",
-                "values": [
-                  500000, 1000000, 2000000, 3000000
-                ]
+                "name": "limit",
+                "type": "MultiValueCoverage",
+                "values": [500000, 1000000, 2000000, 3000000]
               },
               {
+                "name": "retention",
                 "type": "MultiValueCoverage",
                 "values": [10000, 15000, 25000, 50000, 75000, 100000]
               }
@@ -1234,6 +1425,18 @@
           {
             "label": "Retention Option",
             "value": "retention"
+          },
+          {
+            "value": "feature1",
+            "label": "Feature Number 1"
+          },
+          {
+            "value": "feature2",
+            "label": "Feature Number 2"
+          },
+          {
+            "value": "feature3",
+            "label": "Feature Number 3"
           }
         ]
       }
@@ -1293,7 +1496,11 @@
             "applicant": {
               "properties": {
                 "crimelock": {
-                  "required": ["country_1", "noOfEmployees_1"],
+                  "required": [
+                    "numberOfCountries",
+                    "country_1",
+                    "noOfEmployees_1"
+                  ],
                   "properties": {
                     "country_1": {
                       "type": "string",
@@ -1309,47 +1516,10 @@
                         "maximum": "Cannot be more than 5000"
                       }
                     },
-                    "country_2": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
-                    },
-                    "noOfEmployees_2": {
+                    "numberOfCountries": {
                       "type": "number",
-                      "minimum": 1,
-                      "maximum": 5000,
-                      "errorMessage": {
-                        "type": "Must Be A Number",
-                        "minimum": "Cannot be less than 1",
-                        "maximum": "Cannot be more than 5000"
-                      }
-                    },
-                    "country_3": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
-                    },
-                    "noOfEmployees_3": {
-                      "type": "number",
-                      "minimum": 1,
-                      "maximum": 5000,
-                      "errorMessage": {
-                        "type": "Must Be A Number",
-                        "minimum": "Cannot be less than 1",
-                        "maximum": "Cannot be more than 5000"
-                      }
-                    },
-                    "country_4": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
-                    },
-                    "noOfEmployees_4": {
-                      "type": "number",
-                      "minimum": 1,
-                      "maximum": 5000,
-                      "errorMessage": {
-                        "type": "Must Be A Number",
-                        "minimum": "Cannot be less than 1",
-                        "maximum": "Cannot be more than 5000"
-                      }
+                      "enum": [1, 2, 3, 4, 5],
+                      "default": 1
                     }
                   }
                 }
@@ -1392,6 +1562,194 @@
                     }
                   },
                   "required": ["retroactiveDate", "retroactiveExpiryDate"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 2
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_2": {
+                      "type": "string",
+                      "enum": ["COUNTRIES ARRAY"]
+                    },
+                    "noOfEmployees_2": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "type": "Must Be A Number",
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_2", "noOfEmployees_2"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 3
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_3": {
+                      "type": "string",
+                      "enum": ["COUNTRIES ARRAY"]
+                    },
+                    "noOfEmployees_3": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "type": "Must Be A Number",
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_3", "noOfEmployees_3"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 4
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_4": {
+                      "type": "string",
+                      "enum": ["COUNTRIES ARRAY"]
+                    },
+                    "noOfEmployees_4": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "type": "Must Be A Number",
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_4", "noOfEmployees_4"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 5
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_5": {
+                      "type": "string",
+                      "enum": ["COUNTRIES ARRAY"]
+                    },
+                    "noOfEmployees_5": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "type": "Must Be A Number",
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_5", "noOfEmployees_5"]
                 }
               }
             }
