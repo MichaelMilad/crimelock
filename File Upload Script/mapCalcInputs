@@ -6,7 +6,7 @@
     ),
     "UI_EmployeeCount": applicant.crimelock.numberOfEmployees,
     "UI_Revenue": applicant.crimelock.currentRevenue,
-    "UI_IndustryLoad": applicant.crimelock.industryLoad,
+    "UI_IndustryLoad": $number($split(applicant.crimelock.industry, " - ")[0]),
     "UI_LimitOption1": coverage.limitOption1,
     "UI_LimitOption2": (
         coverage.limitOption2 > 0

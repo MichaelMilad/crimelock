@@ -4,7 +4,7 @@
   "description": "CrimeLock Request",
   "dataSchema": {
     "type": "object",
-    "required": ["applicant", "cyberRisk", "coverage"],
+    "required": ["applicant", "riskDetails", "coverage"],
     "properties": {
       "markets": {
         "type": "array",
@@ -27,17 +27,19 @@
       },
       "applicant": {
         "type": "object",
+        "default": {},
         "properties": {
           "crimelock": {
+            "default": {},
             "type": "object",
             "required": [
               "name",
               "address",
+              "lossPayees",
               "periodFrom",
               "periodTo",
               "industry",
               "currentRevenue",
-              "nextYearRevenue",
               "numberOfEmployees",
               "hasIndependentContractor",
               "hasEmployeesOutside"
@@ -58,7 +60,6 @@
                 "required": [
                   "address",
                   "streetAddress",
-                  "area",
                   "city",
                   "state",
                   "zipCode"
@@ -157,6 +158,9 @@
                   }
                 }
               },
+              "lossPayees": {
+                "type": "boolean"
+              },
               "nameInPolicy": {
                 "type": "string",
                 "description": "Insured name will be used if not specified",
@@ -174,12 +178,15 @@
               },
               "periodTo": {
                 "type": "string",
-                "enum": [
-                  "6 Months (180 days)",
-                  "12 Months (365 days)",
-                  "18 Months (540 days)"
-                ],
-                "description": "What is the policy duration ?"
+                "format": "date",
+                "description": "What is the policy duration ?",
+                "setDateDefault": {
+                  "incrementBy": {
+                    "ref": "/applicant/crimelock/periodFrom",
+                    "by": 6,
+                    "unit": "month"
+                  }
+                }
               },
               "additionalInformation": {
                 "type": "string"
@@ -675,7 +682,7 @@
                 "minimum": 0,
                 "maximum": 1000000000,
                 "errorMessage": {
-                  "minimum": "Cannot be less than 0",
+                  "minimum": "Cannot be less than 1",
                   "maximum": "Cannot be more than 1,000,000,000 (One Billion)"
                 }
               },
@@ -689,12 +696,11 @@
                 }
               },
               "numberOfEmployees": {
-                "type": "number",
-                "minimum": 0,
+                "type": ["number", "string"],
+                "minimum": 1,
                 "maximum": 1000000000,
-                "default": 0,
                 "errorMessage": {
-                  "minimum": "Cannot be less than 0",
+                  "minimum": "Cannot be less than 1",
                   "maximum": "Cannot be more than 1,000,000,000 (One Billion)"
                 }
               },
@@ -708,7 +714,7 @@
           }
         }
       },
-      "cyberRisk": {
+      "riskDetails": {
         "type": "object",
         "properties": {
           "crimelock": {
@@ -736,7 +742,11 @@
             "properties": {
               "hasPurchasedBefore": {
                 "type": "string",
-                "enum": ["New Purchase", "Purchased Before"]
+                "enum": [
+                  "New Purchase",
+                  "Purchased In The Last 5 Years",
+                  "Purchased More Than 5 Years Ago"
+                ]
               },
               "SOF_1": {
                 "type": "boolean"
@@ -795,7 +805,8 @@
       },
       "coverage": {
         "type": "object",
-        "required": ["limitOption1", "retentionOption1"],
+        "default": {},
+        "required": ["limitOption1"],
         "properties": {
           "limitOption1": {
             "type": "number",
@@ -803,15 +814,15 @@
               {
                 "title": "$500,000",
                 "const": 500000
-              }, 
+              },
               {
                 "title": "$1,000,000",
                 "const": 1000000
-              }, 
+              },
               {
                 "title": "$2,000,000",
                 "const": 2000000
-              }, 
+              },
               {
                 "title": "$3,000,000",
                 "const": 3000000
@@ -828,15 +839,15 @@
               {
                 "title": "$500,000",
                 "const": 500000
-              }, 
+              },
               {
                 "title": "$1,000,000",
                 "const": 1000000
-              }, 
+              },
               {
                 "title": "$2,000,000",
                 "const": 2000000
-              }, 
+              },
               {
                 "title": "$3,000,000",
                 "const": 3000000
@@ -854,15 +865,15 @@
               {
                 "title": "$500,000",
                 "const": 500000
-              }, 
+              },
               {
                 "title": "$1,000,000",
                 "const": 1000000
-              }, 
+              },
               {
                 "title": "$2,000,000",
                 "const": 2000000
-              }, 
+              },
               {
                 "title": "$3,000,000",
                 "const": 3000000
@@ -880,15 +891,15 @@
               {
                 "title": "$500,000",
                 "const": 500000
-              }, 
+              },
               {
                 "title": "$1,000,000",
                 "const": 1000000
-              }, 
+              },
               {
                 "title": "$2,000,000",
                 "const": 2000000
-              }, 
+              },
               {
                 "title": "$3,000,000",
                 "const": 3000000
@@ -896,222 +907,27 @@
             ],
             "default": null
           },
-          "retentionOption1": {
+          "minRetention": {
             "type": "number",
-            "oneOf": [
-             {
-              "title": "$25,000",
-              "const": 25000
-             },
-             {
-              "title": "$30,000",
-              "const": 30000
-             },
-             {
-              "title": "$35,000",
-              "const": 35000
-             },
-             {
-              "title": "$40,000",
-              "const": 40000
-             },
-             {
-              "title": "$45,000",
-              "const": 45000
-             },
-             {
-              "title": "$50,000",
-              "const": 50000
-             },
-             {
-              "title": "$55,000",
-              "const": 55000
-             },
-             {
-              "title": "$60,000",
-              "const": 60000
-             },
-             {
-              "title": "$65,000",
-              "const": 65000
-             },
-             {
-              "title": "$70,000",
-              "const": 70000
-             },
-             {
-              "title": "$75,000",
-              "const": 75000
-             },
-             {
-              "title": "$80,000",
-              "const": 80000
-             },
-             {
-              "title": "$85,000",
-              "const": 85000
-             },
-             {
-              "title": "$90,000",
-              "const": 90000
-             },
-             {
-              "title": "$95,000",
-              "const": 95000
-             },
-             {
-              "title": "$100,000",
-              "const": 100000
-             }
-            ]
+            "default": 25000
+          }
+        }
+      },
+      "underwriter": {
+        "type": "object",
+        "default": {
+          "referral": false,
+          "referralReasons": []
+        },
+        "properties": {
+          "referral": {
+            "type": "boolean"
           },
-          "retentionOption2": {
-            "type": ["number", "null"],
-            "default": null,
-            "oneOf": [
-              {
-                "title": "...",
-                "const": null
-              },
-              {
-               "title": "$25,000",
-               "const": 25000
-              },
-              {
-               "title": "$30,000",
-               "const": 30000
-              },
-              {
-               "title": "$35,000",
-               "const": 35000
-              },
-              {
-               "title": "$40,000",
-               "const": 40000
-              },
-              {
-               "title": "$45,000",
-               "const": 45000
-              },
-              {
-               "title": "$50,000",
-               "const": 50000
-              },
-              {
-               "title": "$55,000",
-               "const": 55000
-              },
-              {
-               "title": "$60,000",
-               "const": 60000
-              },
-              {
-               "title": "$65,000",
-               "const": 65000
-              },
-              {
-               "title": "$70,000",
-               "const": 70000
-              },
-              {
-               "title": "$75,000",
-               "const": 75000
-              },
-              {
-               "title": "$80,000",
-               "const": 80000
-              },
-              {
-               "title": "$85,000",
-               "const": 85000
-              },
-              {
-               "title": "$90,000",
-               "const": 90000
-              },
-              {
-               "title": "$95,000",
-               "const": 95000
-              },
-              {
-               "title": "$100,000",
-               "const": 100000
-              }
-             ]
-          },
-          "retentionOption3": {
-            "type": ["number", "null"],
-            "default": null,
-            "oneOf": [
-              {
-                "title": "...",
-                "const": null
-              },
-              {
-               "title": "$25,000",
-               "const": 25000
-              },
-              {
-               "title": "$30,000",
-               "const": 30000
-              },
-              {
-               "title": "$35,000",
-               "const": 35000
-              },
-              {
-               "title": "$40,000",
-               "const": 40000
-              },
-              {
-               "title": "$45,000",
-               "const": 45000
-              },
-              {
-               "title": "$50,000",
-               "const": 50000
-              },
-              {
-               "title": "$55,000",
-               "const": 55000
-              },
-              {
-               "title": "$60,000",
-               "const": 60000
-              },
-              {
-               "title": "$65,000",
-               "const": 65000
-              },
-              {
-               "title": "$70,000",
-               "const": 70000
-              },
-              {
-               "title": "$75,000",
-               "const": 75000
-              },
-              {
-               "title": "$80,000",
-               "const": 80000
-              },
-              {
-               "title": "$85,000",
-               "const": 85000
-              },
-              {
-               "title": "$90,000",
-               "const": 90000
-              },
-              {
-               "title": "$95,000",
-               "const": 95000
-              },
-              {
-               "title": "$100,000",
-               "const": 100000
-              }
-             ]
+          "referralReasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -1148,7 +964,13 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["warning", "pending", "declined", "error", "succeeded"]
+                  "enum": [
+                    "warning",
+                    "pending",
+                    "declined",
+                    "error",
+                    "succeeded"
+                  ]
                 }
               }
             },
@@ -1382,6 +1204,21 @@
                 "name": "retention",
                 "type": "MultiValueCoverage",
                 "values": [10000, 15000, 25000, 50000, 75000, 100000]
+              },
+              {
+                "name": "feature1",
+                "type": "SingleValueCoverage",
+                "value": "SELECTED"
+              },
+              {
+                "name": "feature2",
+                "type": "SingleValueCoverage",
+                "value": "SELECTED"
+              },
+              {
+                "name": "feature3",
+                "type": "SingleValueCoverage",
+                "value": "SELECTED_WITH_EXCEPTION"
               }
             ],
             "changeCoverageValue": false
@@ -1497,21 +1334,24 @@
               "properties": {
                 "crimelock": {
                   "required": [
+                    "areEmployeesSubjectToProcedures",
                     "numberOfCountries",
                     "country_1",
                     "noOfEmployees_1"
                   ],
                   "properties": {
+                    "areEmployeesSubjectToProcedures": {
+                      "type": "boolean"
+                    },
                     "country_1": {
                       "type": "string",
                       "enum": ["COUNTRIES ARRAY"]
                     },
                     "noOfEmployees_1": {
-                      "type": "number",
+                      "type": ["number", "string"],
                       "minimum": 1,
                       "maximum": 5000,
                       "errorMessage": {
-                        "type": "Must Be A Number",
                         "minimum": "Cannot be less than 1",
                         "maximum": "Cannot be more than 5000"
                       }
@@ -1554,14 +1394,9 @@
                       "type": "string",
                       "format": "date",
                       "description": "When did you purchase the previous insurance ?"
-                    },
-                    "retroactiveExpiryDate": {
-                      "type": "string",
-                      "format": "date",
-                      "description": "When did the previous insurance expire ?"
                     }
                   },
-                  "required": ["retroactiveDate", "retroactiveExpiryDate"]
+                  "required": ["retroactiveDate"]
                 }
               }
             }
@@ -1598,11 +1433,10 @@
                       "enum": ["COUNTRIES ARRAY"]
                     },
                     "noOfEmployees_2": {
-                      "type": "number",
+                      "type": ["number", "string"],
                       "minimum": 1,
                       "maximum": 5000,
                       "errorMessage": {
-                        "type": "Must Be A Number",
                         "minimum": "Cannot be less than 1",
                         "maximum": "Cannot be more than 5000"
                       }
@@ -1645,11 +1479,10 @@
                       "enum": ["COUNTRIES ARRAY"]
                     },
                     "noOfEmployees_3": {
-                      "type": "number",
+                      "type": ["number", "string"],
                       "minimum": 1,
                       "maximum": 5000,
                       "errorMessage": {
-                        "type": "Must Be A Number",
                         "minimum": "Cannot be less than 1",
                         "maximum": "Cannot be more than 5000"
                       }
@@ -1692,11 +1525,10 @@
                       "enum": ["COUNTRIES ARRAY"]
                     },
                     "noOfEmployees_4": {
-                      "type": "number",
+                      "type": ["number", "string"],
                       "minimum": 1,
                       "maximum": 5000,
                       "errorMessage": {
-                        "type": "Must Be A Number",
                         "minimum": "Cannot be less than 1",
                         "maximum": "Cannot be more than 5000"
                       }
@@ -1739,11 +1571,10 @@
                       "enum": ["COUNTRIES ARRAY"]
                     },
                     "noOfEmployees_5": {
-                      "type": "number",
+                      "type": ["number", "string"],
                       "minimum": 1,
                       "maximum": 5000,
                       "errorMessage": {
-                        "type": "Must Be A Number",
                         "minimum": "Cannot be less than 1",
                         "maximum": "Cannot be more than 5000"
                       }
@@ -1752,6 +1583,1293 @@
                   "required": ["country_5", "noOfEmployees_5"]
                 }
               }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "lossPayees": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "lossPayees_1": { "type": "string" },
+                    "lossPayees_2": { "type": "string" },
+                    "lossPayees_3": { "type": "string" }
+                  },
+                  "required": ["lossPayees_1"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 25000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "$25,000",
+                      "const": 25000
+                    },
+                    {
+                      "title": "$30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ]
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$25,000",
+                      "const": 25000
+                    },
+                    {
+                      "title": "$30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$25,000",
+                      "const": 25000
+                    },
+                    {
+                      "title": "$30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 30000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "$30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ]
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 35000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ]
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 40000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ]
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 45000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ]
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 50000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ]
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "...",
+                      "const": null
+                    },
+                    {
+                      "title": "$50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "$55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "$60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "$65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "$70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "$75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "$80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "$85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "$90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "$95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "$100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
             }
           }
         }
@@ -1769,6 +2887,11 @@
       "key": "13fb24e2-b509-4445-b53e-feb03455d9ed",
       "type": "others",
       "name": "Referred"
+    },
+    {
+      "key": "cddcb12f-d483-4995-b482-760676afc289",
+      "type": "others",
+      "name": "Quoted"
     }
   ],
   "hasProduct": false,

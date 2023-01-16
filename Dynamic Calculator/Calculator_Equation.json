@@ -1,578 +1,66 @@
 {
   "equations": {
-    "EQ_MinRetention1": {
+    "RatePerMille": {
       "temp": true,
-      "expression": "vl_VL_MinRetention1"
-    },
-    "EQ_MinRetention2": {
-      "temp": true,
-      "expression": "eq_EQ_MinRetention1"
-    },
-    "EQ_MinRetention3": {
-      "temp": true,
-      "expression": "eq_EQ_MinRetention1"
+      "expression": "PRODUCT(DIVIDE(limit, 1000), 1.5)"
     },
 
-    "UI_Retention1": {
-      "expression": "UI_Retention1",
-      "conditionalCases": [
-        {
-          "condition": "SMALLER(UI_Retention1, eq_EQ_MinRetention1)",
-          "expression": "eq_EQ_MinRetention1"
-        }
-      ]
-    },
-
-    "EQ_RatePerMille1": {
+    "BasicLoad": {
       "temp": true,
-      "expression": "PRODUCT(DIVIDE(UI_LimitOption1, 1000), 1.5)"
-    },
-    "EQ_RatePerMille2": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "GREATER(UI_LimitOption2, 0)",
-          "expression": "PRODUCT(DIVIDE(UI_LimitOption2, 1000), 1.5)"
-        }
-      ]
-    },
-    "EQ_RatePerMille3": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "GREATER(UI_LimitOption3, 0)",
-          "expression": "PRODUCT(DIVIDE(UI_LimitOption3, 1000), 1.5)"
-        }
-      ]
-    },
-    "EQ_RatePerMille4": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "GREATER(UI_LimitOption4, 0)",
-          "expression": "PRODUCT(DIVIDE(UI_LimitOption4, 1000), 1.5)"
-        }
-      ]
-    },
-
-    "EQ_BasicLoad": {
-      "temp": true,
-      "expression": "PRODUCT(vl_VL_EmployeeLoad, vl_CO_ClassALoad, UI_IndustryLoad, vl_VL_RevenueLoad)"
+      "expression": "PRODUCT(vl_EmployeeLoad, vl_ClassALoad, industryLoad, vl_RevenueLoad)"
     },
     "RevenueLoadID": {
       "temp": true,
-      "expression": "ROUND(DIVIDE(UI_Revenue, 1000000))"
-    },
-    "tenthOfBasicLoad": {
-      "temp": true,
-      "expression": "DIVIDE(eq_EQ_BasicLoad, 10)"
+      "expression": "ROUND(DIVIDE(currentRevenue, 1000000))"
     },
 
-    "EQ_LO1Premium1_temp": {
+    "FinalLoadOnPremium": {
       "temp": true,
-      "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad1, vl_VL_RetentionLoad1))"
-    },
-    "EQ_LO1Premium1_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO1Premium1_temp",
+      "expression": "vl_LoadOnPremium",
       "conditionalCases": [
         {
-          "condition": "AND(SMALLER(eq_EQ_LO1Premium1_temp, eq_EQ_RatePerMille1), GREATER_OR_EQUAL(eq_EQ_RatePerMille1, vl_CO_MinPremium))",
-          "expression": "eq_EQ_RatePerMille1"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO1Premium1_temp, eq_EQ_RatePerMille1), SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO1Premium1_temp, eq_EQ_RatePerMille1), SMALLER_OR_EQUAL(eq_EQ_LO1Premium1_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO1Premium1": {
-      "expression": "ROUND(PRODUCT(eq_EQ_LO1Premium1_temp2, UI_ProRateFactor))"
-    },
-
-    "CON_LO1Premium2": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption1, 0), GREATER(UI_Retention2, 0))"
-    },
-    "EQ_LO1Premium2_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO1Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad1, vl_VL_RetentionLoad2))"
-        }
-      ]
-    },
-    "EQ_LO1Premium2_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO1Premium2_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO1Premium2_temp, eq_EQ_RatePerMille1), GREATER_OR_EQUAL(eq_EQ_RatePerMille1, vl_CO_MinPremium), eq_CON_LO1Premium2)",
-          "expression": "eq_EQ_RatePerMille1"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO1Premium2_temp, eq_EQ_RatePerMille1), SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), eq_CON_LO1Premium2)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO1Premium2_temp, eq_EQ_RatePerMille1), SMALLER_OR_EQUAL(eq_EQ_LO1Premium2_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO1Premium2": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO1Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO1Premium2_temp2, UI_ProRateFactor))"
+          "condition": "fullPriorActsCoverage",
+          "expression": "PRODUCT(vl_LoadOnPremium, vl_fullPriorActsCoverageFactor)"
         }
       ]
     },
 
-    "CON_LO1Premium3": {
+    "Premium_temp": {
       "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption1, 0), GREATER(UI_Retention3, 0))"
+      "expression": "ROUND(PRODUCT(eq_BasicLoad, vl_LimitLoad, vl_RetentionLoad))"
     },
-    "EQ_LO1Premium3_temp": {
+    "Premium_temp2": {
       "temp": true,
-      "expression": "0",
+      "expression": "eq_Premium_temp",
       "conditionalCases": [
         {
-          "condition": "eq_CON_LO1Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad1, vl_VL_RetentionLoad3))"
-        }
-      ]
-    },
-    "EQ_LO1Premium3_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO1Premium3_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO1Premium3_temp, eq_EQ_RatePerMille1), GREATER_OR_EQUAL(eq_EQ_RatePerMille1, vl_CO_MinPremium), eq_CON_LO1Premium3)",
-          "expression": "eq_EQ_RatePerMille1"
+          "condition": "AND(SMALLER(eq_Premium_temp, eq_RatePerMille), GREATER_OR_EQUAL(eq_RatePerMille, vl_MinPremium))",
+          "expression": "eq_RatePerMille"
         },
         {
-          "condition": "AND(SMALLER(eq_EQ_LO1Premium3_temp, eq_EQ_RatePerMille1), SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), eq_CON_LO1Premium3)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille1, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO1Premium3_temp, eq_EQ_RatePerMille1), SMALLER_OR_EQUAL(eq_EQ_LO1Premium3_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
+          "condition": "AND(SMALLER(eq_Premium_temp, vl_MinPremium), SMALLER_OR_EQUAL(eq_RatePerMille, vl_MinPremium))",
+          "expression": "vl_MinPremium"
         }
       ]
     },
-    "EQ_LO1Premium3": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO1Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO1Premium3_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO2Premium1": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption2, 0), GREATER(UI_Retention1, 0))"
-    },
-    "EQ_LO2Premium1_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO2Premium1",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad2, vl_VL_RetentionLoad1))"
-        }
-      ]
-    },
-    "EQ_LO2Premium1_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO2Premium1_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO2Premium1_temp, eq_EQ_RatePerMille2), GREATER_OR_EQUAL(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium1)",
-          "expression": "eq_EQ_RatePerMille2"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO2Premium1_temp, eq_EQ_RatePerMille2), SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium1)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO2Premium1_temp, eq_EQ_RatePerMille2), SMALLER_OR_EQUAL(eq_EQ_LO2Premium1_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO2Premium1": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO2Premium1",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO2Premium1_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO2Premium2": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption2, 0), GREATER(UI_Retention2, 0))"
-    },
-    "EQ_LO2Premium2_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO2Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad2, vl_VL_RetentionLoad2))"
-        }
-      ]
-    },
-    "EQ_LO2Premium2_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO2Premium2_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO2Premium2_temp, eq_EQ_RatePerMille2), GREATER_OR_EQUAL(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium2)",
-          "expression": "eq_EQ_RatePerMille2"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO2Premium2_temp, eq_EQ_RatePerMille2), SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium2)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO2Premium2_temp, eq_EQ_RatePerMille2), SMALLER_OR_EQUAL(eq_EQ_LO2Premium2_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO2Premium2": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO2Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO2Premium2_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO2Premium3": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption2, 0), GREATER(UI_Retention3, 0))"
-    },
-    "EQ_LO2Premium3_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO2Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad2, vl_VL_RetentionLoad3))"
-        }
-      ]
-    },
-    "EQ_LO2Premium3_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO2Premium3_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO2Premium3_temp, eq_EQ_RatePerMille2), GREATER_OR_EQUAL(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium3)",
-          "expression": "eq_EQ_RatePerMille2"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO2Premium3_temp, eq_EQ_RatePerMille2), SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), eq_CON_LO2Premium3)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille2, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO2Premium3_temp, eq_EQ_RatePerMille2), SMALLER_OR_EQUAL(eq_EQ_LO2Premium3_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO2Premium3": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO2Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO2Premium3_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO3Premium1": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption3, 0), GREATER(UI_Retention1, 0))"
-    },
-    "EQ_LO3Premium1_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO3Premium1",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad3, vl_VL_RetentionLoad1))"
-        }
-      ]
-    },
-    "EQ_LO3Premium1_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO3Premium1_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO3Premium1_temp, eq_EQ_RatePerMille3), GREATER_OR_EQUAL(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium1)",
-          "expression": "eq_EQ_RatePerMille3"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO3Premium1_temp, eq_EQ_RatePerMille3), SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium1)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO3Premium1_temp, eq_EQ_RatePerMille3), SMALLER_OR_EQUAL(eq_EQ_LO3Premium1_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO3Premium1": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO3Premium1",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO3Premium1_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO3Premium2": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption3, 0), GREATER(UI_Retention2, 0))"
-    },
-    "EQ_LO3Premium2_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO3Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad3, vl_VL_RetentionLoad2))"
-        }
-      ]
-    },
-    "EQ_LO3Premium2_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO3Premium2_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO3Premium2_temp, eq_EQ_RatePerMille3), GREATER_OR_EQUAL(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium2)",
-          "expression": "eq_EQ_RatePerMille3"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO3Premium2_temp, eq_EQ_RatePerMille3), SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium2)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO3Premium2_temp, eq_EQ_RatePerMille3), SMALLER_OR_EQUAL(eq_EQ_LO3Premium2_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO3Premium2": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO3Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO3Premium2_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO3Premium3": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption3, 0), GREATER(UI_Retention3, 0))"
-    },
-    "EQ_LO3Premium3_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO3Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad3, vl_VL_RetentionLoad3))"
-        }
-      ]
-    },
-    "EQ_LO3Premium3_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO3Premium3_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO3Premium3_temp, eq_EQ_RatePerMille3), GREATER_OR_EQUAL(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium3)",
-          "expression": "eq_EQ_RatePerMille3"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO3Premium3_temp, eq_EQ_RatePerMille3), SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), eq_CON_LO3Premium3)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille3, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO3Premium3_temp, eq_EQ_RatePerMille3), SMALLER_OR_EQUAL(eq_EQ_LO3Premium3_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO3Premium3": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO3Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO3Premium3_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO4Premium1": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption4, 0), GREATER(UI_Retention1, 0))"
-    },
-    "EQ_LO4Premium1_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO4Premium1",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad4, vl_VL_RetentionLoad1))"
-        }
-      ]
-    },
-    "EQ_LO4Premium1_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO4Premium1_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO4Premium1_temp, eq_EQ_RatePerMille4), GREATER_OR_EQUAL(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium1)",
-          "expression": "eq_EQ_RatePerMille4"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO4Premium1_temp, eq_EQ_RatePerMille4), SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium1)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO4Premium1_temp, eq_EQ_RatePerMille4), SMALLER_OR_EQUAL(eq_EQ_LO4Premium1_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO4Premium1": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO4Premium1",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO4Premium1_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO4Premium2": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption4, 0), GREATER(UI_Retention2, 0))"
-    },
-    "EQ_LO4Premium2_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO4Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad4, vl_VL_RetentionLoad2))"
-        }
-      ]
-    },
-    "EQ_LO4Premium2_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO4Premium2_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO4Premium2_temp, eq_EQ_RatePerMille4), GREATER_OR_EQUAL(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium2)",
-          "expression": "eq_EQ_RatePerMille4"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO4Premium2_temp, eq_EQ_RatePerMille4), SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium2)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO4Premium2_temp, eq_EQ_RatePerMille4), SMALLER_OR_EQUAL(eq_EQ_LO4Premium2_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO4Premium2": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO4Premium2",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO4Premium2_temp2, UI_ProRateFactor))"
-        }
-      ]
-    },
-
-    "CON_LO4Premium3": {
-      "temp": true,
-      "expression": "AND(GREATER(UI_LimitOption4, 0), GREATER(UI_Retention3, 0))"
-    },
-    "EQ_LO4Premium3_temp": {
-      "temp": true,
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO4Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_BasicLoad, vl_VL_LimitLoad4, vl_VL_RetentionLoad3))"
-        }
-      ]
-    },
-    "EQ_LO4Premium3_temp2": {
-      "temp": true,
-      "expression": "eq_EQ_LO4Premium3_temp",
-      "conditionalCases": [
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO4Premium3_temp, eq_EQ_RatePerMille4), GREATER_OR_EQUAL(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium3)",
-          "expression": "eq_EQ_RatePerMille4"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_LO4Premium3_temp, eq_EQ_RatePerMille4), SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), eq_CON_LO4Premium3)",
-          "expression": "vl_CO_MinPremium"
-        },
-        {
-          "condition": "AND(SMALLER(eq_EQ_RatePerMille4, vl_CO_MinPremium), GREATER_OR_EQUAL(eq_EQ_LO4Premium3_temp, eq_EQ_RatePerMille4), SMALLER_OR_EQUAL(eq_EQ_LO4Premium3_temp, vl_CO_MinPremium))",
-          "expression": "vl_CO_MinPremium"
-        }
-      ]
-    },
-    "EQ_LO4Premium3": {
-      "expression": "0",
-      "conditionalCases": [
-        {
-          "condition": "eq_CON_LO4Premium3",
-          "expression": "ROUND(PRODUCT(eq_EQ_LO4Premium3_temp2, UI_ProRateFactor))"
-        }
-      ]
+    "premium": {
+      "expression": "ROUND(PRODUCT(eq_Premium_temp2, proRateFactor, eq_FinalLoadOnPremium))"
     }
   },
 
   "lookups": {
-    "VL_EmployeeLoad": {
+    "EmployeeLoad": {
       "temp": true,
       "query": {
         "table": "crimelock_emp_load",
         "target": "EmployeeLoad",
         "where": {
-          "eq": ["EmployeeID", "@UI_EmployeeCount"]
+          "eq": ["EmployeeID", "@numberOfEmployees"]
         }
       },
       "conditionalCases": [
         {
-          "condition": "GREATER(UI_EmployeeCount, 1000)",
+          "condition": "GREATER(numberOfEmployees, 1000)",
           "query": {
             "table": "crimelock_emp_load",
             "target": "EmployeeLoad",
@@ -584,7 +72,7 @@
       ]
     },
 
-    "VL_RevenueLoad": {
+    "RevenueLoad": {
       "temp": true,
       "query": {
         "table": "crimelock_rev_load",
@@ -595,209 +83,99 @@
       },
       "conditionalCases": [
         {
-          "condition": "SMALLER(UI_Revenue, 1000000)",
+          "condition": "SMALLER(currentRevenue, 1000000)",
           "value": 1
         }
       ]
     },
 
-    "VL_MinRetention1": {
-      "temp": true,
-      "query": {
-        "table": "crimelock_min_retention",
-        "target": "Retention1",
-        "where": {
-          "and": [
-            { "gte": ["BasicLoadTo", "@eq_tenthOfBasicLoad"] },
-            { "lt": ["BasicLoadFrom", "@eq_tenthOfBasicLoad"] }
-          ]
-        }
-      }
-    },
-
-    "VL_RetentionLoad1": {
+    "RetentionLoad": {
       "temp": true,
       "query": {
         "table": "crimelock_retention_load",
         "target": "RetentionLoad",
         "where": {
           "and": [
-            { "gte": ["RetentionIDTo", "@UI_Retention1"] },
-            { "lt": ["RetentionIDFrom", "@UI_Retention1"] }
+            { "gte": ["RetentionIDTo", "@retention"] },
+            { "lt": ["RetentionIDFrom", "@retention"] }
           ]
         }
       }
     },
-    "VL_RetentionLoad2": {
-      "temp": true,
-      "value": 0,
-      "conditionalCases": [
-        {
-          "condition": "EXISTS(UI_Retention2)",
-          "query": {
-            "table": "crimelock_retention_load",
-            "target": "RetentionLoad",
-            "where": {
-              "and": [
-                { "gte": ["RetentionIDTo", "@UI_Retention2"] },
-                { "lt": ["RetentionIDFrom", "@UI_Retention2"] }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "VL_RetentionLoad3": {
-      "temp": true,
-      "value": 0,
-      "conditionalCases": [
-        {
-          "condition": "EXISTS(UI_Retention3)",
-          "query": {
-            "table": "crimelock_retention_load",
-            "target": "RetentionLoad",
-            "where": {
-              "and": [
-                { "gte": ["RetentionIDTo", "@UI_Retention3"] },
-                { "lt": ["RetentionIDFrom", "@UI_Retention3"] }
-              ]
-            }
-          }
-        }
-      ]
-    },
 
-    "VL_LimitLoad1": {
+    "LimitLoad": {
       "temp": true,
       "query": {
         "table": "crimelock_limit_load",
         "target": "limitLoad",
         "where": {
           "and": [
-            { "gte": ["limitIdTo", "@UI_LimitOption1"] },
-            { "lt": ["limitIdFrom", "@UI_LimitOption1"] }
+            { "gte": ["limitIdTo", "@limit"] },
+            { "lt": ["limitIdFrom", "@limit"] }
           ]
         }
       }
     },
-    "VL_LimitLoad2": {
-      "temp": true,
-      "value": 0,
-      "conditionalCases": [
-        {
-          "condition": "EXISTS(UI_LimitOption2)",
-          "query": {
-            "table": "crimelock_limit_load",
-            "target": "limitLoad",
-            "where": {
-              "and": [
-                { "gte": ["limitIdTo", "@UI_LimitOption2"] },
-                { "lt": ["limitIdFrom", "@UI_LimitOption2"] }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "VL_LimitLoad3": {
-      "temp": true,
-      "value": 0,
-      "conditionalCases": [
-        {
-          "condition": "EXISTS(UI_LimitOption3)",
-          "query": {
-            "table": "crimelock_limit_load",
-            "target": "limitLoad",
-            "where": {
-              "and": [
-                { "gte": ["limitIdTo", "@UI_LimitOption3"] },
-                { "lt": ["limitIdFrom", "@UI_LimitOption3"] }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    "VL_LimitLoad4": {
-      "temp": true,
-      "value": 0,
-      "conditionalCases": [
-        {
-          "condition": "EXISTS(UI_LimitOption4)",
-          "query": {
-            "table": "crimelock_limit_load",
-            "target": "limitLoad",
-            "where": {
-              "and": [
-                { "gte": ["limitIdTo", "@UI_LimitOption4"] },
-                { "lt": ["limitIdFrom", "@UI_LimitOption4"] }
-              ]
-            }
-          }
-        }
-      ]
-    },
 
-    "CO_MinPremium": {
+    "MinPremium": {
       "temp": true,
       "value": 2160
     },
-    "CO_ClassALoad": {
+    "ClassALoad": {
       "temp": true,
       "value": 0.943424083457335
+    },
+    "fullPriorActsCoverageFactor": {
+      "temp": true,
+      "value": 1.1
+    },
+    "LoadOnPremium": {
+      "temp": true,
+      "value": 1.44
     }
   },
 
   "schemaValidation": {
     "type": "object",
     "required": [
-      "UI_EmployeeCount",
-      "UI_Revenue",
-      "UI_IndustryLoad",
-      "UI_LimitOption1",
-      "UI_Retention1",
-      "UI_ProRateFactor"
+      "numberOfEmployees",
+      "currentRevenue",
+      "industryLoad",
+      "limit",
+      "retention",
+      "proRateFactor"
     ],
     "properties": {
-      "UI_EmployeeCount": {
+      "numberOfEmployees": {
         "type": "number"
       },
-      "UI_Revenue": {
+      "currentRevenue": {
         "type": "number"
       },
-      "UI_IndustryLoad": {
-        "type": "number"
-      },
-      "UI_Retention1": {
-        "type": "number"
-      },
-      "UI_Retention2": {
-        "type": "number"
-      },
-      "UI_Retention3": {
-        "type": "number"
-      },
-      "UI_LimitOption1": {
-        "type": "number"
-      },
-      "UI_LimitOption2": {
-        "type": "number"
-      },
-      "UI_LimitOption3": {
-        "type": "number"
-      },
-      "UI_LimitOption4": {
-        "type": "number"
-      },
-      "UI_ProRateFactor": {
+      "industryLoad": {
         "type": "number",
-        "minimum": 0.5,
-        "maximum": 1.5
+        "minimum": 1
+      },
+      "retention": {
+        "type": "number"
+      },
+      "limit": {
+        "type": "number",
+        "minimum": 500000,
+        "maximum": 3000000
+      },
+      "proRateFactor": {
+        "type": "number",
+        "minimum": 0.45,
+        "maximum": 1.6
+      },
+      "fullPriorActsCoverage": {
+        "type": "boolean",
+        "default": false
       }
     }
   },
   "queryCriteria": {
-    "product": "crimelock",
-    "version": 1
+    "name": "crimelock_rater"
   }
 }
