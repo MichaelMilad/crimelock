@@ -1,0 +1,16 @@
+{
+    "key": (key),
+    "industry": (data.applicant.crimelock.industry),
+    "periodFrom": (data.applicant.crimelock.periodFrom),
+    "periodTo": (data.applicant.crimelock.periodTo),
+    "currentRevenue": (data.applicant.crimelock.currentRevenue),
+    "numberOfEmployees": (data.applicant.crimelock.numberOfEmployees),
+    "limitOption1": (data.coverage.limitOption1),
+    "limitOption2": (data.coverage.limitOption2 ? data.coverage.limitOption2 : undefined),
+    "limitOption3": (data.coverage.limitOption3 ? data.coverage.limitOption3 : undefined),
+    "limitOption4": (data.coverage.limitOption4 ? data.coverage.limitOption4 : undefined),
+    "retentionOption1": (data.coverage.retentionOption1),
+    "retentionOption2": (data.coverage.retentionOption2 ? data.coverage.retentionOption2 : undefined),
+    "retentionOption3": (data.coverage.retentionOption3 ? data.coverage.retentionOption3 : undefined),
+    "fullPriorActsCoverage": (false)
+}

@@ -1,0 +1,148 @@
+(
+    $limit1 := coverage.limitOption1;
+    $limit2 := coverage.limitOption2;
+    $limit3 := coverage.limitOption3;
+    $limit4 := coverage.limitOption4;
+    $ret1 := coverage.retentionOption1;
+    $ret2 := coverage.retentionOption2;
+    $ret3 := coverage.retentionOption3;
+
+    $P11 := (coverage.limitOption1 and coverage.retentionOption1)
+    ? (quotes[ratingInputs.limit = $limit1
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P12 := (coverage.limitOption1 and coverage.retentionOption2)
+    ? (quotes[ratingInputs.limit = $limit1
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P13 := (coverage.limitOption1 and coverage.retentionOption3)
+    ? (quotes[ratingInputs.limit = $limit1
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $P21 := (coverage.limitOption2 and coverage.retentionOption1)
+    ? (quotes[ratingInputs.limit = $limit2
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P22 := (coverage.limitOption2 and coverage.retentionOption2)
+    ? (quotes[ratingInputs.limit = $limit2
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P23 := (coverage.limitOption2 and coverage.retentionOption3)
+    ? (quotes[ratingInputs.limit = $limit2
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $P31 := (coverage.limitOption3 and coverage.retentionOption1)
+    ? (quotes[ratingInputs.limit = $limit3
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P32 := (coverage.limitOption3 and coverage.retentionOption2)
+    ? (quotes[ratingInputs.limit = $limit3
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P33 := (coverage.limitOption3 and coverage.retentionOption3)
+    ? (quotes[ratingInputs.limit = $limit3
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $P41 := (coverage.limitOption4 and coverage.retentionOption1)
+    ? (quotes[ratingInputs.limit = $limit4
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P42 := (coverage.limitOption4 and coverage.retentionOption2)
+    ? (quotes[ratingInputs.limit = $limit4
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P43 := (coverage.limitOption4 and coverage.retentionOption3)
+    ? (quotes[ratingInputs.limit = $limit4
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+    
+    {
+    "F12": (applicant.crimelock.referenceID),
+    "F1": (
+        applicant.crimelock.nameInPolicy 
+        ? applicant.crimelock.nameInPolicy
+        : applicant.crimelock.name
+        ),
+    "F31": ($split(applicant.crimelock.industry, " - ")[1]),
+    "F32": (applicant.crimelock.currentRevenue),
+    "F34": (applicant.crimelock.numberOfEmployees),
+    "F35": (applicant.crimelock.hasIndependentContractor ? "YES" : "NO"),
+    "F36": (applicant.crimelock.isContractorSubjectToProcedures ? "YES" : "NO"),
+    "F38": (applicant.crimelock.hasEmployeesOutside ? "YES" : "NO"),
+    "F58": (riskDetails.crimelock.SOF_2 ? "YES" : "NO"),
+    "F59": (riskDetails.crimelock.SOF_3 ? "YES" : "NO"),
+    "F60": (riskDetails.crimelock.SOF_4 ? "YES" : "NO"),
+    "F61": (riskDetails.crimelock.SOF_5 ? "YES" : "NO"),
+    "F62": (riskDetails.crimelock.SOF_6 ? "YES" : "NO"),
+    "F63": (riskDetails.crimelock.SOF_7 ? "YES" : "NO"),
+    "F64": (riskDetails.crimelock.SOF_8 ? "YES" : "NO"),
+    "F65": (riskDetails.crimelock.SOF_9 ? "YES" : "NO"),
+    "F66": (riskDetails.crimelock.SOF_10 ? "YES" : "NO"),
+    "F67": (riskDetails.crimelock.SOF_11 ? "YES" : "NO"),
+    "F68": (riskDetails.crimelock.SOF_12 ? "YES" : "NO"),
+    "F69": (riskDetails.crimelock.SOF_13 ? "YES" : "NO"),
+    "F70": (riskDetails.crimelock.SOF_14 ? "YES" : "NO"),
+    "F71": (riskDetails.crimelock.SOF_15 ? "YES" : "NO"),
+    "F72": (riskDetails.crimelock.SOF_16 ? "YES" : "NO"),
+    "F73": (riskDetails.crimelock.SOF_17 ? "YES" : "NO"),
+    "F5": (applicant.crimelock.address.address),
+    "F13": ($join(
+        [
+            applicant.crimelock.periodFrom,
+            " to ",
+            applicant.crimelock.periodTo
+        ]
+    )),
+    "F46": (coverage.limitOption1),
+    "F47": (
+        coverage.limitOption2
+        ? coverage.limitOption2
+        : "N/A"
+        ),
+    "F48": (
+        coverage.limitOption3
+        ? coverage.limitOption3
+        : "N/A"
+        ),
+    "F49": (
+        coverage.limitOption4
+        ? coverage.limitOption4
+        : "N/A"
+        ),
+    "F51": (coverage.retentionOption1),
+    "F52": (
+        coverage.retentionOption2
+        ? coverage.retentionOption2
+        : "N/A"
+        ),
+    "F53": (
+        coverage.retentionOption3
+        ? coverage.retentionOption3
+        : "N/A"
+        ),
+
+    "P11": $P11,
+    "P12": $P12,
+    "P13": $P13,
+    "P21": $P21,
+    "P22": $P22,
+    "P23": $P23,
+    "P31": $P31,
+    "P32": $P32,
+    "P33": $P33,
+    "P41": $P41,
+    "P42": $P42,
+    "P43": $P43
+    }
+)

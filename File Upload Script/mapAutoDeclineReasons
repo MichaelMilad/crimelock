@@ -1,0 +1,26 @@
+(
+    $autoDecline:= false;
+    $reasons:= [];
+
+    $contains(applicant.crimelock.industry, "-1") ? 
+        $reasons:= $append($reasons,
+            "Request Declined because of the Selected Industry"
+            );
+
+    (applicant.crimelock.currentRevenue >= 249500000) ?
+        $reasons:= $append($reasons,
+            "Request Declined because of the Current Revenue"
+            );
+
+    (applicant.crimelock.numberOfEmployees > 5000) ?
+        $reasons:= $append($reasons,
+            "Request Declined because of the Current Revenue"
+            );
+
+    $count($reasons) > 0 ? $autoDecline:= true;
+
+    {
+        "status": ($autoDecline ? "ntu" : underwriter.status),
+        "reasons": $reasons
+    }
+)

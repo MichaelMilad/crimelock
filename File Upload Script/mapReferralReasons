@@ -1,65 +1,53 @@
 (
     $referral:= false;
-    $referralReasons:= [];
+    $reasons:= [];
 
-    $contains(applicant.crimelock.industry, "-1") ? 
-        $referralReasons:= $append($referralReasons,
-            "Request Referred because of Selected Industry"
-            );
-
-    (applicant.crimelock.currentRevenue > 250000000) ?
-        $referralReasons:= $append($referralReasons,
-            "Request Referred because of Current Revenue"
-            );
-
-    (applicant.crimelock.numberOfEmployees > 5000) ?
-        $referralReasons:= $append($referralReasons,
-            "Request Referred because of Current Revenue"
-            );
+    (applicant.crimelock.lossPayees) ?
+      $reasons:= $append($reasons, 
+          "Request Referred because a Loss Payee(s) were added"
+        );
 
     (
-        cyberRisk.crimelock.SOF_1 = false
-        or cyberRisk.crimelock.SOF_2 = false
-        or cyberRisk.crimelock.SOF_3 = false
-        or cyberRisk.crimelock.SOF_4 = false
-        or cyberRisk.crimelock.SOF_5 = false
-        or cyberRisk.crimelock.SOF_6 = false
-        or cyberRisk.crimelock.SOF_7 = false
-        or cyberRisk.crimelock.SOF_8 = false
-        or cyberRisk.crimelock.SOF_9 = false
-        or cyberRisk.crimelock.SOF_10 = false
-        or cyberRisk.crimelock.SOF_11 = false
-        or cyberRisk.crimelock.SOF_12 = false
-        or cyberRisk.crimelock.SOF_13 = false
-        or cyberRisk.crimelock.SOF_14 = false
-        or cyberRisk.crimelock.SOF_15 = false
-        or cyberRisk.crimelock.SOF_16 = false
-        or cyberRisk.crimelock.SOF_17 = false
-    ) ? $referralReasons:= $append($referralReasons,
+        riskDetails.crimelock.SOF_1 = false
+        or riskDetails.crimelock.SOF_2 = false
+        or riskDetails.crimelock.SOF_3 = false
+        or riskDetails.crimelock.SOF_4 = false
+        or riskDetails.crimelock.SOF_5 = false
+        or riskDetails.crimelock.SOF_6 = false
+        or riskDetails.crimelock.SOF_7 = false
+        or riskDetails.crimelock.SOF_8 = false
+        or riskDetails.crimelock.SOF_9 = false
+        or riskDetails.crimelock.SOF_10 = false
+        or riskDetails.crimelock.SOF_11 = false
+        or riskDetails.crimelock.SOF_12 = false
+        or riskDetails.crimelock.SOF_13 = false
+        or riskDetails.crimelock.SOF_14 = false
+        or riskDetails.crimelock.SOF_15 = false
+        or riskDetails.crimelock.SOF_16 = false
+        or riskDetails.crimelock.SOF_17 = false
+    ) ? $reasons:= $append($reasons,
             "Request Referred because of one or more SOF Question answered with NO"
             );
 
-    $outsideEmployeesCount := 0;
-        applicant.crimelock.numberOfCountries >= 1 ?
-            $outsideEmployeesCount := $outsideEmployeesCount + applicant.crimelock.noOfEmployees_1;
-        applicant.crimelock.numberOfCountries >= 2 ?
-            $outsideEmployeesCount := $outsideEmployeesCount + applicant.crimelock.noOfEmployees_2;
-        applicant.crimelock.numberOfCountries >= 3 ?
-            $outsideEmployeesCount := $outsideEmployeesCount + applicant.crimelock.noOfEmployees_3;
-        applicant.crimelock.numberOfCountries >= 4 ?
-            $outsideEmployeesCount := $outsideEmployeesCount + applicant.crimelock.noOfEmployees_4;
-        applicant.crimelock.numberOfCountries >= 5 ?
-            $outsideEmployeesCount := $outsideEmployeesCount + applicant.crimelock.noOfEmployees_5;
-
-        ($outsideEmployeesCount / applicant.crimelock.numberOfEmployees) > 0.1 ?
-            $referralReasons:= $append($referralReasons,
-                "Request Referred because more than 10% of employees are placed remotely"
+    applicant.crimelock.hasEmployeesOutside ?
+            $reasons:= $append($reasons,
+                "Request Referred because there are some remote employees"
             );
 
-    $count($referralReasons) > 0 ? $referral:= true;
+    (applicant.crimelock.periodFrom < $now('[Y0001]-[M01]-[D01]')) ? 
+            $reasons:= $append($reasons,
+                "Request Referred because of Backdated Inception Date"
+            );
+
+    applicant.crimelock.lossPayees ?
+            $reasons:= $append($reasons, 
+                "Request Referred because of Adding Loss Payees"
+            );
+
+    $count($reasons) > 0 ? $referral:= true;
 
     {
-        "referral": $referral,
-        "referralReasons": $referralReasons
+        "status": ($referral ? "referred" : underwriter.status),
+        "reasons": $reasons
     }
 )
