@@ -1,0 +1,275 @@
+{
+  "key": "6af5df87-ffa6-4869-b5ce-306ea56299f2",
+  "label": "quote screen - admin",
+  "default": false,
+  "experience": "admin",
+  "type": "trumarket-web-details",
+  "schema": {
+    "type": "QuotePageLayout",
+    "label": "Quotes",
+    "scope": "#/properties/quotes",
+    "options": {
+      "dependencies": {
+        "country": {
+          "crimelock": "applicant.crimelock.address1.country"
+        }
+      },
+      "applicationUiSchemaKey": "1a862caa-e595-485b-813e-ffb027856771",
+      "marketMultiQuotes": true,
+      "providedInfoByStatus": {
+        "quoting": {
+          "label": "Waiting For Price",
+          "type": "info",
+          "actionButton": {
+            "label": "Bind",
+            "type": "primary",
+            "enabled": false,
+            "loading": false,
+            "actions": []
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false
+        },
+        "quoted": {
+          "actionButton": {
+            "label": "Bind",
+            "type": "primary",
+            "enabled": false,
+            "loading": false,
+            "actions": []
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false
+        },
+        "binding": {
+          "actionButton": {
+            "label": "Binding",
+            "type": "primary",
+            "enabled": false,
+            "loading": true,
+            "actions": []
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false
+        },
+        "bound": {
+          "label": "Bound",
+          "type": "warning",
+          "actionButton": {
+            "label": "Bound",
+            "type": "primary",
+            "enabled": false,
+            "loading": false,
+            "actions": []
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false
+        },
+        "referred": {
+          "label": "Firm Order",
+          "type": "warning",
+          "actionButton": {
+            "label": "Bind",
+            "type": "primary",
+            "enabled": true,
+            "loading": false,
+            "actions": [
+              { "key": "navigate", "data": { "search": "?quote-id=$quoteId" } },
+              {
+                "key": "mutate",
+                "data": [
+                  {
+                    "path": "purchase",
+                    "value": {
+                      "quote": "$quoteMarket: $quotePremium"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false
+        },
+        "pending-change-approval": {
+          "label": "Request Authorized",
+          "type": "warning",
+          "actionButton": {
+            "label": "Result",
+            "type": "warning",
+            "enabled": true,
+            "loading": false,
+            "actions": [
+              {
+                "key": "navigate",
+                "data": {
+                  "search": "?modal-id=underwriter-recaps"
+                }
+              }
+            ]
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false
+        },
+        "error": {
+          "label": "Error",
+          "type": "error",
+          "actionButton": {
+            "label": "Bind",
+            "type": "primary",
+            "enabled": false,
+            "loading": false,
+            "actions": []
+          },
+          "coverageEnabled": true,
+          "requote": true,
+          "update": true
+        },
+        "declined": {
+          "label": "Request Declined",
+          "type": "error",
+          "actionButton": {
+            "label": "Bind",
+            "type": "primary",
+            "enabled": false,
+            "loading": false,
+            "actions": []
+          },
+          "coverageEnabled": true,
+          "requote": true,
+          "update": true
+        }
+      },
+      "markets": {
+        "crimelock": {
+          "canInitiateUnbind": false,
+          "canUpdate": false,
+          "canRequote": false,
+          "label": "CRIMELOCK"
+        }
+      },
+      "exportActions": {
+        "toPdf": {
+          "actions": [
+            {
+              "key": "invoke",
+              "actionId": "e538b399-a95f-46ee-9634-21cae26d0cb1"
+            }
+          ]
+        },
+        "toEmail": {
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "?email-quotes=true"
+              }
+            }
+          ]
+        }
+      },
+      "coverages": [
+        {
+          "key": "limit",
+          "type": "MultiValueCoverage"
+        },
+        {
+          "key": "retention",
+          "type": "MultiValueCoverage"
+        },
+        {
+          "key": "feature1",
+          "type": "SingleValueCoverage"
+        },
+        {
+          "key": "feature2",
+          "type": "SingleValueCoverage"
+        },
+        {
+          "key": "feature3",
+          "type": "SingleValueCoverage"
+        }
+      ]
+    },
+    "elements": [
+      {
+        "type": "PurchaseLayout",
+        "label": "Bind Quote",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/purchase/properties/quote",
+            "label": "Quote"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/applicant/properties/crimelock/properties/periodFrom",
+            "label": "Effective Date"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/applicant/properties/crimelock/properties/periodTo",
+            "label": "Period To",
+            "rule": {
+              "effect": "DISABLE",
+              "condition": {}
+            }
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/purchase/properties/signDate",
+            "label": "Sign Date",
+            "options": {
+              "minDate": { "days": 60 },
+              "minDatePath": "applicant.crimelock.periodFrom"
+            }
+          },
+          {
+            "type": "ButtonControl",
+            "label": "Bind",
+            "scope": "",
+            "actions": [
+              { "key": "navigate", "data": { "search": "" } },
+              { "key": "validate" },
+              {
+                "key": "mutate",
+                "data": [
+                  {
+                    "path": "$quote[$quote-id].status",
+                    "value": { "label": "Binding", "type": "warning" }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "ButtonControl",
+            "label": "Cancel",
+            "scope": "",
+            "options": { "style": "default" },
+            "actions": [
+              { "key": "navigate", "data": { "search": "" } },
+              {
+                "key": "mutate",
+                "data": [
+                  {
+                    "path": "purchase",
+                    "value": { "quote": "" }
+                  }
+                ]
+              },
+              { "key": "resetErrors" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
+}

@@ -33,7 +33,7 @@ module.exports = seed_limitLoad = async () => {
     data: limitLoad_schema,
   });
 
-  function seedingData() {
+  async function seedingData() {
     limitLoadData.forEach((data) => {
       const jsonData = JSON.stringify(data);
       axios({
@@ -49,6 +49,6 @@ module.exports = seed_limitLoad = async () => {
       });
     });
   }
-  seedingData();
+  await seedingData();
   console.log("SEEDING LIMIT LOAD IS COMPLETED");
 };

@@ -175,6 +175,7 @@
       }
     }
   },
+
   "queryCriteria": {
     "name": "crimelock_rater"
   }

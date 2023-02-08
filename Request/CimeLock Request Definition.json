@@ -33,6 +33,7 @@
             "default": {},
             "type": "object",
             "required": [
+              "referenceID",
               "name",
               "address",
               "lossPayees",
@@ -160,6 +161,10 @@
               },
               "lossPayees": {
                 "type": "boolean"
+              },
+              "referenceID": {
+                "type": "string",
+                "default": "Generating Reference ID ..."
               },
               "nameInPolicy": {
                 "type": "string",
@@ -916,12 +921,21 @@
       "underwriter": {
         "type": "object",
         "default": {
-          "referral": false,
+          "status": "new",
           "referralReasons": []
         },
         "properties": {
-          "referral": {
-            "type": "boolean"
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "referred",
+              "authorized",
+              "ntu",
+              "quoted",
+              "firmOrder",
+              "bound"
+            ]
           },
           "referralReasons": {
             "type": "array",
@@ -939,85 +953,34 @@
             "id": {
               "type": "string"
             },
-            "errors": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
             "market": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": "string"
-                }
-              }
+              "type": "string"
             },
-            "pinned": {
+            "favorite": {
               "type": "boolean"
             },
             "status": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "warning",
-                    "pending",
-                    "declined",
-                    "error",
-                    "succeeded"
-                  ]
-                }
-              }
+              "type": "string",
+              "enum": [
+                "quoting",
+                "quoted",
+                "binding",
+                "bound",
+                "unbinding",
+                "pending-refer",
+                "referred",
+                "pending-change-approval",
+                "error",
+                "declined"
+              ]
             },
             "premium": {
               "type": "number"
             },
-            "coverage": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": ["SingleValueCoverage", "MultiValueCoverage"]
-                  },
-                  "value": {
-                    "type": "string",
-                    "enum": [
-                      "N/A",
-                      "SELECTED",
-                      "NOT_SELECTED",
-                      "SELECTED_WITH_EXCEPTION",
-                      "CONTACT_UNDERWRITER"
-                    ]
-                  },
-                  "values": {
-                    "type": "array",
-                    "items": {
-                      "type": "number"
-                    }
-                  },
-                  "selected": {
-                    "type": "number"
-                  },
-                  "exception": {
-                    "type": "string"
-                  }
-                }
-              }
+            "ratingInputs": {
+              "type": "object"
             },
-            "selected": {
-              "type": "boolean"
-            },
-            "canUnbind": {
-              "type": "boolean"
-            },
-            "menuOptions": {
+            "coverages": {
               "type": "array",
               "items": {
                 "type": "object",
@@ -1025,124 +988,6 @@
                   "key": {
                     "type": "string"
                   },
-                  "type": {
-                    "type": "string",
-                    "enum": ["primary", "warning", "link"]
-                  },
-                  "label": {
-                    "type": "string"
-                  },
-                  "actions": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "key": {
-                          "type": "string"
-                        },
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "search": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "loading": {
-                          "type": "boolean"
-                        },
-                        "actionId": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "enabled": {
-                    "type": "boolean"
-                  },
-                  "loading": {
-                    "type": "boolean"
-                  }
-                }
-              }
-            },
-            "actionButton": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": ["primary", "warning"]
-                },
-                "label": {
-                  "type": "string"
-                },
-                "actions": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": ["object", "array"]
-                      },
-                      "loading": {
-                        "type": "boolean"
-                      },
-                      "actionId": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "loading": {
-                  "type": "boolean"
-                }
-              }
-            },
-            "ratingInputs": {
-              "type": "object"
-            },
-            "attachmentButton": {
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                }
-              }
-            },
-            "coverageControls": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "SingleValueCoverage",
-                      "MultiValueCoverage",
-                      "ToggleValueCoverage"
-                    ]
-                  },
-                  "value": {
-                    "type": ["string", "boolean"],
-                    "enum": [
-                      "N/A",
-                      "SELECTED",
-                      "NOT_SELECTED",
-                      "SELECTED_WITH_EXCEPTION",
-                      "CONTACT_UNDERWRITER",
-                      true,
-                      false
-                    ]
-                  },
                   "values": {
                     "type": "array",
                     "items": {
@@ -1153,75 +998,41 @@
                     "type": "boolean"
                   },
                   "selected": {
-                    "type": "number"
-                  },
-                  "controlUpdatePaths": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
+                    "type": ["string", "boolean", "number"]
                   }
                 }
               }
-            },
-            "changeCoverageValue": {
-              "type": "boolean"
             }
           }
         },
         "default": [
           {
             "id": "crimelock",
-            "market": {
-              "key": "crimelock",
-              "label": "CRIMELOCK"
-            },
-            "pinned": false,
-            "status": {
-              "type": "pending",
-              "label": "Waiting for Price"
-            },
-            "selected": false,
-            "canUnbind": true,
-            "menuOptions": [],
-            "actionButton": {
-              "type": "primary",
-              "label": "Bind",
-              "actions": [],
-              "enabled": false,
-              "loading": false
-            },
-            "attachmentButton": {
-              "enabled": false
-            },
-            "coverageControls": [
+            "market": "crimelock",
+            "favorite": false,
+            "status": "quoting",
+            "coverages": [
               {
-                "name": "limit",
-                "type": "MultiValueCoverage",
+                "key": "limit",
                 "values": [500000, 1000000, 2000000, 3000000]
               },
               {
-                "name": "retention",
-                "type": "MultiValueCoverage",
+                "key": "retention",
                 "values": [10000, 15000, 25000, 50000, 75000, 100000]
               },
               {
-                "name": "feature1",
-                "type": "SingleValueCoverage",
-                "value": "SELECTED"
+                "key": "feature1",
+                "selected": "SELECTED"
               },
               {
-                "name": "feature2",
-                "type": "SingleValueCoverage",
-                "value": "SELECTED"
+                "key": "feature2",
+                "selected": "SELECTED"
               },
               {
-                "name": "feature3",
-                "type": "SingleValueCoverage",
-                "value": "SELECTED_WITH_EXCEPTION"
+                "key": "feature3",
+                "selected": "SELECTED_WITH_EXCEPTION"
               }
-            ],
-            "changeCoverageValue": false
+            ]
           }
         ]
       },
@@ -1241,41 +1052,24 @@
         },
         "required": ["quote"]
       },
-      "coverageHeaders": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "label": {
-              "type": "string"
-            },
-            "value": {
-              "type": "string"
+      "emailQuotes": {
+        "type": "object",
+        "properties": {
+          "toEmails": {
+            "type": "string",
+            "pattern": "^(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+\\s?,)*(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+)$",
+            "errorMessage": {
+              "pattern": "Please use a recognized emails separated by commas format. Example: john@gmail.com, jack@gmail.com"
+            }
+          },
+          "cc": {
+            "type": "string",
+            "pattern": "^(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+\\s?,)*(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+)$",
+            "errorMessage": {
+              "pattern": "Please use a recognized emails separated by commas format. Example: john@gmail.com, jack@gmail.com"
             }
           }
-        },
-        "default": [
-          {
-            "label": "Limit Option",
-            "value": "limit"
-          },
-          {
-            "label": "Retention Option",
-            "value": "retention"
-          },
-          {
-            "value": "feature1",
-            "label": "Feature Number 1"
-          },
-          {
-            "value": "feature2",
-            "label": "Feature Number 2"
-          },
-          {
-            "value": "feature3",
-            "label": "Feature Number 3"
-          }
-        ]
+        }
       }
     },
     "allOf": [
@@ -1344,8 +1138,7 @@
                       "type": "boolean"
                     },
                     "country_1": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
+                      "type": "string"
                     },
                     "noOfEmployees_1": {
                       "type": ["number", "string"],
@@ -1371,7 +1164,7 @@
       {
         "if": {
           "properties": {
-            "cyberRisk": {
+            "riskDetails": {
               "properties": {
                 "crimelock": {
                   "properties": {
@@ -1386,7 +1179,7 @@
         },
         "then": {
           "properties": {
-            "cyberRisk": {
+            "riskDetails": {
               "properties": {
                 "crimelock": {
                   "properties": {
@@ -1429,8 +1222,7 @@
                 "crimelock": {
                   "properties": {
                     "country_2": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
+                      "type": "string"
                     },
                     "noOfEmployees_2": {
                       "type": ["number", "string"],
@@ -1475,8 +1267,7 @@
                 "crimelock": {
                   "properties": {
                     "country_3": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
+                      "type": "string"
                     },
                     "noOfEmployees_3": {
                       "type": ["number", "string"],
@@ -1567,8 +1358,7 @@
                 "crimelock": {
                   "properties": {
                     "country_5": {
-                      "type": "string",
-                      "enum": ["COUNTRIES ARRAY"]
+                      "type": "string"
                     },
                     "noOfEmployees_5": {
                       "type": ["number", "string"],
@@ -1703,7 +1493,8 @@
                       "title": "$100,000",
                       "const": 100000
                     }
-                  ]
+                  ],
+                  "default": 25000
                 },
                 "retentionOption2": {
                   "type": ["number", "null"],
@@ -1938,7 +1729,8 @@
                       "title": "$100,000",
                       "const": 100000
                     }
-                  ]
+                  ],
+                  "default": 30000
                 },
                 "retentionOption2": {
                   "type": ["number", "null"],
@@ -2161,7 +1953,8 @@
                       "title": "$100,000",
                       "const": 100000
                     }
-                  ]
+                  ],
+                  "default": 35000
                 },
                 "retentionOption2": {
                   "type": ["number", "null"],
@@ -2372,7 +2165,8 @@
                       "title": "$100,000",
                       "const": 100000
                     }
-                  ]
+                  ],
+                  "default": 40000
                 },
                 "retentionOption2": {
                   "type": ["number", "null"],
@@ -2571,7 +2365,8 @@
                       "title": "$100,000",
                       "const": 100000
                     }
-                  ]
+                  ],
+                  "default": 45000
                 },
                 "retentionOption2": {
                   "type": ["number", "null"],
@@ -2758,7 +2553,8 @@
                       "title": "$100,000",
                       "const": 100000
                     }
-                  ]
+                  ],
+                  "default": 50000
                 },
                 "retentionOption2": {
                   "type": ["number", "null"],
@@ -2884,14 +2680,29 @@
       "name": "New"
     },
     {
+      "key": "0c0a59ec-25c1-4cca-a4cb-e3b2a56e4c16",
+      "type": "others",
+      "name": "Quoting"
+    },
+    {
       "key": "13fb24e2-b509-4445-b53e-feb03455d9ed",
       "type": "others",
       "name": "Referred"
     },
     {
+      "key": "3259f9f5-6c69-486b-8301-a5ad11ebcac6",
+      "type": "others",
+      "name": "Authorized"
+    },
+    {
       "key": "cddcb12f-d483-4995-b482-760676afc289",
       "type": "others",
       "name": "Quoted"
+    },
+    {
+      "key": "49a32063-80cb-45fd-aedf-87d38e327c30",
+      "type": "cancelled",
+      "name": "NTU"
     }
   ],
   "hasProduct": false,
