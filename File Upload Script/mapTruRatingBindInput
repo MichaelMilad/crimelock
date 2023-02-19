@@ -1,0 +1,26 @@
+(
+    $nameInPolicy:= data.applicant.crimelock.nameInPolicy
+        ? data.applicant.crimelock.nameInPolicy
+        : data.applicant.crimelock.name;
+
+    $retroactiveDate:= (riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years")
+        ? riskDetails.crimelock.retroactiveDate
+        : "N/A";
+
+    $subscribingMarkets:= data.assignee.subscribingMarkets;
+
+    $office:= office ? office : "N/A";
+        
+
+    {
+    "quoteKey": quoteKey,
+    "referenceID": data.applicant.crimelock.referenceID,
+    "nameInPolicy": $nameInPolicy,
+    "address": data.applicant.crimelock.address.address,
+    "periodFrom": data.applicant.crimelock.periodFrom,
+    "periodTo": data.applicant.crimelock.periodTo,
+    "retroactiveDate": $retroactiveDate,
+    "subscribingMarkets": $subscribingMarkets,
+    "office": $office
+    }
+)

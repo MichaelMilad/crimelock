@@ -1,0 +1,15 @@
+(
+    $newQuotes:= $map(quotes, function($v) {
+        $v.status = 'binding'
+            ? {
+                "id": $v.id,
+                "market": $v.market,
+                "status": "bound",
+                "premium": $v.premium,
+                "favorite": $v.favorite,
+                "coverages": $v.coverages,
+                "ratingInputs": $v.ratingInputs
+            }
+            : $v   
+    });
+)

@@ -14,7 +14,7 @@
 
     (applicant.crimelock.numberOfEmployees > 5000) ?
         $reasons:= $append($reasons,
-            "Request Declined because of the Current Revenue"
+            "Request Declined because of Number Of Employees"
             );
 
     $count($reasons) > 0 ? $autoDecline:= true;

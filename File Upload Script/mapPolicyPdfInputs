@@ -1,0 +1,40 @@
+(
+    $M13:= $join([
+        $string(policy.data.PolicyData.subscribingMarkets[0].marketShare * 100),
+        "%"
+    ]);
+
+    $M23:= $join([
+        $string(policy.data.PolicyData.subscribingMarkets[1].marketShare * 100),
+        "%"
+    ]);
+
+    $M33:= policy.data.PolicyData.subscribingMarkets[2] ? $join([
+        $string(policy.data.PolicyData.subscribingMarkets[2].marketShare * 100),
+        "%"
+    ]) : undefined;
+
+    {
+        "F12": policy.data.PolicyNumber,
+        "F1": policy.data.PolicyData.nameInPolicy,
+        "F5": policy.data.PolicyData.address,
+        "F13": instanceData.data.applicant.crimelock.periodFrom,
+        "F14": instanceData.data.applicant.crimelock.periodTo,
+        "Limit": instanceData.data.quotes[status = 'referred' or status = 'binding'].coverages[key = 'limit'].selected,
+        "Retention": instanceData.data.quotes[status = 'referred' or status = 'binding'].coverages[key = 'retention'].selected,
+        "Premium": instanceData.data.quotes[status = 'referred' or status = 'binding'].premium,
+        "F55": policy.data.PolicyData.retroactiveDate,
+        "Office": policy.data.PolicyData.office,
+        "F20": instanceData.data.applicant.crimelock.address.state,
+        "M1": "Leader",
+        "M11": policy.data.PolicyData.subscribingMarkets[0].marketName,
+        "M13": $M13,
+        "M2": "Follower",
+        "M22": policy.data.PolicyData.subscribingMarkets[1].marketName,
+        "M23": $M23,
+        "M3": policy.data.PolicyData.subscribingMarkets[2]
+            ? "Follower" : undefined,
+        "M32": policy.data.PolicyData.subscribingMarkets[2].marketName,
+        "M33": $M33
+    }
+)

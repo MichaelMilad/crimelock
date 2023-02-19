@@ -1,0 +1,41 @@
+{
+  "equations": {
+    "netSystemPremium": {
+      "true": true,
+      "expressions": "PRODUCT(vl_baseRate, typeOfBusiness)"
+    },
+
+    "netPremium": {
+        "temp": true,
+        "expression": "PRODUCT(eq_netSystemPremium, SUM(1, override))"
+    }
+  },
+
+  "lookups": {
+    "baseRate": {
+      "temp": true,
+      "query": {
+        "table": "DNO_BASE_RATE",
+        "target": "D&O",
+        "where": {
+          "and": [
+            { "lt": ["turnOverFrom", "@turnOverBandings"] },
+            { "gte": ["turnOverTo", "@turnOverBandings"] }
+          ]
+        }
+      }
+    }
+  },
+
+  "schemaValidation": {
+    "type": "object",
+    "properties": {
+      "turnOverBandings": { "type": "string" }
+    },
+    "required": ["turnOverBandings"]
+  },
+
+  "queryCriteria": {
+    "name": "DNO_DNO_Rater"
+  }
+}

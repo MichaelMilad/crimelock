@@ -1,0 +1,2723 @@
+{
+  "key": "1fab6dea-6a3e-44e6-949b-df129dc6017f",
+  "name": "New Crime Insurance - UK Request",
+  "defaults": "string",
+  "description": "CrimeLock UK Request",
+  "dataSchema": {
+    "type": "object",
+    "required": ["applicant", "riskDetails", "coverage"],
+    "properties": {
+      "markets": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "oneOf": [
+            {
+              "const": "crimelock",
+              "title": "CrimeLock"
+            }
+          ]
+        },
+        "default": ["crimelock"],
+        "maxItems": 1,
+        "minItems": 1,
+        "uniqueItems": true,
+        "errorMessage": {
+          "minItems": "You must select at least one market"
+        }
+      },
+      "assignee": {
+        "type": "object",
+        "default": {
+          "country": "UK",
+          "subscribingMarkets": [
+            { "marketName": "Newline Syndicate 1218 / 523 ", "marketShare": 0.3334 },
+            { "marketName": "Liberty Syndicate 4472 / 5381", "marketShare": 0.3333 },
+            { "marketName": "Aviva Insurance Limited / Aviva Insurance Ireland DAC", "marketShare": 0.3333 }
+          ],
+          "sofUpload": false,
+          "commission": false
+        },
+        "properties": {
+          "country": { "type": "string" },
+          "office": { "type": "string" },
+          "subscribingMarkets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "marketName": { "type": "string" },
+                "marketShare": { "type": "number" }
+              }
+            }
+          },
+          "sofUpload": {
+            "type": "boolean",
+            "description": "Please confirm that you have uploaded a signed and dated Enterprise CrimeLock Statements Of Fact Form"
+          },
+          "commission": {
+            "type": "boolean",
+            "description": "Please confirm your agreement to 17.50% commission and that Lockton can retain 7.50% commission"
+          }
+        },
+        "required": ["commission", "sofUpload"]
+      },
+      "applicant": {
+        "type": "object",
+        "default": {},
+        "properties": {
+          "crimelock": {
+            "default": {},
+            "type": "object",
+            "required": [
+              "referenceID",
+              "name",
+              "address",
+              "lossPayees",
+              "periodFrom",
+              "periodTo",
+              "industry",
+              "currentRevenue",
+              "numberOfEmployees",
+              "hasIndependentContractor",
+              "hasEmployeesOutside"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "What is the insured's name ?",
+                "maxLength": 65,
+                "pattern": "^[a-zA-Z]+([ '-][a-zA-Z]+)*$",
+                "errorMessage": {
+                  "pattern": "Must be a valid name",
+                  "maxLength": "Must be at most 65 characters"
+                }
+              },
+              "address": {
+                "type": "object",
+                "required": [
+                  "address",
+                  "streetAddress",
+                  "city",
+                  "state",
+                  "zipCode"
+                ],
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "What is the first address ?"
+                  },
+                  "streetAddress": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "streetAddress2": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "area": {
+                    "type": "string",
+                    "description": "What is the insured's area ?"
+                  },
+                  "city": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 40,
+                    "description": "What is the insured's city ?",
+                    "errorMessage": {
+                      "minLength": "Enter a valid city name",
+                      "maxLength": "City name must not exceed 40 characters"
+                    }
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "England",
+                      "Wales",
+                      "Scotland",
+                      "Northern Ireland"
+                    ],
+                    "errorMessage": {
+                      "enum": "Must Be One Of 'England', 'Wales', 'Scotland' or 'Northern Ireland"
+                    }
+                  },
+                  "zipCode": {
+                    "type": "string",
+                    "description": "What is the insured's Zip Code"
+                  }
+                }
+              },
+              "lossPayees": {
+                "type": "boolean"
+              },
+              "referenceID": {
+                "type": "string",
+                "default": "Generating Reference ID ..."
+              },
+              "nameInPolicy": {
+                "type": "string",
+                "description": "Insured name will be used if not specified",
+                "maxLength": 65,
+                "pattern": "^[a-zA-Z]+([ '-][a-zA-Z]+)*$",
+                "errorMessage": {
+                  "pattern": "Must be a valid name",
+                  "maxLength": "Must be at most 65 characters"
+                }
+              },
+              "periodFrom": {
+                "type": "string",
+                "format": "date",
+                "description": "When do you want the insurance to take effect ?"
+              },
+              "periodTo": {
+                "type": "string",
+                "format": "date",
+                "description": "What is the policy end date ?"
+              },
+              "additionalInformation": {
+                "type": "string"
+              },
+              "industry": {
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "Agricultural Chemicals",
+                    "const": "2 - Agricultural Chemicals"
+                  },
+                  {
+                    "title": "Agricultural Production-Crops",
+                    "const": "1 - Agricultural Production-Crops"
+                  },
+                  {
+                    "title": "Agricultural Services",
+                    "const": "1 - Agricultural Services"
+                  },
+                  {
+                    "title": "Aircraft",
+                    "const": "1.5 - Aircraft"
+                  },
+                  {
+                    "title": "Aircraft & Parts",
+                    "const": "2 - Aircraft & Parts"
+                  },
+                  {
+                    "title": "Aircraft Engines & Engine Parts",
+                    "const": "2 - Aircraft Engines & Engine Parts"
+                  },
+                  {
+                    "title": "Banks",
+                    "const": "-1 - Banks"
+                  },
+                  {
+                    "title": "Beverages",
+                    "const": "2 - Beverages"
+                  },
+                  {
+                    "title": "Bottled & Canned Soft Drinks & Carbonated Waters",
+                    "const": "2 - Bottled & Canned Soft Drinks & Carbonated Waters"
+                  },
+                  {
+                    "title": "Building Contractors",
+                    "const": "1 - Building Contractors"
+                  },
+                  {
+                    "title": "Cable & Other Pay Television Services",
+                    "const": "2.5 - Cable & Other Pay Television Services"
+                  },
+                  {
+                    "title": "Chemicals & Allied Products",
+                    "const": "1 - Chemicals & Allied Products"
+                  },
+                  {
+                    "title": "Commercial Printing",
+                    "const": "1 - Commercial Printing"
+                  },
+                  {
+                    "title": "Commodity Brokers, Dealers, Exchanges & Services",
+                    "const": "-1 - Commodity Brokers, Dealers, Exchanges & Services"
+                  },
+                  {
+                    "title": "Communications Services",
+                    "const": "2 - Communications Services"
+                  },
+                  {
+                    "title": "Computer & office Equipment",
+                    "const": "2 - Computer & office Equipment"
+                  },
+                  {
+                    "title": "Computer Peripheral Equipment, NEC",
+                    "const": "2 - Computer Peripheral Equipment, NEC"
+                  },
+                  {
+                    "title": "Concrete Products, Except Block & Brick",
+                    "const": "1 - Concrete Products, Except Block & Brick"
+                  },
+                  {
+                    "title": "Concrete, Gypsum & Plaster Products",
+                    "const": "1 - Concrete, Gypsum & Plaster Products"
+                  },
+                  {
+                    "title": "Construction",
+                    "const": "1 - Construction"
+                  },
+                  {
+                    "title": "Cutlery, Handtools & General Hardware",
+                    "const": "1 - Cutlery, Handtools & General Hardware"
+                  },
+                  {
+                    "title": "Dairy Products",
+                    "const": "2 - Dairy Products"
+                  },
+                  {
+                    "title": "Dental Equipment & Supplies",
+                    "const": "1 - Dental Equipment & Supplies"
+                  },
+                  {
+                    "title": "Electric Lighting & Wiring Equipment",
+                    "const": "1 - Electric Lighting & Wiring Equipment"
+                  },
+                  {
+                    "title": "Electrical Work",
+                    "const": "1 - Electrical Work"
+                  },
+                  {
+                    "title": "Electronic Components & Accessories",
+                    "const": "1 - Electronic Components & Accessories"
+                  },
+                  {
+                    "title": "Electronic Computers",
+                    "const": "2 - Electronic Computers"
+                  },
+                  {
+                    "title": "Engines & Turbines",
+                    "const": "1 - Engines & Turbines"
+                  },
+                  {
+                    "title": "Fishing, Hunting and Trapping",
+                    "const": "1 - Fishing, Hunting and Trapping"
+                  },
+                  {
+                    "title": "Food Products",
+                    "const": "2 - Food Products"
+                  },
+                  {
+                    "title": "Forestry",
+                    "const": "1 - Forestry"
+                  },
+                  {
+                    "title": "Furniture",
+                    "const": "1 - Furniture"
+                  },
+                  {
+                    "title": "Games, Toys & Children's Vehicles (No Dolls & Bicycles)",
+                    "const": "1 - Games, Toys & Children's Vehicles (No Dolls & Bicycles)"
+                  },
+                  {
+                    "title": "Glass Products, Made of Purchased Glass",
+                    "const": "1 - Glass Products, Made of Purchased Glass"
+                  },
+                  {
+                    "title": "Gold and Silver Ores",
+                    "const": "2.5 - Gold and Silver Ores"
+                  },
+                  {
+                    "title": "Hazardous Waste Management",
+                    "const": "2.5 - Hazardous Waste Management"
+                  },
+                  {
+                    "title": "Heating Equipment, Except Electric & Warm Air Furnaces",
+                    "const": "1 - Heating Equipment, Except Electric & Warm Air Furnaces"
+                  },
+                  {
+                    "title": "Hotels & Motels",
+                    "const": "1 - Hotels & Motels"
+                  },
+                  {
+                    "title": "Hotels, Rooming Houses, Camps & Other Lodging Places",
+                    "const": "2 - Hotels, Rooming Houses, Camps & Other Lodging Places"
+                  },
+                  {
+                    "title": "Household Appliances",
+                    "const": "2.5 - Household Appliances"
+                  },
+                  {
+                    "title": "Household Audio & Video Equipment",
+                    "const": "2 - Household Audio & Video Equipment"
+                  },
+                  {
+                    "title": "Industrial Trucks, Tractors, Trailers & Stackers",
+                    "const": "1 - Industrial Trucks, Tractors, Trailers & Stackers"
+                  },
+                  {
+                    "title": "Insurance",
+                    "const": "-1 - Insurance"
+                  },
+                  {
+                    "title": "Iron & Steel Foundries",
+                    "const": "1 - Iron & Steel Foundries"
+                  },
+                  {
+                    "title": "Jewelry, Precious Metal",
+                    "const": "-1 - Jewelry, Precious Metal"
+                  },
+                  {
+                    "title": "Leather & Leather Products",
+                    "const": "1 - Leather & Leather Products"
+                  },
+                  {
+                    "title": "Lumber & Wood Products (No Furniture)",
+                    "const": "1 - Lumber & Wood Products (No Furniture)"
+                  },
+                  {
+                    "title": "Magnetic & Optical Recording Media",
+                    "const": "1 - Magnetic & Optical Recording Media"
+                  },
+                  {
+                    "title": "Metal Mining",
+                    "const": "2 - Metal Mining"
+                  },
+                  {
+                    "title": "Mining & Quarrying  Nonmetallic Minerals ",
+                    "const": "2 - Mining & Quarrying  Nonmetallic Minerals "
+                  },
+                  {
+                    "title": "Miscellaneous Metal Ores",
+                    "const": "2 - Miscellaneous Metal Ores"
+                  },
+                  {
+                    "title": "Miscellaneous Plastics Products",
+                    "const": "1 - Miscellaneous Plastics Products"
+                  },
+                  {
+                    "title": "Mobile Homes",
+                    "const": "1 - Mobile Homes"
+                  },
+                  {
+                    "title": "Motor Vehicles & Passenger Car Bodies",
+                    "const": "1 - Motor Vehicles & Passenger Car Bodies"
+                  },
+                  {
+                    "title": "Musical Instruments",
+                    "const": "1 - Musical Instruments"
+                  },
+                  {
+                    "title": "Natural Gas Transmission",
+                    "const": "1 - Natural Gas Transmission"
+                  },
+                  {
+                    "title": "Newspapers, books: Publishing or Publishing & Printing",
+                    "const": "1 - Newspapers, books: Publishing or Publishing & Printing"
+                  },
+                  {
+                    "title": "Office Machines, NEC",
+                    "const": "1 - Office Machines, NEC"
+                  },
+                  {
+                    "title": "Oil & Gas ",
+                    "const": "1 - Oil & Gas "
+                  },
+                  {
+                    "title": "Oil & Gas Field Exploration Services",
+                    "const": "1 - Oil & Gas Field Exploration Services"
+                  },
+                  {
+                    "title": "Paints, Varnishes, Lacquers, Enamels & Allied Prods",
+                    "const": "1 - Paints, Varnishes, Lacquers, Enamels & Allied Prods"
+                  },
+                  {
+                    "title": "Paper Mills",
+                    "const": "1 - Paper Mills"
+                  },
+                  {
+                    "title": "Pay Day Lenders",
+                    "const": "-1 - Pay Day Lenders"
+                  },
+                  {
+                    "title": "Pens, Pencils & Other Artists' Materials",
+                    "const": "1 - Pens, Pencils & Other Artists' Materials"
+                  },
+                  {
+                    "title": "Perfumes, Cosmetics & Other Toilet Preparations",
+                    "const": "2 - Perfumes, Cosmetics & Other Toilet Preparations"
+                  },
+                  {
+                    "title": "Petroleum Refining",
+                    "const": "1 - Petroleum Refining"
+                  },
+                  {
+                    "title": "Pharmaceutical ",
+                    "const": "1.5 - Pharmaceutical "
+                  },
+                  {
+                    "title": "Plastics Products, NEC",
+                    "const": "1 - Plastics Products, NEC"
+                  },
+                  {
+                    "title": "Primary Smelting & Refining of Nonferrous Metals",
+                    "const": "1 - Primary Smelting & Refining of Nonferrous Metals"
+                  },
+                  {
+                    "title": "Printed Circuit Boards",
+                    "const": "1 - Printed Circuit Boards"
+                  },
+                  {
+                    "title": "Public Warehousing & Storage",
+                    "const": "2.5 - Public Warehousing & Storage"
+                  },
+                  {
+                    "title": "Railroad Equipment",
+                    "const": "1 - Railroad Equipment"
+                  },
+                  {
+                    "title": "Railroad Switching & Terminal Establishments",
+                    "const": "1 - Railroad Switching & Terminal Establishments"
+                  },
+                  {
+                    "title": "Railroads, Line-Haul Operating",
+                    "const": "1 - Railroads, Line-Haul Operating"
+                  },
+                  {
+                    "title": "Real Estate",
+                    "const": "1.5 - Real Estate"
+                  },
+                  {
+                    "title": "Real Estate Operators (No Developers) & Lessors",
+                    "const": "1.5 - Real Estate Operators (No Developers) & Lessors"
+                  },
+                  {
+                    "title": "Refrigeration & Service Industry Machinery",
+                    "const": "1 - Refrigeration & Service Industry Machinery"
+                  },
+                  {
+                    "title": "Refuse Systems",
+                    "const": "2 - Refuse Systems"
+                  },
+                  {
+                    "title": "Retail-Auto & Home Supply Stores",
+                    "const": "2 - Retail-Auto & Home Supply Stores"
+                  },
+                  {
+                    "title": "Retail-Auto Dealers & Gasoline Stations",
+                    "const": "2 - Retail-Auto Dealers & Gasoline Stations"
+                  },
+                  {
+                    "title": "Retail-Computer & Computer Software Stores",
+                    "const": "2 - Retail-Computer & Computer Software Stores"
+                  },
+                  {
+                    "title": "Retail-Convenience Stores",
+                    "const": "2 - Retail-Convenience Stores"
+                  },
+                  {
+                    "title": "Retail-Department Stores",
+                    "const": "2 - Retail-Department Stores"
+                  },
+                  {
+                    "title": "Retail-Eating & Drinking Places",
+                    "const": "2.5 - Retail-Eating & Drinking Places"
+                  },
+                  {
+                    "title": "Retail-Eating Places",
+                    "IndustryLoad": 2.25,
+                    "const": "2.25 - Retail-Eating Places"
+                  },
+                  {
+                    "title": "Retail-Food Stores",
+                    "const": "2 - Retail-Food Stores"
+                  },
+                  {
+                    "title": "Retail-Furniture Stores",
+                    "const": "1.5 - Retail-Furniture Stores"
+                  },
+                  {
+                    "title": "Retail-Grocery Stores",
+                    "const": "1.5 - Retail-Grocery Stores"
+                  },
+                  {
+                    "title": "Retail-Hobby, Toy & Game Shops",
+                    "const": "1 - Retail-Hobby, Toy & Game Shops"
+                  },
+                  {
+                    "title": "Retail-Home Furniture, Furnishings & Equipment Stores",
+                    "const": "1.5 - Retail-Home Furniture, Furnishings & Equipment Stores"
+                  },
+                  {
+                    "title": "Retail-Jewelry Stores",
+                    "const": "-1 - Retail-Jewelry Stores"
+                  },
+                  {
+                    "title": "Retail-Miscellaneous Retail",
+                    "const": "2 - Retail-Miscellaneous Retail"
+                  },
+                  {
+                    "title": "Retail-Radio, TV & Consumer Electronics Stores",
+                    "const": "2 - Retail-Radio, TV & Consumer Electronics Stores"
+                  },
+                  {
+                    "title": "Sanitary Services",
+                    "const": "1 - Sanitary Services"
+                  },
+                  {
+                    "title": "Semiconductors & Related Devices",
+                    "const": "1 - Semiconductors & Related Devices"
+                  },
+                  {
+                    "title": "Services- Casino, Gambling Transactions",
+                    "const": "-1 - Services- Casino, Gambling Transactions"
+                  },
+                  {
+                    "title": "Services-Amusement Parks",
+                    "const": "1.5 - Services-Amusement Parks"
+                  },
+                  {
+                    "title": "Services-Computer Programming, Data Processing, Etc.",
+                    "const": "1 - Services-Computer Programming, Data Processing, Etc."
+                  },
+                  {
+                    "title": "Services-Educational Services",
+                    "const": "1 - Services-Educational Services"
+                  },
+                  {
+                    "title": "Services-Engineering Services",
+                    "const": "1 - Services-Engineering Services"
+                  },
+                  {
+                    "title": "Services-Health Services",
+                    "const": "1 - Services-Health Services"
+                  },
+                  {
+                    "title": "Services-Legal Services",
+                    "const": "-1 - Services-Legal Services"
+                  },
+                  {
+                    "title": "Services-Membership Sports & Recreation Clubs",
+                    "const": "1.5 - Services-Membership Sports & Recreation Clubs"
+                  },
+                  {
+                    "title": "Services-Miscellaneous Amusement & Recreation",
+                    "const": "2 - Services-Miscellaneous Amusement & Recreation"
+                  },
+                  {
+                    "title": "Services-Video Game Arcades",
+                    "const": "2.5 - Services-Video Game Arcades"
+                  },
+                  {
+                    "title": "Ship & Boat Building & Repairing",
+                    "const": "1 - Ship & Boat Building & Repairing"
+                  },
+                  {
+                    "title": "Sporting & Athletic Goods, NEC",
+                    "const": "1 - Sporting & Athletic Goods, NEC"
+                  },
+                  {
+                    "title": "Telecom- Communications Equipment",
+                    "const": "2 - Telecom- Communications Equipment"
+                  },
+                  {
+                    "title": "Telephone Communications ",
+                    "const": "2.5 - Telephone Communications "
+                  },
+                  {
+                    "title": "Textile Products",
+                    "const": "1 - Textile Products"
+                  },
+                  {
+                    "title": "Tobacco Products",
+                    "const": "2.5 - Tobacco Products"
+                  },
+                  {
+                    "title": "Transportation Services",
+                    "const": "2 - Transportation Services"
+                  },
+                  {
+                    "title": "Trucking & Courier Services (No Air)",
+                    "const": "-1 - Trucking & Courier Services (No Air)"
+                  },
+                  {
+                    "title": "Trucking (No Local)",
+                    "const": "-1 - Trucking (No Local)"
+                  },
+                  {
+                    "title": "Watches, Clocks, Clockwork Operated Devices/Parts",
+                    "const": "2 - Watches, Clocks, Clockwork Operated Devices/Parts"
+                  },
+                  {
+                    "title": "Water Supply",
+                    "const": "1 - Water Supply"
+                  },
+                  {
+                    "title": "Water Transportation",
+                    "const": "1 - Water Transportation"
+                  },
+                  {
+                    "title": "Water, Sewer",
+                    "const": "1 - Water, Sewer"
+                  },
+                  {
+                    "title": "Wood Household Furniture, (No Upholstered)",
+                    "const": "1 - Wood Household Furniture, (No Upholstered)"
+                  },
+                  {
+                    "title": "Other",
+                    "const": "-1 - Other"
+                  }
+                ]
+              },
+              "currentRevenue": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1000000000,
+                "errorMessage": {
+                  "minimum": "Cannot be less than 1",
+                  "maximum": "Cannot be more than 1,000,000,000 (One Billion)"
+                }
+              },
+              "nextYearRevenue": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1000000000,
+                "errorMessage": {
+                  "minimum": "Cannot be less than 0",
+                  "maximum": "Cannot be more than 1,000,000,000 (One Billion)"
+                }
+              },
+              "numberOfEmployees": {
+                "type": ["number", "string"],
+                "minimum": 1,
+                "maximum": 1000000000,
+                "errorMessage": {
+                  "minimum": "Cannot be less than 1",
+                  "maximum": "Cannot be more than 1,000,000,000 (One Billion)"
+                }
+              },
+              "hasIndependentContractor": {
+                "type": "boolean"
+              },
+              "hasEmployeesOutside": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "riskDetails": {
+        "type": "object",
+        "properties": {
+          "crimelock": {
+            "type": "object",
+            "required": [
+              "hasPurchasedBefore",
+              "SOF_1",
+              "SOF_2",
+              "SOF_3",
+              "SOF_4",
+              "SOF_5",
+              "SOF_6",
+              "SOF_7",
+              "SOF_8",
+              "SOF_9",
+              "SOF_10",
+              "SOF_11",
+              "SOF_12",
+              "SOF_13",
+              "SOF_14",
+              "SOF_15",
+              "SOF_16",
+              "SOF_17"
+            ],
+            "properties": {
+              "hasPurchasedBefore": {
+                "type": "string",
+                "enum": [
+                  "New Purchase",
+                  "Purchased In The Last 5 Years",
+                  "Purchased More Than 5 Years Ago"
+                ]
+              },
+              "SOF_1": {
+                "type": "boolean",
+                "description": "Please Confirm no Losses or Circumstances have been Discovered at the Date of Automation?"
+              },
+              "SOF_2": {
+                "type": "boolean",
+                "description": "The policyholder is audited annually by an external Auditor and any recommendations made around control improvements are implemented within an agreed time frame and any variances/exceptions investigated by Senior Management"
+              },
+              "SOF_3": {
+                "type": "boolean",
+                "description": "All funds transfers are segregated so that no one individual can complete any transaction from commencement to completion without referral to others."
+              },
+              "SOF_4": {
+                "type": "boolean",
+                "description": "When recruiting or promoting persons to positions of financial responsibility, background checks are conducted to ensure suitability for the position and such records are maintained on file."
+              },
+              "SOF_5": {
+                "type": "boolean",
+                "description": "All Suppliers / Contractors / Sub-Contractors are vetted and assessed for suitability prior to awarding the tender for services and all such records maintained are authorized by at least 2 (two) signatories."
+              },
+              "SOF_6": {
+                "type": "boolean",
+                "description": "All expense or invoice requisitions require full supporting documentation prior to the payment being authorized."
+              },
+              "SOF_7": {
+                "type": "boolean",
+                "description": "Access to the insureds computer systems and networks are protected by Firewall and Anti-Virus Software which is updated regularly, including password protection with individual user log-on details required to be changed once at least every 90 days. "
+              },
+              "SOF_8": {
+                "type": "boolean",
+                "description": "All premises are locked and alarmed outside of working hours"
+              },
+              "SOF_9": {
+                "type": "boolean",
+                "description": "All premises containing stock, inventory, securities or precious metals are audited at least annually and stock records maintained."
+              },
+              "SOF_10": {
+                "type": "boolean",
+                "description": "All cash in hand or petty cash is reconciled daily and stored in a locked safe."
+              },
+              "SOF_11": {
+                "type": "boolean",
+                "description": "All requests purporting to come from Vendors, Suppliers or Customers, including the transfer of funds or to change details stored on file, are authenticated with a known contact at the Vendor, Supplier or Customer via a Phone Call and NOT using the details provided on such request."
+              },
+              "SOF_12": {
+                "type": "boolean",
+                "description": "The policyholder has had no claims of the type that would be covered under this policy in the last 5 years. If there have been no claims, please answer “yes”. If there has been a claim, please answer “no” and provide more details around the circumstances of the loss and remedial actions taken by the company"
+              },
+              "SOF_13": {
+                "type": "boolean",
+                "description": "Staff are not able to access the network via public WiFi or hotspots. If staff cannot access the network via public WiFi/Hotspots, please answer \"Yes\". If staff can access the network via public WiFi/hotspots, please answer \"No\" and provide more details around the network security of insured."
+              },
+              "SOF_14": {
+                "type": "boolean",
+                "description": "Two factor authentication is required to access the network."
+              },
+              "SOF_15": {
+                "type": "boolean",
+                "description": "In roles of financial responsibility, all segregated duties and financial controls are being applied the same as before workers were remotely working. "
+              },
+              "SOF_16": {
+                "type": "boolean",
+                "description": "Awareness around increased Social Engineering activity is being communicated across the remote workforce."
+              },
+              "SOF_17": {
+                "type": "boolean",
+                "description": "All premises are secured to the same level of physical security"
+              }
+            }
+          }
+        }
+      },
+      "coverage": {
+        "type": "object",
+        "default": {},
+        "required": ["limitOption1"],
+        "properties": {
+          "limitOption1": {
+            "type": "number",
+            "oneOf": [
+              {
+                "title": "£500,000",
+                "const": 500000
+              },
+              {
+                "title": "£1,000,000",
+                "const": 1000000
+              },
+              {
+                "title": "£2,000,000",
+                "const": 2000000
+              },
+              {
+                "title": "£3,000,000",
+                "const": 3000000
+              }
+            ]
+          },
+          "limitOption2": {
+            "type": ["number", "null"],
+            "oneOf": [
+              {
+                "title": "None",
+                "const": null
+              },
+              {
+                "title": "£500,000",
+                "const": 500000
+              },
+              {
+                "title": "£1,000,000",
+                "const": 1000000
+              },
+              {
+                "title": "£2,000,000",
+                "const": 2000000
+              },
+              {
+                "title": "£3,000,000",
+                "const": 3000000
+              }
+            ],
+            "default": null
+          },
+          "limitOption3": {
+            "type": ["number", "null"],
+            "oneOf": [
+              {
+                "title": "None",
+                "const": null
+              },
+              {
+                "title": "£500,000",
+                "const": 500000
+              },
+              {
+                "title": "£1,000,000",
+                "const": 1000000
+              },
+              {
+                "title": "£2,000,000",
+                "const": 2000000
+              },
+              {
+                "title": "£3,000,000",
+                "const": 3000000
+              }
+            ],
+            "default": null
+          },
+          "limitOption4": {
+            "type": ["number", "null"],
+            "oneOf": [
+              {
+                "title": "None",
+                "const": null
+              },
+              {
+                "title": "£500,000",
+                "const": 500000
+              },
+              {
+                "title": "£1,000,000",
+                "const": 1000000
+              },
+              {
+                "title": "£2,000,000",
+                "const": 2000000
+              },
+              {
+                "title": "£3,000,000",
+                "const": 3000000
+              }
+            ],
+            "default": null
+          },
+          "minRetention": {
+            "type": "number",
+            "default": 25000
+          }
+        }
+      },
+      "underwriter": {
+        "type": "object",
+        "default": {
+          "status": "new",
+          "referralReasons": []
+        },
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "referred",
+              "authorized",
+              "ntu",
+              "quoted",
+              "firmOrder",
+              "bound"
+            ]
+          },
+          "referralReasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "quotes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "market": {
+              "type": "string"
+            },
+            "favorite": {
+              "type": "boolean"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "quoting",
+                "quoted",
+                "binding",
+                "bound",
+                "unbinding",
+                "pending-refer",
+                "referred",
+                "pending-change-approval",
+                "error",
+                "declined"
+              ]
+            },
+            "premium": {
+              "type": "number"
+            },
+            "ratingInputs": {
+              "type": "object"
+            },
+            "coverages": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "selected": {
+                    "type": ["string", "boolean", "number"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "default": [
+          {
+            "id": "crimelock",
+            "market": "crimelock",
+            "favorite": false,
+            "status": "quoting",
+            "coverages": [
+              {
+                "key": "limit",
+                "values": [500000, 1000000, 2000000, 3000000]
+              },
+              {
+                "key": "retention",
+                "values": [10000, 15000, 25000, 50000, 75000, 100000]
+              },
+              {
+                "key": "feature1",
+                "selected": "SELECTED"
+              },
+              {
+                "key": "feature2",
+                "selected": "SELECTED"
+              },
+              {
+                "key": "feature3",
+                "selected": "SELECTED_WITH_EXCEPTION"
+              }
+            ]
+          }
+        ]
+      },
+      "purchase": {
+        "type": "object",
+        "properties": {
+          "quote": { "type": "string" },
+          "signDate": {
+            "type": "string",
+            "format": "date",
+            "before": {
+              "type": "object",
+              "properties": { "path": "applicant.crimelock.periodFrom" }
+            },
+            "errorMessage": { "before": "Sign date cannot be after start date" }
+          },
+          "firmOrderUpload": {
+            "type": "boolean",
+            "description": "I agree that signed Firm Order document is uploaded"
+          }
+        },
+        "required": ["quote", "firmOrderUpload"]
+      },
+      "emailQuotes": {
+        "type": "object",
+        "properties": {
+          "toEmails": {
+            "type": "string",
+            "pattern": "^(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+\\s?,)*(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+)£",
+            "errorMessage": {
+              "pattern": "Please use a recognized emails separated by commas format. Example: john@gmail.com, jack@gmail.com"
+            }
+          },
+          "cc": {
+            "type": "string",
+            "pattern": "^(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+\\s?,)*(\\s?[^\\s,]+@[^\\s,]+\\.[^\\s,]+)£",
+            "errorMessage": {
+              "pattern": "Please use a recognized emails separated by commas format. Example: john@gmail.com, jack@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "hasIndependentContractor": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "isContractorSubjectToProcedures": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": ["isContractorSubjectToProcedures"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "required": [
+                    "areEmployeesSubjectToProcedures",
+                    "numberOfCountries",
+                    "country_1",
+                    "noOfEmployees_1"
+                  ],
+                  "properties": {
+                    "areEmployeesSubjectToProcedures": {
+                      "type": "boolean"
+                    },
+                    "country_1": {
+                      "type": "string"
+                    },
+                    "noOfEmployees_1": {
+                      "type": ["number", "string"],
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    },
+                    "numberOfCountries": {
+                      "type": "number",
+                      "enum": [1, 2, 3, 4, 5],
+                      "default": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "riskDetails": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "hasPurchasedBefore": {
+                      "const": "Purchased Before"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "riskDetails": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "retroactiveDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "When did you purchase the previous insurance ?"
+                    }
+                  },
+                  "required": ["retroactiveDate"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 2
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_2": {
+                      "type": "string"
+                    },
+                    "noOfEmployees_2": {
+                      "type": ["number", "string"],
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_2", "noOfEmployees_2"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 3
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_3": {
+                      "type": "string"
+                    },
+                    "noOfEmployees_3": {
+                      "type": ["number", "string"],
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_3", "noOfEmployees_3"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 4
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_4": {
+                      "type": "string"
+                    },
+                    "noOfEmployees_4": {
+                      "type": ["number", "string"],
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_4", "noOfEmployees_4"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "numberOfCountries": {
+                      "minimum": 5
+                    },
+                    "hasEmployeesOutside": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "country_5": {
+                      "type": "string"
+                    },
+                    "noOfEmployees_5": {
+                      "type": ["number", "string"],
+                      "minimum": 1,
+                      "maximum": 5000,
+                      "errorMessage": {
+                        "minimum": "Cannot be less than 1",
+                        "maximum": "Cannot be more than 5000"
+                      }
+                    }
+                  },
+                  "required": ["country_5", "noOfEmployees_5"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "lossPayees": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "applicant": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "lossPayees_1": { "type": "string" },
+                    "lossPayees_2": { "type": "string" },
+                    "lossPayees_3": { "type": "string" }
+                  },
+                  "required": ["lossPayees_1"]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 25000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "£25,000",
+                      "const": 25000
+                    },
+                    {
+                      "title": "£30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": 25000
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£25,000",
+                      "const": 25000
+                    },
+                    {
+                      "title": "£30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£25,000",
+                      "const": 25000
+                    },
+                    {
+                      "title": "£30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 30000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "£30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": 30000
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£30,000",
+                      "const": 30000
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 35000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": 35000
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£35,000",
+                      "const": 35000
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 40000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": 40000
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£40,000",
+                      "const": 40000
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 45000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": 45000
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£45,000",
+                      "const": 45000
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "minRetention": {
+                  "const": 50000
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "properties": {
+                "retentionOption1": {
+                  "type": "number",
+                  "oneOf": [
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": 50000
+                },
+                "retentionOption2": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                },
+                "retentionOption3": {
+                  "type": ["number", "null"],
+                  "oneOf": [
+                    {
+                      "title": "None",
+                      "const": null
+                    },
+                    {
+                      "title": "£50,000",
+                      "const": 50000
+                    },
+                    {
+                      "title": "£55,000",
+                      "const": 55000
+                    },
+                    {
+                      "title": "£60,000",
+                      "const": 60000
+                    },
+                    {
+                      "title": "£65,000",
+                      "const": 65000
+                    },
+                    {
+                      "title": "£70,000",
+                      "const": 70000
+                    },
+                    {
+                      "title": "£75,000",
+                      "const": 75000
+                    },
+                    {
+                      "title": "£80,000",
+                      "const": 80000
+                    },
+                    {
+                      "title": "£85,000",
+                      "const": 85000
+                    },
+                    {
+                      "title": "£90,000",
+                      "const": 90000
+                    },
+                    {
+                      "title": "£95,000",
+                      "const": 95000
+                    },
+                    {
+                      "title": "£100,000",
+                      "const": 100000
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": ["retentionOption1"]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "uiSchemas": [],
+  "statuses": [
+    {
+      "key": "d775f4a2-8e8e-4095-84bc-c3bec3c2cc0d",
+      "type": "new",
+      "name": "New"
+    },
+    {
+      "key": "5cab6a7f-11a0-4cb9-9baa-835ebcd8e38e",
+      "type": "others",
+      "name": "Quoting"
+    },
+    {
+      "key": "40b0ebb9-2464-4da2-8b82-da3d4a1ab650",
+      "type": "others",
+      "name": "Referred"
+    },
+    {
+      "key": "af4f7f43-ce5d-4e33-a165-dda94a2e1254",
+      "type": "others",
+      "name": "Authorized"
+    },
+    {
+      "key": "5ff626d9-1e37-45b9-8e73-2a268e2bc180",
+      "type": "others",
+      "name": "Quoted"
+    },
+    {
+      "key": "ca64d119-d940-4913-bac1-aed5f1e20b88",
+      "type": "others",
+      "name": "Firm Order"
+    },
+    {
+      "key": "7f2ef97f-45c2-4984-988f-763fc8249b13",
+      "type": "cancelled",
+      "name": "NTU"
+    },
+    {
+      "key": "425a9bc9-d912-4156-bcba-7672c9d3084c",
+      "type": "completed",
+      "name": "Bound"
+    }
+  ],
+  "hasProduct": false,
+  "productDefinitionKey": "2033bd03-9e7e-4cad-8002-eb8749af3279"
+}

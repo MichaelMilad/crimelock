@@ -1,0 +1,33 @@
+(
+    $updates:= [{
+        "kind": "E",
+        "path": ["coverage", "minRetention"],
+        "rhs": minRetention
+    }];
+
+    coverage.retentionOption1
+    ? $updates:= $append($updates, {
+        "kind": "E",
+        "path": ["coverage", "retentionOption1"],
+        "rhs": (minRetention > coverage.retentionOption1
+            ? minRetention : coverage.retentionOption1)
+    });
+
+    coverage.retentionOption2
+    ? $updates:= $append($updates, {
+        "kind": "E",
+        "path": ["coverage", "retentionOption2"],
+        "rhs": (minRetention > coverage.retentionOption2
+            ? minRetention : coverage.retentionOption2)
+    });
+
+    coverage.retentionOption3
+    ? $updates:= $append($updates, {
+        "kind": "E",
+        "path": ["coverage", "retentionOption3"],
+        "rhs": (minRetention > coverage.retentionOption3
+            ? minRetention : coverage.retentionOption3)
+    });
+   
+   $updates;
+)

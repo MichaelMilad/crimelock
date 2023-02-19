@@ -1,0 +1,200 @@
+(
+    $limit1 := coverage.limitOption1;
+    $limit2 := coverage.limitOption2;
+    $limit3 := coverage.limitOption3;
+    $limit4 := coverage.limitOption4;
+    $ret1 := coverage.retentionOption1;
+    $ret2 := coverage.retentionOption2;
+    $ret3 := coverage.retentionOption3;
+
+    $P11 := ($limit1 and $ret1)
+    ? (quotes[ratingInputs.limit = $limit1
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P12 := ($limit1 and $ret2)
+    ? (quotes[ratingInputs.limit = $limit1
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P13 := ($limit1 and $ret3)
+    ? (quotes[ratingInputs.limit = $limit1
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $P21 := ($limit2 and $ret1)
+    ? (quotes[ratingInputs.limit = $limit2
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P22 := ($limit2 and $ret2)
+    ? (quotes[ratingInputs.limit = $limit2
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P23 := ($limit2 and $ret3)
+    ? (quotes[ratingInputs.limit = $limit2
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $P31 := ($limit3 and $ret1)
+    ? (quotes[ratingInputs.limit = $limit3
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P32 := ($limit3 and $ret2)
+    ? (quotes[ratingInputs.limit = $limit3
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P33 := ($limit3 and $ret3)
+    ? (quotes[ratingInputs.limit = $limit3
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $P41 := ($limit4 and $ret1)
+    ? (quotes[ratingInputs.limit = $limit4
+    and ratingInputs.retention = $ret1].premium)[0]
+    : "N/A";
+
+    $P42 := ($limit4 and $ret2)
+    ? (quotes[ratingInputs.limit = $limit4
+    and ratingInputs.retention = $ret2].premium)[0]
+    : "N/A";
+
+    $P43 := ($limit4 and $ret3)
+    ? (quotes[ratingInputs.limit = $limit4
+    and ratingInputs.retention = $ret3].premium)[0]
+    : "N/A";
+
+    $settlementDate := $fromMillis(
+        $toMillis(applicant.crimelock.periodFrom) + (60 * 24 * 60 * 60 * 1000),
+        '[Y0001]-[M01]-[D01]'
+        );
+
+    $domiciledEmp := 0;
+
+    (applicant.crimelock.numberOfCountries >= 1) ?
+        $domiciledEmp:= $sum([$domiciledEmp ,applicant.crimelock.noOfEmployees_1]);
+
+    (applicant.crimelock.numberOfCountries >= 2) ?
+        $domiciledEmp:= $sum([$domiciledEmp ,applicant.crimelock.noOfEmployees_2]);
+
+    (applicant.crimelock.numberOfCountries >= 3) ?
+        $domiciledEmp:= $sum([$domiciledEmp ,applicant.crimelock.noOfEmployees_3]);
+
+    (applicant.crimelock.numberOfCountries >= 4) ?
+        $domiciledEmp:= $sum([$domiciledEmp ,applicant.crimelock.noOfEmployees_4]);
+
+    (applicant.crimelock.numberOfCountries >= 5) ?
+        $domiciledEmp:= $sum([$domiciledEmp ,applicant.crimelock.noOfEmployees_5]);
+
+    $M13:= $join([
+        $string(assignee.subscribingMarkets[0].marketShare * 100),
+        "%"
+    ]);
+
+    $M23:= $join([
+        $string(assignee.subscribingMarkets[1].marketShare * 100),
+        "%"
+    ]);
+
+    $M33:= assignee.subscribingMarkets[2] ? $join([
+        $string(assignee.subscribingMarkets[2].marketShare * 100),
+        "%"
+    ]) : undefined;
+    
+    {
+    "F12": (applicant.crimelock.referenceID),
+    "F1": (
+        applicant.crimelock.nameInPolicy 
+        ? applicant.crimelock.nameInPolicy
+        : applicant.crimelock.name
+        ),
+    "F31": ($split(applicant.crimelock.industry, " - ")[1]),
+    "F32": (applicant.crimelock.currentRevenue),
+    "F34": (applicant.crimelock.numberOfEmployees),
+    "F35": (
+        applicant.crimelock.hasIndependentContractor
+        ? "Yes"
+        :"No"
+        ),
+    "F36": (
+        (applicant.crimelock.hasIndependentContractor
+        and
+        applicant.crimelock.isContractorSubjectToProcedures)
+        ? "Yes"
+        : (applicant.crimelock.hasIndependentContractor
+        and
+        applicant.crimelock.isContractorSubjectToProcedures = false)
+        ? "No"
+        : "N/A"
+        ),
+    
+    "domiciledEmp": (
+        applicant.crimelock.hasEmployeesOutside
+        ? $domiciledEmp
+        : "N/A"
+    ),
+
+    "F38": (applicant.crimelock.hasEmployeesOutside ? "Yes" : "No"),
+    "F58": (riskDetails.crimelock.SOF_2 ? "Yes" : "No"),
+    "F59": (riskDetails.crimelock.SOF_3 ? "Yes" : "No"),
+    "F60": (riskDetails.crimelock.SOF_4 ? "Yes" : "No"),
+    "F61": (riskDetails.crimelock.SOF_5 ? "Yes" : "No"),
+    "F62": (riskDetails.crimelock.SOF_6 ? "Yes" : "No"),
+    "F63": (riskDetails.crimelock.SOF_7 ? "Yes" : "No"),
+    "F64": (riskDetails.crimelock.SOF_8 ? "Yes" : "No"),
+    "F65": (riskDetails.crimelock.SOF_9 ? "Yes" : "No"),
+    "F66": (riskDetails.crimelock.SOF_10 ? "Yes" : "No"),
+    "F67": (riskDetails.crimelock.SOF_11 ? "Yes" : "No"),
+    "F68": (riskDetails.crimelock.SOF_12 ? "Yes" : "No"),
+    "F69": (riskDetails.crimelock.SOF_13 ? "Yes" : "No"),
+    "F70": (riskDetails.crimelock.SOF_14 ? "Yes" : "No"),
+    "F71": (riskDetails.crimelock.SOF_15 ? "Yes" : "No"),
+    "F72": (riskDetails.crimelock.SOF_16 ? "Yes" : "No"),
+    "F73": (riskDetails.crimelock.SOF_17 ? "Yes" : "No"),
+    "F5": (applicant.crimelock.address.address),
+    "F13": (applicant.crimelock.periodFrom),
+    "F14": (applicant.crimelock.periodTo),
+    "F46": ($limit1),
+    "F47": ($limit2 ? $limit2 : "N/A"),
+    "F48": ($limit3 ? $limit3 : "N/A"),
+    "F49": ($limit4 ? $limit4 : "N/A"),
+    "F51": ($ret1),
+    "F52": ( $ret2 ? $ret2 : "N/A"),
+    "F53": ( $ret3 ? $ret3 : "N/A"),
+    
+    "F55": (
+        riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years"
+        ? riskDetails.crimelock.retroactiveDate
+        : "N/A"
+        ),
+
+    "settlementDate": $settlementDate,
+
+    "P11": $P11,
+    "P12": $P12,
+    "P13": $P13,
+    "P21": $P21,
+    "P22": $P22,
+    "P23": $P23,
+    "P31": $P31,
+    "P32": $P32,
+    "P33": $P33,
+    "P41": $P41,
+    "P42": $P42,
+    "P43": $P43,
+
+    "M1": "Leader",
+    "M11": assignee.subscribingMarkets[0].marketName,
+    "M13": $M13,
+    "M2": "Follower",
+    "M22": assignee.subscribingMarkets[1].marketName,
+    "M23": $M23,
+    "M3": assignee.subscribingMarkets[2]
+        ? "Follower" : undefined,
+    "M32": assignee.subscribingMarkets[2].marketName,
+    "M33": $M33
+    }
+)

@@ -12,5 +12,8 @@
     "retentionOption1": (data.coverage.retentionOption1),
     "retentionOption2": (data.coverage.retentionOption2 ? data.coverage.retentionOption2 : undefined),
     "retentionOption3": (data.coverage.retentionOption3 ? data.coverage.retentionOption3 : undefined),
-    "fullPriorActsCoverage": (false)
+    "fullPriorActsCoverage": (
+        data.riskDetails.crimelock.hasPurchasedBefore = "Purchased More Than 5 Years Ago"
+        ? true : false
+        )
 }

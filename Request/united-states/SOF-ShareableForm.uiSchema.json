@@ -1,0 +1,123 @@
+{
+  "key": "8dab4c9a-7abc-4062-b9eb-dbb65dae20c4",
+  "label": "Application-SOF",
+  "type": "trumarket-public-user",
+  "default": true,
+  "experience": "experience",
+  "schema": {
+    "type": "VerticalLayout",
+    "options": {
+      "schemaOptions": {
+        "applicationView": true
+      }
+    },
+    "elements": [
+      {
+        "type": "VerticalStepsLayout",
+        "elements": [
+          {
+            "type": "StepLayout",
+            "label": "Statement Of Facts",
+            "elements": [
+              {
+                "type": "VerticalSections",
+                "elements": [
+                  {
+                    "type": "Section",
+                    "elements": [
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_1",
+                        "label": "Losses"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_2",
+                        "label": "Policyholder Annual Audition"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_3",
+                        "label": "Funds Segregation"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_4",
+                        "label": "Recruiting/Promoting to Financial Positions"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_5",
+                        "label": "Suppliers/Contractors/Sub-Contractors Assessment"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_6",
+                        "label": "Expenses/Invoices Requisitions"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_7",
+                        "label": "Computers Access Protection"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_8",
+                        "label": "Premises Protection"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_9",
+                        "label": "Premises Auditions and Records"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_10",
+                        "label": "Cash Reconciled"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_11",
+                        "label": "Requests Purporting to Come"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_12",
+                        "label": "Previous Claims"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_13",
+                        "label": "Staff Public Network Access"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_14",
+                        "label": "Two Factor Authentication"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_15",
+                        "label": "Roles of Financial Responsibilities"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_16",
+                        "label": "Social Engineering Awareness"
+                      },
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_17",
+                        "label": "Premises Security"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
