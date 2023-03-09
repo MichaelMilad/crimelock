@@ -1,6 +1,7 @@
 (
     $newQuotes:= $map(quotes, function($v) {
         $v.status = 'binding'
+        or $v.status = 'pending-bind'
             ? {
                 "id": $v.id,
                 "market": $v.market,
@@ -12,4 +13,9 @@
             }
             : $v   
     });
+
+    {
+        "quotes": [$newQuotes],
+        "boundQuote": $newQuotes[status = 'bound']
+    }
 )

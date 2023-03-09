@@ -35,7 +35,9 @@
             { "marketName": "Liberty Syndicate 4472 / 5381", "marketShare": 0.5 }
           ],
           "sofUpload": false,
-          "commission": false
+          "commission": false,
+          "market1": true,
+          "market2": true
         },
         "properties": {
           "country": { "type": "string"},
@@ -57,9 +59,17 @@
           "commission": {
             "type": "boolean",
             "description": "Please confirm your agreement to 17.50% commission and that Lockton can retain 7.50% commission"
+          },
+          "market1": {
+            "type": "boolean",
+            "description": "Toggle off if NewLine Syndicate Decided not to proceed with this risk"
+          },
+          "market2": {
+            "type": "boolean",
+            "description": "Toggle off if Liberty Syndicate Decided not to proceed with this risk"
           }
         },
-        "required": ["commission", "sofUpload"]
+        "required": ["commission", "sofUpload", "market1", "market2"]
       },
       "applicant": {
         "type": "object",
@@ -730,11 +740,12 @@
                 }
               },
               "numberOfEmployees": {
-                "type": ["number", "string"],
-                "minimum": 1,
+                "type": "number",
+                "default": 0,
+                "minimum": 0,
                 "maximum": 1000000000,
                 "errorMessage": {
-                  "minimum": "Cannot be less than 1",
+                  "type": "Must be a number",
                   "maximum": "Cannot be more than 1,000,000,000 (One Billion)"
                 }
               },
@@ -1017,7 +1028,8 @@
                 "referred",
                 "pending-change-approval",
                 "error",
-                "declined"
+                "declined",
+                "pending-bind"
               ]
             },
             "premium": {
@@ -2737,11 +2749,6 @@
       "key": "13fb24e2-b509-4445-b53e-feb03455d9ed",
       "type": "others",
       "name": "Referred"
-    },
-    {
-      "key": "3259f9f5-6c69-486b-8301-a5ad11ebcac6",
-      "type": "others",
-      "name": "Authorized"
     },
     {
       "key": "cddcb12f-d483-4995-b482-760676afc289",

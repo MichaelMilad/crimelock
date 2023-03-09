@@ -167,7 +167,7 @@
                           "dependencies": [
                             "applicant.crimelock.periodTo",
                             null,
-                            6
+                            12
                           ],
                           "minDate": {
                             "days": 548
@@ -216,11 +216,7 @@
                         "label": "Current Revenue",
                         "scope": "#/properties/applicant/properties/crimelock/properties/currentRevenue",
                         "options": {
-                          "dependencies": [
-                            "applicant.crimelock.currentRevenue",
-                            "applicant.crimelock.industry",
-                            "applicant.crimelock.numberOfEmployees"
-                          ],
+                          "dependencies": ["assignee.country"],
                           "actionData": {
                             "actionKey": "e8b8e474-8523-4d56-8f55-397c10110ab1",
                             "dataArray": [
@@ -248,7 +244,10 @@
                       {
                         "type": "Currency",
                         "label": "Next Year Estimated Revenue",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/nextYearRevenue"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/nextYearRevenue",
+                        "options": {
+                          "dependencies": ["assignee.country"]
+                        }
                       },
                       {
                         "type": "Control",
@@ -869,12 +868,34 @@
                     "options": { "format": "radio", "toggle": true }
                   }
                 ]
+              },
+              {
+                "type": "Section",
+                "label": "Subscribing Markets",
+                "elements": [
+                  {
+                    "type": "Control",
+                    "label": "Newline Syndicate 1218 / 523",
+                    "scope": "#/properties/assignee/properties/market1",
+                    "options": { "format": "radio", "toggle": true },
+                    "rule": {
+                      "effect": "DISABLE",
+                      "condition": {}
+                    }
+                  },
+                  {
+                    "type": "Control",
+                    "label": "Liberty Syndicate 4472 / 5381",
+                    "scope": "#/properties/assignee/properties/market2",
+                    "options": { "format": "radio", "toggle": true },
+                    "rule": {
+                      "effect": "DISABLE",
+                      "condition": {}
+                    }
+                  }
+                ]
               }
-            ],
-            "rule": {
-              "effect": "DISABLE",
-              "condition": {}
-            }
+            ]
           }
         ]
       },
@@ -930,6 +951,13 @@
                 ]
               },
               {
+                "key": "changeStatus",
+                "data": {
+                  "statusKey": "0c0a59ec-25c1-4cca-a4cb-e3b2a56e4c16",
+                  "statusType": "others"
+                }
+              },
+              {
                 "key": "invoke",
                 "actionId": "36ee6cb0-5636-49e0-9beb-5d56eb76cdea"
               },
@@ -940,7 +968,27 @@
                   "message": "Approved"
                 }
               }
-            ]
+            ],
+            "rule": {
+              "effect": "ENABLE",
+              "condition": {
+                "type": "OR",
+                "conditions": [
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "new" }
+                  },
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "referred" }
+                  },
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "quoted" }
+                  }
+                ]
+              }
+            }
           },
           {
             "type": "ButtonControl",
@@ -949,7 +997,46 @@
             "actions": [
               {
                 "key": "navigate",
-                "data": { "search": "?popover=decline-reason" }
+                "data": { "search": "" }
+              },
+              {
+                "key": "mutate",
+                "data": [
+                  {"path": "underwriter.status", "value": "ntu"},
+                  {
+                    "path": "quotes",
+                    "value": [
+                      {
+                        "id": "crimelock",
+                        "market": "crimelock",
+                        "favorite": false,
+                        "status": "declined",
+                        "coverages": [
+                          {
+                            "key": "limit",
+                            "selected": 500000
+                          },
+                          {
+                            "key": "retention",
+                             "selected": 25000
+                          },
+                          {
+                            "key": "feature1",
+                            "selected": "SELECTED"
+                          },
+                          {
+                            "key": "feature2",
+                            "selected": "SELECTED"
+                          },
+                          {
+                            "key": "feature3",
+                            "selected": "SELECTED_WITH_EXCEPTION"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "key": "changeStatus",
@@ -965,7 +1052,27 @@
                   "message": "Declined"
                 }
               }
-            ]
+            ],
+            "rule": {
+              "effect": "ENABLE",
+              "condition": {
+                "type": "OR",
+                "conditions": [
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "new" }
+                  },
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "referred" }
+                  },
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "quoted" }
+                  }
+                ]
+              }
+            }
           }
         ]
       }

@@ -17,10 +17,6 @@
         "uiSchemaKey": "e3a844a1-bed0-44e0-99d3-4bd39c83f04f"
       },
       {
-        "statusKey": "af4f7f43-ce5d-4e33-a165-dda94a2e1254",
-        "uiSchemaKey": "e3a844a1-bed0-44e0-99d3-4bd39c83f04f"
-      },
-      {
         "statusKey": "40b0ebb9-2464-4da2-8b82-da3d4a1ab650",
         "uiSchemaKey": "e3a844a1-bed0-44e0-99d3-4bd39c83f04f"
       },
@@ -30,10 +26,6 @@
       },
       {
         "statusKey": "5cab6a7f-11a0-4cb9-9baa-835ebcd8e38e",
-        "uiSchemaKey": "0ace3134-a631-4156-871a-3fe0db5d45e5"
-      },
-      {
-        "statusKey": "af4f7f43-ce5d-4e33-a165-dda94a2e1254",
         "uiSchemaKey": "0ace3134-a631-4156-871a-3fe0db5d45e5"
       },
       {
@@ -55,6 +47,14 @@
       {
         "statusKey": "425a9bc9-d912-4156-bcba-7672c9d3084c",
         "uiSchemaKey": "0ace3134-a631-4156-871a-3fe0db5d45e5"
+      },
+      {
+        "statusKey": "7f2ef97f-45c2-4984-988f-763fc8249b13",
+        "uiSchemaKey": "0ace3134-a631-4156-871a-3fe0db5d45e5"
+      },
+      {
+        "statusKey": "7f2ef97f-45c2-4984-988f-763fc8249b13",
+        "uiSchemaKey": "e3a844a1-bed0-44e0-99d3-4bd39c83f04f"
       }
     ]
   }

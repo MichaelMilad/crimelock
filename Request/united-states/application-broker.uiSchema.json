@@ -167,7 +167,7 @@
                           "dependencies": [
                             "applicant.crimelock.periodTo",
                             null,
-                            6
+                            12
                           ],
                           "minDate": {
                             "days": 7
@@ -216,11 +216,7 @@
                         "label": "Current Revenue",
                         "scope": "#/properties/applicant/properties/crimelock/properties/currentRevenue",
                         "options": {
-                          "dependencies": [
-                            "applicant.crimelock.currentRevenue",
-                            "applicant.crimelock.industry",
-                            "applicant.crimelock.numberOfEmployees"
-                          ],
+                          "dependencies": ["assignee.country"],
                           "actionData": {
                             "actionKey": "e8b8e474-8523-4d56-8f55-397c10110ab1",
                             "dataArray": [
@@ -248,7 +244,10 @@
                       {
                         "type": "Currency",
                         "label": "Next Year Estimated Revenue",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/nextYearRevenue"
+                        "scope": "#/properties/applicant/properties/crimelock/properties/nextYearRevenue",
+                        "options": {
+                          "dependencies": ["assignee.country"]
+                        }
                       },
                       {
                         "type": "Control",
@@ -855,7 +854,7 @@
               {
                 "type": "Section",
                 "label": "Broker Agreement",
-                "elements":[
+                "elements": [
                   {
                     "type": "Control",
                     "label": "SOF Document",
@@ -867,6 +866,32 @@
                     "label": "Commission",
                     "scope": "#/properties/assignee/properties/commission",
                     "options": { "format": "radio", "toggle": true }
+                  }
+                ]
+              },
+              {
+                "type": "Section",
+                "label": "Subscribing Markets",
+                "elements": [
+                  {
+                    "type": "Control",
+                    "label": "Newline Syndicate 1218 / 523",
+                    "scope": "#/properties/assignee/properties/market1",
+                    "options": { "format": "radio", "toggle": true },
+                    "rule": {
+                      "effect": "DISABLE",
+                      "condition": {}
+                    }
+                  },
+                  {
+                    "type": "Control",
+                    "label": "Liberty Syndicate 4472 / 5381",
+                    "scope": "#/properties/assignee/properties/market2",
+                    "options": { "format": "radio", "toggle": true },
+                    "rule": {
+                      "effect": "DISABLE",
+                      "condition": {}
+                    }
                   }
                 ]
               }
@@ -907,7 +932,7 @@
                               },
                               {
                                 "key": "retention",
-                                 "selected": 25000
+                                "selected": 25000
                               },
                               {
                                 "key": "feature1",
@@ -964,14 +989,26 @@
                         "schema": { "const": false }
                       },
                       {
-                        "scope": "#/properties/assignee/properties/commission" ,
+                        "scope": "#/properties/assignee/properties/commission",
                         "schema": { "const": false }
                       }
                     ]
                   }
                 }
               }
-            ]
+            ],
+            "rule": {
+              "effect": "ENABLE",
+              "condition": {
+                "type": "OR",
+                "conditions": [
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": { "const": "new" }
+                  }
+                ]
+              }
+            }
           }
         ]
       }
@@ -1069,7 +1106,7 @@
     },
     {
       "if": {
-        "==": [{"var": "applicant.crimelock.lossPayees"}, true]
+        "==": [{ "var": "applicant.crimelock.lossPayees" }, true]
       },
       "then": [
         {
@@ -1084,10 +1121,7 @@
     },
     {
       "if": {
-        "DateLogic.ls": [
-          {"var": "applicant.crimelock.periodFrom"},
-          "NOW"
-        ]
+        "DateLogic.ls": [{ "var": "applicant.crimelock.periodFrom" }, "NOW"]
       },
       "then": [
         {

@@ -11,7 +11,7 @@
     "options": {
       "dependencies": {
         "country": {
-          "crimelock": "applicant.crimelock.address.country"
+          "crimelock": "assignee.country"
         }
       },
       "applicationUiSchemaKey": "663b7071-4fb5-4687-939f-8c081dea6149",
@@ -42,7 +42,10 @@
               {
                 "key": "mutate",
                 "data": [
-                  { "path": "$quote[$quote-id].status", "value": "referred" }
+                  {
+                    "path": "$quote[$quote-id].status",
+                    "value": "pending-bind"
+                  }
                 ]
               },
               {
@@ -153,6 +156,21 @@
           "requote": true,
           "update": true,
           "isQuoteEnabled": true
+        },
+        "pending-bind": {
+          "label": "Firm Order",
+          "type": "primary",
+          "actionButton": {
+            "label": "Firm Order",
+            "type": "primary",
+            "enabled": false,
+            "loading": false,
+            "actions": []
+          },
+          "coverageEnabled": true,
+          "requote": true,
+          "update": true,
+          "isQuoteEnabled": false
         }
       },
       "markets": {
@@ -186,6 +204,20 @@
         }
       ]
     },
-    "elements": []
+    "elements": [],
+    "rule": {
+      "effect": "ENABLE",
+      "condition": {
+        "type": "OR",
+        "conditions": [
+          {
+            "scope": "#/properties/underwriter/properties/status",
+            "schema": {
+              "const": "quoted"
+            }
+          }
+        ]
+      }
+    }
   }
 }

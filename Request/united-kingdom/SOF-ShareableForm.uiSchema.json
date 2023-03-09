@@ -3,7 +3,7 @@
     "label": "Application-SOF",
     "type": "trumarket-public-user",
     "default": true,
-    "experience": "experience",
+    "experience": "publicUser",
     "schema": {
       "type": "VerticalLayout",
       "options": {

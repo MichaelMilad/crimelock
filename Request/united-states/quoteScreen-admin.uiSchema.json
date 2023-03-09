@@ -11,7 +11,7 @@
     "options": {
       "dependencies": {
         "country": {
-          "crimelock": "applicant.crimelock.address1.country"
+          "crimelock": "assignee.country"
         }
       },
       "applicationUiSchemaKey": "1a862caa-e595-485b-813e-ffb027856771",
@@ -79,22 +79,9 @@
           "actionButton": {
             "label": "Bind",
             "type": "primary",
-            "enabled": true,
+            "enabled": false,
             "loading": false,
-            "actions": [
-              { "key": "navigate", "data": { "search": "?quote-id=$quoteId" } },
-              {
-                "key": "mutate",
-                "data": [
-                  {
-                    "path": "purchase",
-                    "value": {
-                      "quote": "$quoteMarket: $quotePremium"
-                    }
-                  }
-                ]
-              }
-            ]
+            "actions": []
           },
           "coverageEnabled": false,
           "requote": false,
@@ -151,6 +138,43 @@
           "coverageEnabled": true,
           "requote": true,
           "update": true,
+          "isQuoteEnabled": true
+        },
+        "pending-bind": {
+          "label": "Firm Order",
+          "type": "warning",
+          "actionButton": {
+            "label": "Bind",
+            "type": "primary",
+            "enabled": true,
+            "loading": false,
+            "actions": [
+              {
+                "key": "navigate",
+                "data": {
+                  "search": "?quote-id=$quoteId"
+                }
+              },
+              {
+                "key": "mutate",
+                "data": [
+                  {
+                    "path": "purchase",
+                    "value": {
+                      "quote": "$quoteMarket: $quotePremium"
+                    }
+                  },
+                  {
+                    "path": "$quote[$quote-id].status",
+                    "value": "binding"
+                  }
+                ]
+              }
+            ]
+          },
+          "coverageEnabled": false,
+          "requote": false,
+          "update": false,
           "isQuoteEnabled": true
         }
       },
@@ -222,7 +246,9 @@
             "scope": "#/properties/purchase/properties/signDate",
             "label": "Sign Date",
             "options": {
-              "minDate": { "days": 60 },
+              "minDate": {
+                "days": 60
+              },
               "minDatePath": "applicant.crimelock.periodFrom"
             }
           },
@@ -230,35 +256,40 @@
             "type": "Control",
             "scope": "#/properties/purchase/properties/firmOrderUpload",
             "label": "Firm Order",
-            "options": { "format": "radio", "toggle": true }
+            "options": {
+              "format": "radio",
+              "toggle": true
+            }
           },
           {
             "type": "ButtonControl",
             "label": "Bind",
             "scope": "",
             "actions": [
-              { "key": "navigate", "data": { "search": "" } },
-              { "key": "validate" },
+              {
+                "key": "navigate",
+                "data": {
+                  "search": ""
+                }
+              },
+              {
+                "key": "validate"
+              },
               {
                 "key": "invoke",
                 "actionId": "9aaad55d-9391-4406-8218-d18f18dd1293",
-                "data": { "quoteKey": "$quote-id" }
-              },
-              {
-                "key": "mutate",
-                "data": [
-                  {
-                    "path": "$quote[$quote-id].status",
-                    "value": "bound"
-                  }
-                ]
+                "data": {
+                  "quoteKey": "$quote-id"
+                }
               }
             ],
             "rule": {
               "effect": "ENABLE",
               "condition": {
                 "scope": "#/properties/purchase/properties/firmOrderUpload",
-                "schema": { "const": true }
+                "schema": {
+                  "const": true
+                }
               }
             }
           },
@@ -266,24 +297,34 @@
             "type": "ButtonControl",
             "label": "Cancel",
             "scope": "",
-            "options": { "style": "default" },
+            "options": {
+              "style": "default"
+            },
             "actions": [
-              { "key": "navigate", "data": { "search": "" } },
+              {
+                "key": "navigate",
+                "data": {
+                  "search": ""
+                }
+              },
               {
                 "key": "mutate",
                 "data": [
                   {
                     "path": "purchase",
-                    "value": { "quote": "" }
+                    "value": {
+                      "quote": ""
+                    }
                   }
                 ]
               },
-              { "key": "resetErrors" }
+              {
+                "key": "resetErrors"
+              }
             ]
           }
         ]
       }
     ]
   }
-  
 }

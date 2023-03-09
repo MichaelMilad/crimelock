@@ -29,14 +29,26 @@
       "assignee": {
         "type": "object",
         "default": {
-          "country": "UK",
+          "country": "United Kingdom",
           "subscribingMarkets": [
-            { "marketName": "Newline Syndicate 1218 / 523 ", "marketShare": 0.3334 },
-            { "marketName": "Liberty Syndicate 4472 / 5381", "marketShare": 0.3333 },
-            { "marketName": "Aviva Insurance Limited / Aviva Insurance Ireland DAC", "marketShare": 0.3333 }
+            {
+              "marketName": "Newline Syndicate 1218 / 523",
+              "marketShare": 0.3334
+            },
+            {
+              "marketName": "Liberty Syndicate 4472 / 5381",
+              "marketShare": 0.3333
+            },
+            {
+              "marketName": "Aviva Insurance Limited / Aviva Insurance Ireland DAC",
+              "marketShare": 0.3333
+            }
           ],
           "sofUpload": false,
-          "commission": false
+          "commission": false,
+          "market1": true,
+          "market2": true,
+          "market3": true
         },
         "properties": {
           "country": { "type": "string" },
@@ -58,9 +70,21 @@
           "commission": {
             "type": "boolean",
             "description": "Please confirm your agreement to 17.50% commission and that Lockton can retain 7.50% commission"
+          },
+          "market1": {
+            "type": "boolean",
+            "description": "Toggle off if NewLine Syndicate Decided not to proceed with this risk"
+          },
+          "market2": {
+            "type": "boolean",
+            "description": "Toggle off if Liberty Syndicate Decided not to proceed with this risk"
+          },
+          "market3": {
+            "type": "boolean",
+            "description": "Toggle off if Aviva Decided not to proceed with this risk"
           }
         },
-        "required": ["commission", "sofUpload"]
+        "required": ["commission", "sofUpload", "market1", "market2", "market3"]
       },
       "applicant": {
         "type": "object",
@@ -684,8 +708,9 @@
                 }
               },
               "numberOfEmployees": {
-                "type": ["number", "string"],
-                "minimum": 1,
+                "type": "number",
+                "default": 0,
+                "minimum": 0,
                 "maximum": 1000000000,
                 "errorMessage": {
                   "minimum": "Cannot be less than 1",
@@ -971,7 +996,8 @@
                 "referred",
                 "pending-change-approval",
                 "error",
-                "declined"
+                "declined",
+                "pending-bind"
               ]
             },
             "premium": {
@@ -2691,11 +2717,6 @@
       "key": "40b0ebb9-2464-4da2-8b82-da3d4a1ab650",
       "type": "others",
       "name": "Referred"
-    },
-    {
-      "key": "af4f7f43-ce5d-4e33-a165-dda94a2e1254",
-      "type": "others",
-      "name": "Authorized"
     },
     {
       "key": "5ff626d9-1e37-45b9-8e73-2a268e2bc180",
