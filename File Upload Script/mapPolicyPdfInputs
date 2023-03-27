@@ -14,6 +14,17 @@
         "%"
     ]) : undefined;
 
+    $settlementDate := $fromMillis(
+        $toMillis(instanceData.data.applicant.crimelock.periodFrom) + (60 * 24 * 60 * 60 * 1000),
+        '[Y0001]-[M01]-[D01]'
+        );
+
+    $crimeInsurer:= (
+        instanceData.data.riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years"
+        or instanceData.data.riskDetails.crimelock.hasPurchasedBefore = "Purchased More Than 5 Years Ago"
+        ) ? instanceData.data.riskDetails.crimelock.crimeInsurer
+        : "N/A";
+
     {
         "F12": policy.data.PolicyNumber,
         "F1": policy.data.PolicyData.nameInPolicy,
@@ -35,6 +46,8 @@
         "M3": policy.data.PolicyData.subscribingMarkets[2]
             ? "Follower" : undefined,
         "M32": policy.data.PolicyData.subscribingMarkets[2].marketName,
-        "M33": $M33
+        "M33": $M33,
+        "settlementDate": $settlementDate,
+        "Cr_ins": $crimeInsurer
     }
 )

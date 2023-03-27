@@ -5,17 +5,31 @@
   "type": "trumarket-web-details",
   "experience": "broker",
   "schema": {
+    "rule": {
+      "effect": "ENABLE",
+      "condition": {
+        "type": "OR",
+        "conditions": [
+          {
+            "scope": "#/properties/underwriter/properties/status",
+            "schema": {
+              "const": "new"
+            }
+          }
+        ]
+      }
+    },
     "type": "VerticalLayout",
     "options": {
-      "schemaOptions": {
-        "applicationView": true
-      },
       "actions": [
         {
           "key": "invoke",
           "actionId": "598871e9-1e10-4ffe-b554-f820c74f77b3"
         }
-      ]
+      ],
+      "schemaOptions": {
+        "applicationView": true
+      }
     },
     "elements": [
       {
@@ -33,13 +47,13 @@
                     "label": "Insured Information",
                     "elements": [
                       {
-                        "type": "Control",
-                        "label": "Reference ID",
-                        "scope": "#/properties/applicant/properties/crimelock/properties/referenceID",
                         "rule": {
                           "effect": "DISABLE",
                           "condition": {}
-                        }
+                        },
+                        "type": "Control",
+                        "label": "Reference ID",
+                        "scope": "#/properties/applicant/properties/crimelock/properties/referenceID"
                       },
                       {
                         "type": "Control",
@@ -51,16 +65,9 @@
                         "label": "Address",
                         "scope": "#/properties/applicant/properties/crimelock/properties/address/properties/address",
                         "options": {
-                          "searchCountryScope": ["US"],
                           "countryMap": {
                             "United States": "United States of America"
                           },
-                          "countrySearchCode": [
-                            {
-                              "name": "United States of America",
-                              "code": "US"
-                            }
-                          ],
                           "dependencies": [
                             {
                               "key": "streetLongName",
@@ -80,7 +87,14 @@
                               "key": "postalCodeLongName",
                               "paths": ["applicant.crimelock.address.zipCode"]
                             }
-                          ]
+                          ],
+                          "countrySearchCode": [
+                            {
+                              "code": "US",
+                              "name": "United States of America"
+                            }
+                          ],
+                          "searchCountryScope": ["US"]
                         }
                       },
                       {
@@ -113,9 +127,20 @@
                         "scope": "#/properties/applicant/properties/crimelock/properties/lossPayees"
                       },
                       {
+                        "rule": {
+                          "effect": "SHOW",
+                          "condition": {
+                            "scope": "#/properties/applicant/properties/crimelock/properties/lossPayees",
+                            "schema": {
+                              "const": true
+                            }
+                          }
+                        },
                         "type": "Control",
                         "label": "Loss Payees 1",
-                        "scope": "#/allOf[7]/then/properties/applicant/properties/crimelock/properties/lossPayees_1",
+                        "scope": "#/allOf[7]/then/properties/applicant/properties/crimelock/properties/lossPayees_1"
+                      },
+                      {
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -124,26 +149,12 @@
                               "const": true
                             }
                           }
-                        }
-                      },
-                      {
+                        },
                         "type": "Control",
                         "label": "Loss Payees 2",
-                        "scope": "#/allOf[7]/then/properties/applicant/properties/crimelock/properties/lossPayees_2",
-                        "rule": {
-                          "effect": "SHOW",
-                          "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/lossPayees",
-                            "schema": {
-                              "const": true
-                            }
-                          }
-                        }
+                        "scope": "#/allOf[7]/then/properties/applicant/properties/crimelock/properties/lossPayees_2"
                       },
                       {
-                        "type": "Control",
-                        "label": "Loss Payees 3",
-                        "scope": "#/allOf[7]/then/properties/applicant/properties/crimelock/properties/lossPayees_3",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -152,7 +163,10 @@
                               "const": true
                             }
                           }
-                        }
+                        },
+                        "type": "Control",
+                        "label": "Loss Payees 3",
+                        "scope": "#/allOf[7]/then/properties/applicant/properties/crimelock/properties/lossPayees_3"
                       },
                       {
                         "type": "Control",
@@ -164,17 +178,17 @@
                         "label": "Period From",
                         "scope": "#/properties/applicant/properties/crimelock/properties/periodFrom",
                         "options": {
+                          "maxDate": {
+                            "days": 90
+                          },
+                          "minDate": {
+                            "days": 7
+                          },
                           "dependencies": [
                             "applicant.crimelock.periodTo",
                             null,
                             12
-                          ],
-                          "minDate": {
-                            "days": 7
-                          },
-                          "maxDate": {
-                            "days": 90
-                          }
+                          ]
                         }
                       },
                       {
@@ -182,14 +196,14 @@
                         "label": "Period To",
                         "scope": "#/properties/applicant/properties/crimelock/properties/periodTo",
                         "options": {
-                          "minDate": {
-                            "days": -183
-                          },
-                          "minDatePath": "applicant.crimelock.periodFrom",
                           "maxDate": {
                             "days": 548
                           },
-                          "maxDatePath": "applicant.crimelock.periodFrom"
+                          "minDate": {
+                            "days": -183
+                          },
+                          "maxDatePath": "applicant.crimelock.periodFrom",
+                          "minDatePath": "applicant.crimelock.periodFrom"
                         }
                       },
                       {
@@ -216,7 +230,6 @@
                         "label": "Current Revenue",
                         "scope": "#/properties/applicant/properties/crimelock/properties/currentRevenue",
                         "options": {
-                          "dependencies": ["assignee.country"],
                           "actionData": {
                             "actionKey": "e8b8e474-8523-4d56-8f55-397c10110ab1",
                             "dataArray": [
@@ -238,6 +251,7 @@
                               }
                             ]
                           },
+                          "dependencies": ["assignee.country"],
                           "dependentArray": [{}]
                         }
                       },
@@ -260,9 +274,6 @@
                         "scope": "#/properties/applicant/properties/crimelock/properties/hasIndependentContractor"
                       },
                       {
-                        "type": "Control",
-                        "label": "Are all independent contractors subject to the same management controls and procedures as your employees?",
-                        "scope": "#/allOf[0]/then/properties/applicant/properties/crimelock/properties/isContractorSubjectToProcedures",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -271,7 +282,10 @@
                               "const": true
                             }
                           }
-                        }
+                        },
+                        "type": "Control",
+                        "label": "Are all independent contractors subject to the same management controls and procedures as your employees?",
+                        "scope": "#/allOf[0]/then/properties/applicant/properties/crimelock/properties/isContractorSubjectToProcedures"
                       },
                       {
                         "type": "Control",
@@ -279,9 +293,20 @@
                         "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside"
                       },
                       {
+                        "rule": {
+                          "effect": "SHOW",
+                          "condition": {
+                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
+                            "schema": {
+                              "const": true
+                            }
+                          }
+                        },
                         "type": "Control",
                         "label": "Are these employees subject to the same management controls and procedures as your employees?",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/areEmployeesSubjectToProcedures",
+                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/areEmployeesSubjectToProcedures"
+                      },
+                      {
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -290,24 +315,11 @@
                               "const": true
                             }
                           }
-                        }
-                      },
-                      {
+                        },
                         "type": "Control",
-                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/numberOfCountries",
-                        "rule": {
-                          "effect": "SHOW",
-                          "condition": {
-                            "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                            "schema": {
-                              "const": true
-                            }
-                          }
-                        }
+                        "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/numberOfCountries"
                       },
                       {
-                        "type": "Section",
-                        "label": "Country 1",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -315,24 +327,30 @@
                             "conditions": [
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                                "schema": { "const": true }
+                                "schema": {
+                                  "const": true
+                                }
                               },
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
-                                "schema": { "minimum": 1 }
+                                "schema": {
+                                  "minimum": 1
+                                }
                               }
                             ]
                           }
                         },
+                        "type": "Section",
+                        "label": "Country 1",
                         "elements": [
                           {
                             "type": "SelectWithApiData",
                             "label": "Choose Country",
                             "scope": "#/allOf[1]/then/properties/applicant/properties/crimelock/properties/country_1",
                             "options": {
-                              "fetchOptions": true,
                               "groupID": "e62db385-b903-4943-86d0-5e7e4addc30b",
-                              "markets": ["crimelock"]
+                              "markets": ["crimelock"],
+                              "fetchOptions": true
                             }
                           },
                           {
@@ -343,8 +361,6 @@
                         ]
                       },
                       {
-                        "type": "Section",
-                        "label": "Country 2",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -352,24 +368,30 @@
                             "conditions": [
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                                "schema": { "const": true }
+                                "schema": {
+                                  "const": true
+                                }
                               },
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
-                                "schema": { "minimum": 2 }
+                                "schema": {
+                                  "minimum": 2
+                                }
                               }
                             ]
                           }
                         },
+                        "type": "Section",
+                        "label": "Country 2",
                         "elements": [
                           {
                             "type": "SelectWithApiData",
                             "label": "Choose Country",
                             "scope": "#/allOf[3]/then/properties/applicant/properties/crimelock/properties/country_2",
                             "options": {
-                              "fetchOptions": true,
                               "groupID": "e62db385-b903-4943-86d0-5e7e4addc30b",
-                              "markets": ["crimelock"]
+                              "markets": ["crimelock"],
+                              "fetchOptions": true
                             }
                           },
                           {
@@ -380,8 +402,6 @@
                         ]
                       },
                       {
-                        "type": "Section",
-                        "label": "Country 3",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -389,24 +409,30 @@
                             "conditions": [
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                                "schema": { "const": true }
+                                "schema": {
+                                  "const": true
+                                }
                               },
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
-                                "schema": { "minimum": 3 }
+                                "schema": {
+                                  "minimum": 3
+                                }
                               }
                             ]
                           }
                         },
+                        "type": "Section",
+                        "label": "Country 3",
                         "elements": [
                           {
                             "type": "SelectWithApiData",
                             "label": "Choose Country",
                             "scope": "#/allOf[4]/then/properties/applicant/properties/crimelock/properties/country_3",
                             "options": {
-                              "fetchOptions": true,
                               "groupID": "e62db385-b903-4943-86d0-5e7e4addc30b",
-                              "markets": ["crimelock"]
+                              "markets": ["crimelock"],
+                              "fetchOptions": true
                             }
                           },
                           {
@@ -417,8 +443,6 @@
                         ]
                       },
                       {
-                        "type": "Section",
-                        "label": "Country 4",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -426,24 +450,30 @@
                             "conditions": [
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                                "schema": { "const": true }
+                                "schema": {
+                                  "const": true
+                                }
                               },
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
-                                "schema": { "minimum": 4 }
+                                "schema": {
+                                  "minimum": 4
+                                }
                               }
                             ]
                           }
                         },
+                        "type": "Section",
+                        "label": "Country 4",
                         "elements": [
                           {
                             "type": "SelectWithApiData",
                             "label": "Choose Country",
                             "scope": "#/allOf[5]/then/properties/applicant/properties/crimelock/properties/country_4",
                             "options": {
-                              "fetchOptions": true,
                               "groupID": "e62db385-b903-4943-86d0-5e7e4addc30b",
-                              "markets": ["crimelock"]
+                              "markets": ["crimelock"],
+                              "fetchOptions": true
                             }
                           },
                           {
@@ -454,8 +484,6 @@
                         ]
                       },
                       {
-                        "type": "Section",
-                        "label": "Country 5",
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -463,24 +491,30 @@
                             "conditions": [
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/hasEmployeesOutside",
-                                "schema": { "const": true }
+                                "schema": {
+                                  "const": true
+                                }
                               },
                               {
                                 "scope": "#/properties/applicant/properties/crimelock/properties/numberOfCountries",
-                                "schema": { "minimum": 5 }
+                                "schema": {
+                                  "minimum": 5
+                                }
                               }
                             ]
                           }
                         },
+                        "type": "Section",
+                        "label": "Country 5",
                         "elements": [
                           {
                             "type": "SelectWithApiData",
                             "label": "Choose Country",
                             "scope": "#/allOf[6]/then/properties/applicant/properties/crimelock/properties/country_5",
                             "options": {
-                              "fetchOptions": true,
                               "groupID": "e62db385-b903-4943-86d0-5e7e4addc30b",
-                              "markets": ["crimelock"]
+                              "markets": ["crimelock"],
+                              "fetchOptions": true
                             }
                           },
                           {
@@ -516,6 +550,14 @@
                         "type": "Control",
                         "label": "Retroactive Date",
                         "scope": "#/allOf[2]/then/properties/riskDetails/properties/crimelock/properties/retroactiveDate",
+                        "options": {
+                          "maxDate": {
+                            "days": -1
+                          },
+                          "minDate": {
+                            "days": 1826
+                          }
+                        },
                         "rule": {
                           "effect": "SHOW",
                           "condition": {
@@ -524,13 +566,22 @@
                               "const": "Purchased In The Last 5 Years"
                             }
                           }
-                        },
-                        "options": {
-                          "maxDate": {
-                            "days": -1
-                          },
-                          "minDate": {
-                            "days": 1826
+                        }
+                      },
+                      {
+                        "type": "Control",
+                        "label": "Current Insurer Name",
+                        "scope": "#/allOf[14]/then/properties/riskDetails/properties/crimelock/properties/crimeInsurer",
+                        "rule": {
+                          "effect": "SHOW",
+                          "condition": {
+                            "scope": "#/properties/riskDetails/properties/crimelock/properties/hasPurchasedBefore",
+                            "schema": {
+                              "enum": [
+                                "Purchased In The Last 5 Years",
+                                "Purchased More Than 5 Years Ago"
+                              ]
+                            }
                           }
                         }
                       }
@@ -542,88 +593,88 @@
                     "elements": [
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_1",
-                        "label": "Losses"
+                        "label": "Losses",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_1"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_2",
-                        "label": "Policyholder Annual Audition"
+                        "label": "Policyholder Annual Audition",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_2"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_3",
-                        "label": "Funds Segregation"
+                        "label": "Funds Segregation",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_3"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_4",
-                        "label": "Recruiting/Promoting to Financial Positions"
+                        "label": "Recruiting/Promoting to Financial Positions",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_4"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_5",
-                        "label": "Suppliers/Contractors/Sub-Contractors Assessment"
+                        "label": "Suppliers/Contractors/Sub-Contractors Assessment",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_5"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_6",
-                        "label": "Expenses/Invoices Requisitions"
+                        "label": "Expenses/Invoices Requisitions",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_6"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_7",
-                        "label": "Computers Access Protection"
+                        "label": "Computers Access Protection",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_7"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_8",
-                        "label": "Premises Protection"
+                        "label": "Premises Protection",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_8"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_9",
-                        "label": "Premises Auditions and Records"
+                        "label": "Premises Auditions and Records",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_9"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_10",
-                        "label": "Cash Reconciled"
+                        "label": "Cash Reconciled",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_10"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_11",
-                        "label": "Requests Purporting to Come"
+                        "label": "Requests Purporting to Come",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_11"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_12",
-                        "label": "Previous Claims"
+                        "label": "Previous Claims",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_12"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_13",
-                        "label": "Staff Public Network Access"
+                        "label": "Staff Public Network Access",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_13"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_14",
-                        "label": "Two Factor Authentication"
+                        "label": "Two Factor Authentication",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_14"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_15",
-                        "label": "Roles of Financial Responsibilities"
+                        "label": "Roles of Financial Responsibilities",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_15"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_16",
-                        "label": "Social Engineering Awareness"
+                        "label": "Social Engineering Awareness",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_16"
                       },
                       {
                         "type": "Control",
-                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_17",
-                        "label": "Premises Security"
+                        "label": "Premises Security",
+                        "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_17"
                       }
                     ]
                   }
@@ -665,6 +716,15 @@
                     ]
                   },
                   {
+                    "rule": {
+                      "effect": "SHOW",
+                      "condition": {
+                        "scope": "#/properties/coverage/properties/minRetention",
+                        "schema": {
+                          "const": 25000
+                        }
+                      }
+                    },
                     "type": "Section",
                     "label": "Retention Options",
                     "elements": [
@@ -683,18 +743,18 @@
                         "label": "Retention Option 3",
                         "scope": "#/allOf[8]/then/properties/coverage/properties/retentionOption3"
                       }
-                    ],
+                    ]
+                  },
+                  {
                     "rule": {
                       "effect": "SHOW",
                       "condition": {
                         "scope": "#/properties/coverage/properties/minRetention",
                         "schema": {
-                          "const": 25000
+                          "const": 30000
                         }
                       }
-                    }
-                  },
-                  {
+                    },
                     "type": "Section",
                     "label": "Retention Options",
                     "elements": [
@@ -713,18 +773,18 @@
                         "label": "Retention Option 3",
                         "scope": "#/allOf[9]/then/properties/coverage/properties/retentionOption3"
                       }
-                    ],
+                    ]
+                  },
+                  {
                     "rule": {
                       "effect": "SHOW",
                       "condition": {
                         "scope": "#/properties/coverage/properties/minRetention",
                         "schema": {
-                          "const": 30000
+                          "const": 35000
                         }
                       }
-                    }
-                  },
-                  {
+                    },
                     "type": "Section",
                     "label": "Retention Options",
                     "elements": [
@@ -743,18 +803,18 @@
                         "label": "Retention Option 3",
                         "scope": "#/allOf[10]/then/properties/coverage/properties/retentionOption3"
                       }
-                    ],
+                    ]
+                  },
+                  {
                     "rule": {
                       "effect": "SHOW",
                       "condition": {
                         "scope": "#/properties/coverage/properties/minRetention",
                         "schema": {
-                          "const": 35000
+                          "const": 40000
                         }
                       }
-                    }
-                  },
-                  {
+                    },
                     "type": "Section",
                     "label": "Retention Options",
                     "elements": [
@@ -773,18 +833,18 @@
                         "label": "Retention Option 3",
                         "scope": "#/allOf[11]/then/properties/coverage/properties/retentionOption3"
                       }
-                    ],
+                    ]
+                  },
+                  {
                     "rule": {
                       "effect": "SHOW",
                       "condition": {
                         "scope": "#/properties/coverage/properties/minRetention",
                         "schema": {
-                          "const": 40000
+                          "const": 45000
                         }
                       }
-                    }
-                  },
-                  {
+                    },
                     "type": "Section",
                     "label": "Retention Options",
                     "elements": [
@@ -803,18 +863,18 @@
                         "label": "Retention Option 3",
                         "scope": "#/allOf[12]/then/properties/coverage/properties/retentionOption3"
                       }
-                    ],
+                    ]
+                  },
+                  {
                     "rule": {
                       "effect": "SHOW",
                       "condition": {
                         "scope": "#/properties/coverage/properties/minRetention",
                         "schema": {
-                          "const": 45000
+                          "const": 50000
                         }
                       }
-                    }
-                  },
-                  {
+                    },
                     "type": "Section",
                     "label": "Retention Options",
                     "elements": [
@@ -833,16 +893,7 @@
                         "label": "Retention Option 3",
                         "scope": "#/allOf[13]/then/properties/coverage/properties/retentionOption3"
                       }
-                    ],
-                    "rule": {
-                      "effect": "SHOW",
-                      "condition": {
-                        "scope": "#/properties/coverage/properties/minRetention",
-                        "schema": {
-                          "const": 50000
-                        }
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -859,38 +910,18 @@
                     "type": "Control",
                     "label": "SOF Document",
                     "scope": "#/properties/assignee/properties/sofUpload",
-                    "options": { "format": "radio", "toggle": true }
+                    "options": {
+                      "format": "radio",
+                      "toggle": true
+                    }
                   },
                   {
                     "type": "Control",
                     "label": "Commission",
                     "scope": "#/properties/assignee/properties/commission",
-                    "options": { "format": "radio", "toggle": true }
-                  }
-                ]
-              },
-              {
-                "type": "Section",
-                "label": "Subscribing Markets",
-                "elements": [
-                  {
-                    "type": "Control",
-                    "label": "Newline Syndicate 1218 / 523",
-                    "scope": "#/properties/assignee/properties/market1",
-                    "options": { "format": "radio", "toggle": true },
-                    "rule": {
-                      "effect": "DISABLE",
-                      "condition": {}
-                    }
-                  },
-                  {
-                    "type": "Control",
-                    "label": "Liberty Syndicate 4472 / 5381",
-                    "scope": "#/properties/assignee/properties/market2",
-                    "options": { "format": "radio", "toggle": true },
-                    "rule": {
-                      "effect": "DISABLE",
-                      "condition": {}
+                    "options": {
+                      "format": "radio",
+                      "toggle": true
                     }
                   }
                 ]
@@ -898,9 +929,55 @@
             ]
           },
           {
+            "rule": {
+              "effect": "ENABLE",
+              "condition": {
+                "type": "OR",
+                "conditions": [
+                  {
+                    "scope": "#/properties/underwriter/properties/status",
+                    "schema": {
+                      "const": "new"
+                    }
+                  }
+                ]
+              }
+            },
             "type": "HorizontalFields",
             "elements": [
               {
+                "rule": {
+                  "effect": "DISABLE",
+                  "condition": {
+                    "type": "OR",
+                    "conditions": [
+                      {
+                        "scope": "#/properties/underwriter/properties/referral",
+                        "schema": {
+                          "const": true
+                        }
+                      },
+                      {
+                        "scope": "#/properties/underwriter/properties/autoDecline",
+                        "schema": {
+                          "const": true
+                        }
+                      },
+                      {
+                        "scope": "#/properties/assignee/properties/sofUpload",
+                        "schema": {
+                          "const": false
+                        }
+                      },
+                      {
+                        "scope": "#/properties/assignee/properties/commission",
+                        "schema": {
+                          "const": false
+                        }
+                      }
+                    ]
+                  }
+                },
                 "type": "ButtonControl",
                 "label": "Submit",
                 "scope": "",
@@ -923,8 +1000,8 @@
                           {
                             "id": "crimelock",
                             "market": "crimelock",
-                            "favorite": false,
                             "status": "quoting",
+                            "favorite": false,
                             "coverages": [
                               {
                                 "key": "limit",
@@ -970,66 +1047,23 @@
                       "message": "Submitted"
                     }
                   }
-                ],
-                "rule": {
-                  "effect": "DISABLE",
-                  "condition": {
-                    "type": "OR",
-                    "conditions": [
-                      {
-                        "scope": "#/properties/underwriter/properties/referral",
-                        "schema": { "const": true }
-                      },
-                      {
-                        "scope": "#/properties/underwriter/properties/autoDecline",
-                        "schema": { "const": true }
-                      },
-                      {
-                        "scope": "#/properties/assignee/properties/sofUpload",
-                        "schema": { "const": false }
-                      },
-                      {
-                        "scope": "#/properties/assignee/properties/commission",
-                        "schema": { "const": false }
-                      }
-                    ]
-                  }
-                }
-              }
-            ],
-            "rule": {
-              "effect": "ENABLE",
-              "condition": {
-                "type": "OR",
-                "conditions": [
-                  {
-                    "scope": "#/properties/underwriter/properties/status",
-                    "schema": { "const": "new" }
-                  }
                 ]
               }
-            }
+            ]
           }
         ]
       }
-    ],
-    "rule": {
-      "effect": "ENABLE",
-      "condition": {
-        "type": "OR",
-        "conditions": [
-          {
-            "scope": "#/properties/underwriter/properties/status",
-            "schema": { "const": "new" }
-          }
-        ]
-      }
-    }
+    ]
   },
   "rules": [
     {
       "if": {
-        ">=": [{ "var": "applicant.crimelock.currentRevenue" }, 249500000]
+        ">=": [
+          {
+            "var": "applicant.crimelock.currentRevenue"
+          },
+          249500000
+        ]
       },
       "then": [
         {
@@ -1044,7 +1078,12 @@
     },
     {
       "if": {
-        ">": [{ "var": "applicant.crimelock.numberOfEmployees" }, 5000]
+        ">": [
+          {
+            "var": "applicant.crimelock.numberOfEmployees"
+          },
+          5000
+        ]
       },
       "then": [
         {
@@ -1060,23 +1099,142 @@
     {
       "if": {
         "or": [
-          { "==": [{ "var": "riskDetails.crimelock.SOF_1" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_2" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_3" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_4" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_5" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_6" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_7" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_8" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_9" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_10" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_11" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_12" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_13" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_14" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_15" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_16" }, false] },
-          { "==": [{ "var": "riskDetails.crimelock.SOF_17" }, false] }
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_1"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_2"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_3"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_4"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_5"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_6"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_7"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_8"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_9"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_10"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_11"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_12"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_13"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_14"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_15"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_16"
+              },
+              false
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "riskDetails.crimelock.SOF_17"
+              },
+              false
+            ]
+          }
         ]
       },
       "then": [
@@ -1091,7 +1249,12 @@
     },
     {
       "if": {
-        "in": ["-1", { "var": "applicant.crimelock.industry" }]
+        "in": [
+          "-1",
+          {
+            "var": "applicant.crimelock.industry"
+          }
+        ]
       },
       "then": [
         {
@@ -1106,7 +1269,12 @@
     },
     {
       "if": {
-        "==": [{ "var": "applicant.crimelock.lossPayees" }, true]
+        "==": [
+          {
+            "var": "applicant.crimelock.lossPayees"
+          },
+          true
+        ]
       },
       "then": [
         {
@@ -1121,7 +1289,12 @@
     },
     {
       "if": {
-        "DateLogic.ls": [{ "var": "applicant.crimelock.periodFrom" }, "NOW"]
+        "DateLogic.ls": [
+          {
+            "var": "applicant.crimelock.periodFrom"
+          },
+          "NOW"
+        ]
       },
       "then": [
         {

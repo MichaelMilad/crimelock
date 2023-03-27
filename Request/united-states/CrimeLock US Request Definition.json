@@ -7,6 +7,7 @@
     "type": "object",
     "required": ["applicant", "riskDetails", "coverage"],
     "properties": {
+      "logsNumber": { "type": "number", "default": 0 },
       "markets": {
         "type": "array",
         "items": {
@@ -34,6 +35,7 @@
             { "marketName": "Newline Syndicate 1218 / 523", "marketShare": 0.5 },
             { "marketName": "Liberty Syndicate 4472 / 5381", "marketShare": 0.5 }
           ],
+          "sofOnlineEdit": false,
           "sofUpload": false,
           "commission": false,
           "market1": true,
@@ -51,6 +53,9 @@
                 "marketShare": { "type": "number" }
               }
             }
+          },
+          "sofOnlineEdit": {
+            "type": "boolean"
           },
           "sofUpload": {
             "type": "boolean",
@@ -792,6 +797,9 @@
                   "Purchased In The Last 5 Years",
                   "Purchased More Than 5 Years Ago"
                 ]
+              },
+              "crimeInsurer": {
+                "type": "string"
               },
               "SOF_1": {
                 "type": "boolean",
@@ -2727,6 +2735,40 @@
                 }
               },
               "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "riskDetails": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "hasPurchasedBefore": {
+                      "enum": [
+                        "Purchased In The Last 5 Years",
+                        "Purchased More Than 5 Years Ago"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "riskDetails": {
+              "properties": {
+                "crimelock": {
+                  "required": ["crimeInsurer"],
+                  "properties": {
+                    "crimeInsurer": { "type": "string" }
+                  }
+                }
+              }
             }
           }
         }

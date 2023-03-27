@@ -14,6 +14,26 @@
           "crimelock": "assignee.country"
         }
       },
+      "exportActions": {
+        "toPdf": {
+          "actions": [
+            {
+              "key": "invoke",
+              "actionId": "e538b399-a95f-46ee-9634-21cae26d0cb1"
+            }
+          ]
+        },
+        "toEmail": {
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "?email-quotes=true"
+              }
+            }
+          ]
+        }
+      },
       "applicationUiSchemaKey": "41c4ee8e-f59e-4197-b765-69f4d663c54a",
       "marketMultiQuotes": true,
       "providedInfoByStatus": {
@@ -24,7 +44,7 @@
             "label": "Bind",
             "type": "primary",
             "enabled": false,
-            "loading": false,
+            "loading": true,
             "actions": []
           },
           "coverageEnabled": false,
@@ -163,10 +183,6 @@
                     "value": {
                       "quote": "$quoteMarket: $quotePremium"
                     }
-                  },
-                  {
-                    "path": "$quote[$quote-id].status",
-                    "value": "binding"
                   }
                 ]
               }
@@ -194,18 +210,6 @@
         {
           "key": "retention",
           "type": "MultiValueCoverage"
-        },
-        {
-          "key": "feature1",
-          "type": "SingleValueCoverage"
-        },
-        {
-          "key": "feature2",
-          "type": "SingleValueCoverage"
-        },
-        {
-          "key": "feature3",
-          "type": "SingleValueCoverage"
         }
       ]
     },
@@ -274,6 +278,15 @@
               },
               {
                 "key": "validate"
+              },
+              {
+                "key": "mutate",
+                "data": [
+                  {
+                    "path": "$quote[$quote-id].status",
+                    "value": "binding"
+                  }
+                ]
               },
               {
                 "key": "invoke",

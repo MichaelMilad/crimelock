@@ -110,7 +110,49 @@
                         "scope": "#/properties/riskDetails/properties/crimelock/properties/SOF_17",
                         "label": "Premises Security"
                       }
-                    ]
+                    ],
+                    "rule": {
+                      "effect": "DISABLE",
+                      "condition": {
+                        "scope": "#/properties/assignee/properties/sofOnlineEdit",
+                        "schema": { "const": true}
+                      }
+                    }
+                  },
+                  {
+                    "type": "HorizontalFields",
+                    "elements": [
+                      {
+                        "type": "ButtonControl",
+                        "label": "Submit",
+                        "scope": "",
+                        "actions": [
+                          {
+                            "key": "mutate",
+                            "data": [
+                              {
+                                "path": "assignee.sofOnlineEdit",
+                                "value": true
+                              }
+                            ]
+                          },
+                          {
+                            "key": "toast",
+                            "toast": {
+                              "level": "success",
+                              "message": "Success"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "rule": {
+                      "effect": "DISABLE",
+                      "condition": {
+                        "scope": "#/properties/assignee/properties/sofOnlineEdit",
+                        "schema": { "const": true }
+                      }
+                    }
                   }
                 ]
               }

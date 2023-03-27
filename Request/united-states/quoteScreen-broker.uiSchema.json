@@ -14,6 +14,26 @@
           "crimelock": "assignee.country"
         }
       },
+      "exportActions": {
+        "toPdf": {
+          "actions": [
+            {
+              "key": "invoke",
+              "actionId": "e538b399-a95f-46ee-9634-21cae26d0cb1"
+            }
+          ]
+        },
+        "toEmail": {
+          "actions": [
+            {
+              "key": "navigate",
+              "data": {
+                "search": "?email-quotes=true"
+              }
+            }
+          ]
+        }
+      },
       "applicationUiSchemaKey": "663b7071-4fb5-4687-939f-8c081dea6149",
       "marketMultiQuotes": true,
       "providedInfoByStatus": {
@@ -45,6 +65,10 @@
                   {
                     "path": "$quote[$quote-id].status",
                     "value": "pending-bind"
+                  },
+                  {
+                    "path": "underwriter",
+                    "value": {"status": "firmOrder"}
                   }
                 ]
               },
@@ -189,18 +213,6 @@
         {
           "key": "retention",
           "type": "MultiValueCoverage"
-        },
-        {
-          "key": "feature1",
-          "type": "SingleValueCoverage"
-        },
-        {
-          "key": "feature2",
-          "type": "SingleValueCoverage"
-        },
-        {
-          "key": "feature3",
-          "type": "SingleValueCoverage"
         }
       ]
     },

@@ -7,6 +7,7 @@
     "type": "object",
     "required": ["applicant", "riskDetails", "coverage"],
     "properties": {
+      "logsNumber": { "type": "number", "default": 0 },
       "markets": {
         "type": "array",
         "items": {
@@ -44,6 +45,7 @@
               "marketShare": 0.3333
             }
           ],
+          "sofOnlineEdit": false,
           "sofUpload": false,
           "commission": false,
           "market1": true,
@@ -62,6 +64,9 @@
                 "marketShare": { "type": "number" }
               }
             }
+          },
+          "sofOnlineEdit": {
+            "type": "boolean"
           },
           "sofUpload": {
             "type": "boolean",
@@ -940,6 +945,9 @@
           "minRetention": {
             "type": "number",
             "default": 25000
+          },
+          "retentionOption1": {
+            "type": "number"
           }
         }
       },
@@ -2695,6 +2703,40 @@
                 }
               },
               "required": ["retentionOption1"]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "riskDetails": {
+              "properties": {
+                "crimelock": {
+                  "properties": {
+                    "hasPurchasedBefore": {
+                      "enum": [
+                        "Purchased In The Last 5 Years",
+                        "Purchased More Than 5 Years Ago"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "riskDetails": {
+              "properties": {
+                "crimelock": {
+                  "required": ["crimeInsurer"],
+                  "properties": {
+                    "crimeInsurer": { "type": "string" }
+                  }
+                }
+              }
             }
           }
         }

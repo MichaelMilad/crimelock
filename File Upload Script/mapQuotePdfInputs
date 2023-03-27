@@ -103,6 +103,14 @@
         $string(assignee.subscribingMarkets[2].marketShare * 100),
         "%"
     ]) : undefined;
+
+    $retroactiveDate:= (
+        riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years"
+        ? riskDetails.crimelock.retroactiveDate
+        : riskDetails.crimelock.hasPurchasedBefore = "New Purchase"
+        ? applicant.crimelock.periodFrom
+        : "N/A"
+        );
     
     {
     "F12": (applicant.crimelock.referenceID),
@@ -165,11 +173,7 @@
     "F52": ( $ret2 ? $ret2 : "N/A"),
     "F53": ( $ret3 ? $ret3 : "N/A"),
     
-    "F55": (
-        riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years"
-        ? riskDetails.crimelock.retroactiveDate
-        : "N/A"
-        ),
+    "F55": $retroactiveDate,
 
     "settlementDate": $settlementDate,
 

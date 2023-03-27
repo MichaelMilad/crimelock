@@ -3,9 +3,13 @@
         ? data.applicant.crimelock.nameInPolicy
         : data.applicant.crimelock.name;
 
-    $retroactiveDate:= (riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years")
+    $retroactiveDate:= (
+        riskDetails.crimelock.hasPurchasedBefore = "Purchased In The Last 5 Years"
         ? riskDetails.crimelock.retroactiveDate
-        : "N/A";
+        : riskDetails.crimelock.hasPurchasedBefore = "New Purchase"
+        ? applicant.crimelock.periodFrom
+        : "N/A"
+        );
 
     $subscribingMarkets:= data.assignee.subscribingMarkets;
 

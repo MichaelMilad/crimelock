@@ -1,0 +1,122 @@
+( 
+    $referral:= false;
+    $reasons:= [];
+
+   
+    (
+           risk.shared.SOF_1 = false
+        or risk.shared.SOF_2 = false
+        or risk.shared.SOF_3 = false
+        or risk.shared.SOF_4 = false
+        or risk.shared.SOF_5 = false
+        or risk.shared.SOF_6 = false
+        or risk.shared.SOF_7 = false
+    
+    ) ?
+    
+     $reasons:= $append ($reasons,
+       "Request Referred because of one or more SOF Question answered with NO"
+     );
+
+
+    (risk.shared.previousClaims = false 
+    )? 
+     $reasons:= $append
+     ($reasons,"Request Referred because Previous Claims Question answered with NO"
+     );
+
+     (coverage.shared.epl.eplProcedure=false)?
+     $reasons:= $append
+     ($reasons,"Request Referred because EPL Procedure Question answered with NO"
+     );
+
+     (coverage.shared.cl.clProcedure=false)?
+      $reasons:= $append
+     ($reasons,"Request Referred because CL Procedure Question answered with NO"
+     );
+
+    (applicant.shared.hasNonUkExposure= true) ?
+     $reasons:= $append
+     ($reasons,"Request Referred because Has Non Uk Exposure Question answered with YES"
+     );
+
+
+
+
+     (applicant.shared.annualRevenue < 500000)?
+   $reasons:= $append
+     ($reasons,"Request Referred because Annual Revenue Is less than 500,000 "
+     );
+      (
+          
+          $yearnow:=$number($substring($now(), 0, 4));
+
+          $yearnow - applicant.shared.incorporationYear < 2
+      
+      )?
+
+   $reasons:= $append
+     ($reasons,"Request Referred because incorporationYear Is less than Two Years "
+     );
+
+      (applicant.shared.companyStructure= "Other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because Company Structure Question answered with  Other"
+     );
+              (applicant.shared.companyStructure= "Partnership") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because Company Structure Question answered with  Partnership"
+     );
+     
+
+                (coverage.shared.dno.liabilityLimit= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because DNO Limit Question answered with other"
+     );
+                   (coverage.shared.dno.liabilityExcess= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because DNO Excess Question answered with other"
+     );
+
+
+                (coverage.shared.epl.limit= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because EPL Limit Question answered with other"
+     );
+                   (coverage.shared.epl.excess= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because EPL Excess Question answered with other"
+     );
+
+                (coverage.shared.cl.limit= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because CL Limit Question answered with other"
+     );
+                   (coverage.shared.cl.excess= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because CL Excess Question answered with other"
+     );
+     
+                   (coverage.shared.ptl.limit= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because PTL Limit Question answered with other"
+     );
+                   (coverage.shared.ptl.excess= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because PTL Excess Question answered with other"
+     );
+     
+                      (coverage.shared.cll.limit= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because CLL Limit Question answered with other"
+     );
+                   (coverage.shared.cll.excess= "other") ?
+     $reasons:= $append
+     ($reasons,"Request Referred because CLL Excess Question answered with other"
+     );
+    $count($reasons) > 0 ? $referral:= true;
+    {
+    "referral": $referral,
+    "reasons": $reasons
+}
+)

@@ -1,0 +1,55 @@
+{
+  "equations": {
+    "output": {
+      "expression": "PRODUCT(x, y, 3, vl_constNumber)",
+      "conditionalCases": [
+        {
+            "condition": "z",
+            "expression": "450"
+        }
+      ]
+    },
+
+    "number": {
+        "temp": true,
+        "expression": "numberOfEmployees"
+    },
+
+    "lookupOutput": {
+        "expression": "vl_employeeLoad"
+    }
+  },
+
+  "lookups": {
+    "employeeLoad": {
+        "temp": true, 
+        "query": {
+            "table": "crimelock_emp_load",
+            "target": "EmployeeLoad",
+            "where": {
+                "eq": ["EmployeeID", "@eq_number"]
+            }
+        }
+    },
+
+    "constNumber": {
+        "temp": true,
+        "value": 0.964552
+    }
+  },
+
+  "schemaValidation": {
+    "type": "object",
+    "properties": {
+      "x": { "type": "number" },
+      "y": { "type": "number" },
+      "z": { "type": "boolean", "default": false },
+      "numberOfEmployees": { "type": "number" }
+    },
+    "required": ["x", "y"]
+  },
+
+  "queryCriteria": {
+    "name": "sdsd"
+  }
+}

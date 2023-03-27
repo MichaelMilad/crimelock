@@ -1,0 +1,302 @@
+(
+$referral:= false;
+$reasons:= [];
+
+
+(applicant.shared.industry= "Wholesale of grain, unmanufactured tobcco, seeds and animal feeds")?
+
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Manufacture of weapons and ammunition")?
+
+
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+
+(applicant.shared.industry= "Activities of religious organisations")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+
+(applicant.shared.industry= "Activities of political organisations")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+
+(applicant.shared.industry= "Banks")?
+
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection");   
+(applicant.shared.industry= "Building societies")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of investment trusts")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of venture and development capital companies" )?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of property unit trusts"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);  
+
+
+(applicant.shared.industry= "Financial leasing"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry="Credit granting by non-deposit taking linance houses and other specialist consumer credit grantors")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Security dealing on own account"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Factoring")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+); 
+
+(applicant.shared.industry= "Life insurance"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+); 
+
+(applicant.shared.industry= "Non-life insurance")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Life reinsurance")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Administration of financial markets"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);   
+
+
+(applicant.shared.industry= "Security and commodity contracts brokeage")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Other activities auxiliary to financia services, except insurance and pension funding")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of insurance agents and broers")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Other activities auxiliary to insurancand pension funding")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+); 
+
+
+(applicant.shared.industry= "Fund management activities")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Residential nursing care activities"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);   
+
+
+(applicant.shared.industry= "Social work activities without accommoation for the elderly and disabled")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Other social work activities without acommodation n.e.c."
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+(applicant.shared.industry= "Gambling and betting activities"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Operation of sports facilities
+")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of sport clubs")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Growing of tobacco")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Manufacture of tobacco products"
+)?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Manufacture of explosives")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Processing of nuclear fuel")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Manufacture of military fighting vehicels")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Central banking")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);  
+
+(applicant.shared.industry= "Activities of financial services holdig companies")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of unit trusts")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of open-ended investment copanies")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Activities of mortgage finance companis")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Other credit granting (not including cedit granting by non-deposit taking finance houses and other specialist consumer credit grantors and activities of mortgage finance companies) n.e.c.")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Other financial , except insurance andpension funding, (not including security dealing on own account and factoring) n.e.c.")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Non-life reinsurance")?
+
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Pension funding")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);  
+
+(applicant.shared.industry= "Foreign affairs")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);  
+
+(applicant.shared.industry= "Defence activities")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Compulsory social security activities")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+
+(applicant.shared.industry= "Residential care activities for learnig disabilities, mental health and substance abuse")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+
+(applicant.shared.industry= "Residential care activities for the elerly and disabled")?
+$reasons:= $append ($reasons,
+  "Request Declied because of one or more industry selection"
+);
+
+$count($reasons) > 0 ? $referral:= true;
+{
+"referral": $referral,
+"reasons": $reasons
+}
+)
